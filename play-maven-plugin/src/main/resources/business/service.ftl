@@ -7,14 +7,14 @@ import com.airlenet.repo.jpa.EntityService;
 import ${className};
 import ${modulePackage}.repo.${simpleName}Repository;
 /**
- * ${functionShowName!}
- *
- * @author ${author!}
- * @version ${version!}
- */
+* ${functionShowName!}
+*
+* @author ${author!}
+* @version ${version!}
+*/
 @Service
 public class ${simpleName}Service extends EntityService<${simpleName}, Long> {
-	
-	@Autowired
-	private ${simpleName}Repository ${'${simpleName}'?uncap_first}Repository;
+
+@Autowired
+private ${simpleName}Repository ${'${simpleName}'?uncap_first}Repository;
 }

@@ -45,6 +45,7 @@ public class RoleRestController {
 
     @Autowired
     private UserEntityService userEntityService;
+
     /**
      * 角色中不存在的用户列表
      *
@@ -52,7 +53,7 @@ public class RoleRestController {
      * @param pageable
      * @return
      */
-    @RequiresPermissions(value = { "page:sys:role:read", "data:sys:role:read" }, logical = Logical.OR)
+    @RequiresPermissions(value = {"page:sys:role:read", "data:sys:role:read"}, logical = Logical.OR)
     @RequestMapping(value = "/{roleId}/user/unexist/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<AdminUserEntity> doRoleUnExistUserPage(Predicate predicate, Pageable pageable, @PathVariable Long roleId) {
@@ -69,7 +70,7 @@ public class RoleRestController {
     @RequestMapping(value = "/{roleId}/user/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<AdminUserEntity> doRoleUserPage(Predicate predicate, Pageable pageable, @PathVariable Long roleId) {
-        return roleEntityService.findUserPageByRoleId(predicate,roleId, pageable);
+        return roleEntityService.findUserPageByRoleId(predicate, roleId, pageable);
     }
 
     /**
@@ -103,7 +104,7 @@ public class RoleRestController {
         return Result.success();
     }
 
-    @RequiresPermissions(value = { "page:sys:role:read", "data:sys:role:read" }, logical = Logical.OR)
+    @RequiresPermissions(value = {"page:sys:role:read", "data:sys:role:read"}, logical = Logical.OR)
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<RoleEntity> doPage(Predicate predicate, Pageable pageable) {
@@ -147,7 +148,7 @@ public class RoleRestController {
         return tree;
     }
 
-    @RequiresPermissions(value = { "data:sys:role:menu:upate", "data:sys:role:menu:create" }, logical = Logical.OR)
+    @RequiresPermissions(value = {"data:sys:role:menu:upate", "data:sys:role:menu:create"}, logical = Logical.OR)
     @RequestMapping(value = "/menu/save", method = RequestMethod.POST, params = "ids")
     @ResponseBody
     public Result doRoleMenuSave(@RequestParam(value = "ids") MenuEntity[] entities, @RequestParam(value = "roleId") Long roleId) {
@@ -158,6 +159,7 @@ public class RoleRestController {
     }
 
     // //////////////////
+
     /**
      * 菜单对应的权限列表
      *

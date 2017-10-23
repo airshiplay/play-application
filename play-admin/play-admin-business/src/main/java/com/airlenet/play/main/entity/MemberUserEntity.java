@@ -12,237 +12,236 @@ import java.util.Date;
 
 /**
  * 业务用户、会员等
- * 
- * @author lig
  *
+ * @author lig
  */
 @Table(name = "business_member")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class MemberUserEntity extends DataEntity<AdminUserEntity, Long> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	@NotNull
-	@Size(min = 2, max = 50)
-	@Column(length = 100)
-	private String nickname;
+    @NotNull
+    @Size(min = 2, max = 50)
+    @Column(length = 100)
+    private String nickname;
 
-	@Size(min = 4, max = 50)
-	@Column(unique = true, length = 100)
-	private String username;
+    @Size(min = 4, max = 50)
+    @Column(unique = true, length = 100)
+    private String username;
 
-	@Column(length = 10)
-	private String realname = "";
+    @Column(length = 10)
+    private String realname = "";
 
-	@Column(length = 225)
-	private String password;
+    @Column(length = 225)
+    private String password;
 
-	@Pattern(regexp = PlayPatterns.REGEX_MOBILE)
-	@Column(unique = true, length = 50)
-	private String mobile;
+    @Pattern(regexp = PlayPatterns.REGEX_MOBILE)
+    @Column(unique = true, length = 50)
+    private String mobile;
 
-	@Pattern(regexp = PlayPatterns.REGEX_MAIL)
-	@Column(unique = true, length = 50)
-	private String email;
+    @Pattern(regexp = PlayPatterns.REGEX_MAIL)
+    @Column(unique = true, length = 50)
+    private String email;
 
-	@Column(length = 500)
-	private String photo;
+    @Column(length = 500)
+    private String photo;
 
-	@Column(length = 64)
-	private String salt;
+    @Column(length = 64)
+    private String salt;
 
-	private Integer age;
+    private Integer age;
 
-	private String sex;
+    private String sex;
 
-	@DateTimeFormat(pattern = "yyyy年MM月dd日")
-	private Date birthday;
+    @DateTimeFormat(pattern = "yyyy年MM月dd日")
+    private Date birthday;
 
-	private Date lastLoginDate;
+    private Date lastLoginDate;
 
-	@Column(length = 50)
-	private String lastLoginIp;
+    @Column(length = 50)
+    private String lastLoginIp;
 
-	private boolean enabled = true;
+    private boolean enabled = true;
 
-	private boolean accountExpired = false;
+    private boolean accountExpired = false;
 
-	private boolean credentialsExpired = false;
+    private boolean credentialsExpired = false;
 
-	private boolean locked = false;
+    private boolean locked = false;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private AreaEntity area;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AreaEntity area;
 
-	@Column(length = 200)
-	private String areaName;
+    @Column(length = 200)
+    private String areaName;
 
-	@ManyToOne()
-	@JoinColumn(name = "rank_id")
-	private MemberRankEntity rank;
-	
-	public String getUsername() {
-		return username;
-	}
+    @ManyToOne()
+    @JoinColumn(name = "rank_id")
+    private MemberRankEntity rank;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getRealname() {
-		return realname;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setRealname(String realname) {
-		this.realname = realname;
-	}
+    public String getRealname() {
+        return realname;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getMobile() {
-		return mobile;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+    public String getMobile() {
+        return mobile;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getPhoto() {
-		return photo;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
+    public String getPhoto() {
+        return photo;
+    }
 
-	public String getSalt() {
-		return salt;
-	}
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
+    public String getSalt() {
+        return salt;
+    }
 
-	public Integer getAge() {
-		return age;
-	}
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+    public Integer getAge() {
+        return age;
+    }
 
-	public String getSex() {
-		return sex;
-	}
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+    public String getSex() {
+        return sex;
+    }
 
-	public Date getBirthday() {
-		return birthday;
-	}
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    public Date getBirthday() {
+        return birthday;
+    }
 
-	public Date getLastLoginDate() {
-		return lastLoginDate;
-	}
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
-	public void setLastLoginDate(Date lastLoginDate) {
-		this.lastLoginDate = lastLoginDate;
-	}
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
 
-	public String getLastLoginIp() {
-		return lastLoginIp;
-	}
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
 
-	public void setLastLoginIp(String lastLoginIp) {
-		this.lastLoginIp = lastLoginIp;
-	}
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
+    }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	public boolean isAccountExpired() {
-		return accountExpired;
-	}
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	public void setAccountExpired(boolean accountExpired) {
-		this.accountExpired = accountExpired;
-	}
+    public boolean isAccountExpired() {
+        return accountExpired;
+    }
 
-	public boolean isCredentialsExpired() {
-		return credentialsExpired;
-	}
+    public void setAccountExpired(boolean accountExpired) {
+        this.accountExpired = accountExpired;
+    }
 
-	public void setCredentialsExpired(boolean credentialsExpired) {
-		this.credentialsExpired = credentialsExpired;
-	}
+    public boolean isCredentialsExpired() {
+        return credentialsExpired;
+    }
 
-	public boolean isLocked() {
-		return locked;
-	}
+    public void setCredentialsExpired(boolean credentialsExpired) {
+        this.credentialsExpired = credentialsExpired;
+    }
 
-	public void setLocked(boolean locked) {
-		this.locked = locked;
-	}
+    public boolean isLocked() {
+        return locked;
+    }
 
-	public AreaEntity getArea() {
-		return area;
-	}
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
 
-	public void setArea(AreaEntity area) {
-		this.area = area;
-	}
+    public AreaEntity getArea() {
+        return area;
+    }
 
-	public String getAreaName() {
-		return areaName;
-	}
+    public void setArea(AreaEntity area) {
+        this.area = area;
+    }
 
-	public void setAreaName(String areaName) {
-		this.areaName = areaName;
-	}
+    public String getAreaName() {
+        return areaName;
+    }
 
-	public String getNickname() {
-		return nickname;
-	}
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    public String getNickname() {
+        return nickname;
+    }
 
-	public MemberRankEntity getRank() {
-		return rank;
-	}
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-	public void setRank(MemberRankEntity rank) {
-		this.rank = rank;
-	}
+    public MemberRankEntity getRank() {
+        return rank;
+    }
+
+    public void setRank(MemberRankEntity rank) {
+        this.rank = rank;
+    }
 
 }

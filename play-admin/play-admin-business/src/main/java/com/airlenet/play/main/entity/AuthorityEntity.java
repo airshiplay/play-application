@@ -12,66 +12,73 @@ import java.util.Set;
 @Table(name = "sys_authority")
 public class AuthorityEntity extends SortEntity<AdminUserEntity, Long> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@NotNull
-	@Enumerated(EnumType.ORDINAL)
-	private PermissionType type;
-	/**
-	 * 菜单读权限
-	 */
-	@Column(length = 20)
-	@Size(max = 10)
-	private String name;
-	/**
-	 * sys:menu:view
-	 */
-	@Column(name = "permission")
-	private String permission;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    @NotNull
+    @Enumerated(EnumType.ORDINAL)
+    private PermissionType type;
+    /**
+     * 菜单读权限
+     */
+    @Column(length = 20)
+    @Size(max = 10)
+    private String name;
+    /**
+     * sys:menu:view
+     */
+    @Column(name = "permission")
+    private String permission;
 
-	@ManyToOne
-	private MenuEntity menu;
+    @ManyToOne
+    private MenuEntity menu;
 
-	@ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
-	private Set<RoleEntity> roles = new HashSet<>();
-	public String getName() {
-		return name;
-	}
+    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
+    private Set<RoleEntity> roles = new HashSet<>();
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public MenuEntity getMenu() {
-		return menu;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setMenu(MenuEntity menu) {
-		this.menu = menu;
-	}
+    public MenuEntity getMenu() {
+        return menu;
+    }
 
-	public PermissionType getType() {
-		return type;
-	}
+    public void setMenu(MenuEntity menu) {
+        this.menu = menu;
+    }
 
-	public void setType(PermissionType type) {
-		this.type = type;
-	}
+    public PermissionType getType() {
+        return type;
+    }
 
-	public String getPermission() {
-		return permission;
-	}
+    public void setType(PermissionType type) {
+        this.type = type;
+    }
 
-	public void setPermission(String permission) {
-		this.permission = permission;
-	}
+    public String getPermission() {
+        return permission;
+    }
 
-	public enum PermissionType {
-		/** 页面授权 */
-		page, /** 数据授权 */
-		data, /** 页面数据授权 */
-		all
-	}
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
+    public enum PermissionType {
+        /**
+         * 页面授权
+         */
+        page, /**
+         * 数据授权
+         */
+        data, /**
+         * 页面数据授权
+         */
+        all
+    }
 }

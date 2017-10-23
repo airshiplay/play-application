@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MemberRankEntityService extends EntityService<MemberRankEntity, Long> {
-	
-	@Autowired
-	private MemberRankEntityRepository memberRankEntityRepository;
+
+    @Autowired
+    private MemberRankEntityRepository memberRankEntityRepository;
 }

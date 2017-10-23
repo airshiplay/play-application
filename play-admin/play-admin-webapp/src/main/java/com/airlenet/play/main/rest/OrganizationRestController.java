@@ -32,7 +32,7 @@ public class OrganizationRestController {
     private OrganizationEntityService organizationEntityService;
 
 
-    @RequestMapping(value = "/page", method = { RequestMethod.POST, RequestMethod.GET })
+    @RequestMapping(value = "/page", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public Page<OrganizationEntity> page(Predicate predicate, Pageable pageable) {
         return organizationEntityService.findAll(predicate, pageable);
@@ -73,7 +73,8 @@ public class OrganizationRestController {
         }
         return Result.success();
     }
-    @RequestMapping(value = "/treeList", method = { RequestMethod.POST, RequestMethod.GET })
+
+    @RequestMapping(value = "/treeList", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public Page<OrganizationEntity> treeList(Predicate predicate, Pageable pageable) {
         Tree<OrganizationEntity> tree = organizationEntityService.findTree(predicate);

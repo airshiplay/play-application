@@ -29,6 +29,7 @@ public class MenuRestController {
 
     @Autowired
     private RoleEntityService roleEntityService;
+
     @RequiresUser
     @RequiresPermissions("data:sys:menu:read")
     @RequestMapping(value = "/tree", method = RequestMethod.GET)

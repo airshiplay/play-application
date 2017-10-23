@@ -22,6 +22,7 @@ public class LogRestController {
 
     @Autowired
     private LogEntityService logEntityService;
+
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<LogEntity> doPage(Predicate predicate, Pageable pageable) {

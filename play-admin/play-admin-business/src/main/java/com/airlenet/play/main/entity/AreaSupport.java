@@ -5,25 +5,25 @@ import javax.persistence.PreUpdate;
 
 public interface AreaSupport {
 
-	AreaEntity getArea();
+    AreaEntity getArea();
 
-	void setArea(AreaEntity area);
+    void setArea(AreaEntity area);
 
-	String getAreaName();
+    String getAreaName();
 
-	void setAreaName(String areaName);
+    void setAreaName(String areaName);
 
-	@PrePersist
-	default void prePersist() {
-		if (getArea() != null) {
-			setAreaName(getArea().getFullName());
-		}
-	}
+    @PrePersist
+    default void prePersist() {
+        if (getArea() != null) {
+            setAreaName(getArea().getFullName());
+        }
+    }
 
-	@PreUpdate
-	default void preUpdate() {
-		if (getArea() != null) {
-			setAreaName(getArea().getFullName());
-		}
-	}
+    @PreUpdate
+    default void preUpdate() {
+        if (getArea() != null) {
+            setAreaName(getArea().getFullName());
+        }
+    }
 }

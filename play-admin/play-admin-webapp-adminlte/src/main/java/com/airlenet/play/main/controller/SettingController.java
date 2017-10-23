@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/center/setting")
 public class SettingController {
 
-	@Autowired
-	private SettingEntityService settingEntityService;
+    @Autowired
+    private SettingEntityService settingEntityService;
 
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public String getList(Model model) {
-		SettingEntity setting = settingEntityService.get();
-		model.addAttribute("setting", setting);
-		return "classpath:/admin/setting/info";
-	}
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String getList(Model model) {
+        SettingEntity setting = settingEntityService.get();
+        model.addAttribute("setting", setting);
+        return "classpath:/admin/setting/info";
+    }
 
 
 }

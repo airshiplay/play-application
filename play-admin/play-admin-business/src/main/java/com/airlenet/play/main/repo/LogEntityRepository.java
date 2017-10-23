@@ -8,8 +8,8 @@ import org.springframework.data.querydsl.binding.QuerydslBindings;
 
 public interface LogEntityRepository extends EntityRepository<LogEntity, Long>, QuerydslBinderCustomizer<QLogEntity> {
 
-	@Override
-	default public void customize(QuerydslBindings bindings, QLogEntity root) {
-		bindings.bind(root.text).first((path, value) -> path.containsIgnoreCase(value));
-	}
+    @Override
+    default public void customize(QuerydslBindings bindings, QLogEntity root) {
+        bindings.bind(root.text).first((path, value) -> path.containsIgnoreCase(value));
+    }
 }

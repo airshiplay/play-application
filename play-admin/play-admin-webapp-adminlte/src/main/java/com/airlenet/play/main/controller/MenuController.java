@@ -16,34 +16,34 @@ import com.airlenet.repo.domain.Tree;
 @RequestMapping("/center/menu")
 public class MenuController {
 
-	@Autowired
-	private MenuEntityService menuEntityService;
- 
+    @Autowired
+    private MenuEntityService menuEntityService;
 
-	@RequiresPermissions("page:sys:menu:read")
-	@RequestMapping(value = "/list.view", method = RequestMethod.GET)
-	public String get(Model model) {
-		Tree<MenuEntity> tree = menuEntityService.findTree(null);
-		tree.setIconClsProperty("iconCls");
-		tree.setTextProperty("text");
-		model.addAttribute("allMenuTree", tree.getRoots());
-		return "classpath:/admin/menu/list";
-	}
 
-	@RequestMapping(value = "/add.view", method = RequestMethod.GET)
-	public String getMenuAdd(Model model) {
-		return "classpath:/admin/menu/add";
-	}
+    @RequiresPermissions("page:sys:menu:read")
+    @RequestMapping(value = "/list.view", method = RequestMethod.GET)
+    public String get(Model model) {
+        Tree<MenuEntity> tree = menuEntityService.findTree(null);
+        tree.setIconClsProperty("iconCls");
+        tree.setTextProperty("text");
+        model.addAttribute("allMenuTree", tree.getRoots());
+        return "classpath:/admin/menu/list";
+    }
 
-	@RequestMapping(value = "/edit/{id}.view", method = RequestMethod.GET)
-	public String getMenuEdit(Model model, @PathVariable Long id) {
-		return "classpath:/admin/menu/edit";
-	}
+    @RequestMapping(value = "/add.view", method = RequestMethod.GET)
+    public String getMenuAdd(Model model) {
+        return "classpath:/admin/menu/add";
+    }
 
-	@RequestMapping(value = "/dialog/tree.view", method = RequestMethod.GET)
-	public String getMenuTree(Model model) {
-		return "classpath:/admin/menu/dialog/tree";
-	}
+    @RequestMapping(value = "/edit/{id}.view", method = RequestMethod.GET)
+    public String getMenuEdit(Model model, @PathVariable Long id) {
+        return "classpath:/admin/menu/edit";
+    }
+
+    @RequestMapping(value = "/dialog/tree.view", method = RequestMethod.GET)
+    public String getMenuTree(Model model) {
+        return "classpath:/admin/menu/dialog/tree";
+    }
 
 
 }

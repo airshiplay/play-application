@@ -16,30 +16,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MenuEntityService extends HierarchicalEntityService<MenuEntity, Long> {
 
-	@Autowired
-	private MenuEntityRepository menuEntityRepository;
+    @Autowired
+    private MenuEntityRepository menuEntityRepository;
 
-	@Autowired
-	private RoleEntityRepository roleEntityRepository;
+    @Autowired
+    private RoleEntityRepository roleEntityRepository;
 
-	@Transactional(readOnly = true)
-	public MenuEntity findByCode(String code) {
-		return menuEntityRepository.findByCode(code);
-	}
+    @Transactional(readOnly = true)
+    public MenuEntity findByCode(String code) {
+        return menuEntityRepository.findByCode(code);
+    }
 
-	@Transactional(readOnly = true)
-	public Tree<MenuEntity> getAllMenuTree() {
-		Tree<MenuEntity> tree = findTree(null);
-		return tree;
-	}
+    @Transactional(readOnly = true)
+    public Tree<MenuEntity> getAllMenuTree() {
+        Tree<MenuEntity> tree = findTree(null);
+        return tree;
+    }
 
-	@Transactional(readOnly = true)
-	public Tree<MenuEntity> getMenuTreeByUserId(Long userId) {
-		RoleEntity roleEntity = roleEntityRepository.findOne(QRoleEntity.roleEntity.users.any().id.eq(userId));
-		if (roleEntity.getCode().equals("superadmin")) {
-			return findTree(null);
-		}
-		Tree<MenuEntity> tree =TreeHelper.toTree(null,Lists.newArrayList(roleEntity.getMenus()));
-		return tree;
-	}
+    @Transactional(readOnly = true)
+    public Tree<MenuEntity> getMenuTreeByUserId(Long userId) {
+        RoleEntity roleEntity = roleEntityRepository.findOne(QRoleEntity.roleEntity.users.any().id.eq(userId));
+        if (roleEntity.getCode().equals("superadmin")) {
+            return findTree(null);
+        }
+        Tree<MenuEntity> tree = TreeHelper.toTree(null, Lists.newArrayList(roleEntity.getMenus()));
+        return tree;
+    }
 }

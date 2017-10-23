@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AreaEntityService extends HierarchicalEntityService<AreaEntity, Long> {
 
-	@Autowired
-	private AreaEntityRepository areaEntityRepository;
+    @Autowired
+    private AreaEntityRepository areaEntityRepository;
 
-	@Transactional(readOnly = true)
-	public AreaEntity findByFullNameAndType(String fullName, AreaEntity.AreaType type) {
-		return areaEntityRepository.findByFullNameAndType(fullName, type);
-	}
+    @Transactional(readOnly = true)
+    public AreaEntity findByFullNameAndType(String fullName, AreaEntity.AreaType type) {
+        return areaEntityRepository.findByFullNameAndType(fullName, type);
+    }
 }

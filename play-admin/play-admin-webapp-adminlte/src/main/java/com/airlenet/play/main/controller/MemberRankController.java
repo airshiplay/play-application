@@ -13,38 +13,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/center/memberRank")
 public class MemberRankController {
 
-	@Autowired
-	private MemberRankEntityService memberRankEntityService;
-	
-	@Autowired
-	private MemberUserEntityService memberUserEntityService;
+    @Autowired
+    private MemberRankEntityService memberRankEntityService;
 
-	@RequestMapping(value = "/memberRankList.view", method = RequestMethod.GET)
-	public String getList() {
-		return "classpath:/admin/memberRank/memberRankList";
-	}
+    @Autowired
+    private MemberUserEntityService memberUserEntityService;
 
-	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
-	public String create(Model model) {
-		return "classpath:/admin/memberRank/memberRankForm";
-	}
+    @RequestMapping(value = "/memberRankList.view", method = RequestMethod.GET)
+    public String getList() {
+        return "classpath:/admin/memberRank/memberRankList";
+    }
 
-	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
-	public String edit(Model model, @PathVariable Long id) {
-		model.addAttribute("memberRank", memberRankEntityService.findOne(id));
-		return "classpath:/admin/memberRank/memberRankForm";
-	}
+    @RequestMapping(value = {"/create.view"}, method = RequestMethod.GET)
+    public String create(Model model) {
+        return "classpath:/admin/memberRank/memberRankForm";
+    }
 
-	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
-	public String view(Model model, @PathVariable Long id) {
-		model.addAttribute("memberRank", memberRankEntityService.findOne(id));
-		return "classpath:/admin/memberRank/memberRankView";
-	}
+    @RequestMapping(value = {"/edit/{id}.view"}, method = RequestMethod.GET)
+    public String edit(Model model, @PathVariable Long id) {
+        model.addAttribute("memberRank", memberRankEntityService.findOne(id));
+        return "classpath:/admin/memberRank/memberRankForm";
+    }
 
-	@RequestMapping(value = { "/{id}/member.view" }, method = RequestMethod.GET)
-	public String getMember(Model model, @PathVariable Long id) {
-		model.addAttribute("memberRankId",id);
-		return "classpath:/admin/memberRank/rankMemberDialog";
-	}
+    @RequestMapping(value = {"/view/{id}.view"}, method = RequestMethod.GET)
+    public String view(Model model, @PathVariable Long id) {
+        model.addAttribute("memberRank", memberRankEntityService.findOne(id));
+        return "classpath:/admin/memberRank/memberRankView";
+    }
+
+    @RequestMapping(value = {"/{id}/member.view"}, method = RequestMethod.GET)
+    public String getMember(Model model, @PathVariable Long id) {
+        model.addAttribute("memberRankId", id);
+        return "classpath:/admin/memberRank/rankMemberDialog";
+    }
 
 }

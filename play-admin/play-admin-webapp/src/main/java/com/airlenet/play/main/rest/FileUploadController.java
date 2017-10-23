@@ -17,115 +17,115 @@ import java.util.Map;
 @RequestMapping("/center")
 public class FileUploadController {
 
-	@Autowired
-	private FileService fileStorageService;
+    @Autowired
+    private FileService fileStorageService;
 
-	// 图片扩展名
-	private final static String[] fileTypes = new String[] { "gif", "jpg",
-			"jpeg", "png", "bmp" };
+    // 图片扩展名
+    private final static String[] fileTypes = new String[]{"gif", "jpg",
+            "jpeg", "png", "bmp"};
 
-	@RequestMapping(value = "/multipart/upload", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> uploadImage(
-			@RequestPart("file") MultipartFile part,
-			@RequestParam(value = "dir", required = false) String dir) {
-		if (part == null) {
-			return error("请选择文件");
-		}
+    @RequestMapping(value = "/multipart/upload", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> uploadImage(
+            @RequestPart("file") MultipartFile part,
+            @RequestParam(value = "dir", required = false) String dir) {
+        if (part == null) {
+            return error("请选择文件");
+        }
 
-		if (Strings.isNullOrEmpty(dir)) {
-			dir = "image";
-		}
+        if (Strings.isNullOrEmpty(dir)) {
+            dir = "image";
+        }
 
-		String url = null;
+        String url = null;
 
-			url = fileStorageService.upload(part);
-		 if(url==null){
-		 	return error("file fail");
-		 }
-		return success(url);
-	}
+        url = fileStorageService.upload(part);
+        if (url == null) {
+            return error("file fail");
+        }
+        return success(url);
+    }
 
-	@RequestMapping(value = "/list")
-	@ResponseBody
-	public Map<String, Object> listFile(@RequestParam("dir") String dir,
-			@RequestParam("path") String path,
-			@RequestParam("order") String order) {
-		List<FileInfo> listFiles = fileStorageService.browser(dir, path);
-		Map<String, Object> result = new HashMap<>();
-		result.put("total_count", listFiles.size());
-		result.put("file_list", listFiles);
-		return result;
-	}
+    @RequestMapping(value = "/list")
+    @ResponseBody
+    public Map<String, Object> listFile(@RequestParam("dir") String dir,
+                                        @RequestParam("path") String path,
+                                        @RequestParam("order") String order) {
+        List<FileInfo> listFiles = fileStorageService.browser(dir, path);
+        Map<String, Object> result = new HashMap<>();
+        result.put("total_count", listFiles.size());
+        result.put("file_list", listFiles);
+        return result;
+    }
 
-	private Map<String, Object> error(String message) {
-		Map<String, Object> result = new HashMap<>();
-		result.put("error", 1);
-		result.put("message", message);
-		return result;
-	}
+    private Map<String, Object> error(String message) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("error", 1);
+        result.put("message", message);
+        return result;
+    }
 
-	private Map<String, Object> success(String url) {
-		Map<String, Object> result = new HashMap<>();
-		result.put("success",true);
-		result.put("msg", "操作成功");
-		result.put("code", "success");
-		result.put("urls", url);
-		//{"success":true,"code":"success","msg":"操作成功","urls":"http://mdm.whenling.com/upload//file/53bf0731113241e7b9fe7305b8ad35dc.jpg"}
+    private Map<String, Object> success(String url) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("msg", "操作成功");
+        result.put("code", "success");
+        result.put("urls", url);
+        //{"success":true,"code":"success","msg":"操作成功","urls":"http://mdm.whenling.com/upload//file/53bf0731113241e7b9fe7305b8ad35dc.jpg"}
 
-		return result;
-	}
+        return result;
+    }
 
-	public class NameComparator implements Comparator<Map<String, Object>> {
-		public int compare(Map<String, Object> hashA, Map<String, Object> hashB) {
-			if (((Boolean) hashA.get("is_dir"))
-					&& !((Boolean) hashB.get("is_dir"))) {
-				return -1;
-			} else if (!((Boolean) hashA.get("is_dir"))
-					&& ((Boolean) hashB.get("is_dir"))) {
-				return 1;
-			} else {
-				return ((String) hashA.get("filename"))
-						.compareTo((String) hashB.get("filename"));
-			}
-		}
-	}
+    public class NameComparator implements Comparator<Map<String, Object>> {
+        public int compare(Map<String, Object> hashA, Map<String, Object> hashB) {
+            if (((Boolean) hashA.get("is_dir"))
+                    && !((Boolean) hashB.get("is_dir"))) {
+                return -1;
+            } else if (!((Boolean) hashA.get("is_dir"))
+                    && ((Boolean) hashB.get("is_dir"))) {
+                return 1;
+            } else {
+                return ((String) hashA.get("filename"))
+                        .compareTo((String) hashB.get("filename"));
+            }
+        }
+    }
 
-	public class SizeComparator implements Comparator<Map<String, Object>> {
-		public int compare(Map<String, Object> hashA, Map<String, Object> hashB) {
-			if (((Boolean) hashA.get("is_dir"))
-					&& !((Boolean) hashB.get("is_dir"))) {
-				return -1;
-			} else if (!((Boolean) hashA.get("is_dir"))
-					&& ((Boolean) hashB.get("is_dir"))) {
-				return 1;
-			} else {
-				if (((Long) hashA.get("filesize")) > ((Long) hashB
-						.get("filesize"))) {
-					return 1;
-				} else if (((Long) hashA.get("filesize")) < ((Long) hashB
-						.get("filesize"))) {
-					return -1;
-				} else {
-					return 0;
-				}
-			}
-		}
-	}
+    public class SizeComparator implements Comparator<Map<String, Object>> {
+        public int compare(Map<String, Object> hashA, Map<String, Object> hashB) {
+            if (((Boolean) hashA.get("is_dir"))
+                    && !((Boolean) hashB.get("is_dir"))) {
+                return -1;
+            } else if (!((Boolean) hashA.get("is_dir"))
+                    && ((Boolean) hashB.get("is_dir"))) {
+                return 1;
+            } else {
+                if (((Long) hashA.get("filesize")) > ((Long) hashB
+                        .get("filesize"))) {
+                    return 1;
+                } else if (((Long) hashA.get("filesize")) < ((Long) hashB
+                        .get("filesize"))) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+    }
 
-	public class TypeComparator implements Comparator<Map<String, Object>> {
-		public int compare(Map<String, Object> hashA, Map<String, Object> hashB) {
-			if (((Boolean) hashA.get("is_dir"))
-					&& !((Boolean) hashB.get("is_dir"))) {
-				return -1;
-			} else if (!((Boolean) hashA.get("is_dir"))
-					&& ((Boolean) hashB.get("is_dir"))) {
-				return 1;
-			} else {
-				return ((String) hashA.get("filetype"))
-						.compareTo((String) hashB.get("filetype"));
-			}
-		}
-	}
+    public class TypeComparator implements Comparator<Map<String, Object>> {
+        public int compare(Map<String, Object> hashA, Map<String, Object> hashB) {
+            if (((Boolean) hashA.get("is_dir"))
+                    && !((Boolean) hashB.get("is_dir"))) {
+                return -1;
+            } else if (!((Boolean) hashA.get("is_dir"))
+                    && ((Boolean) hashB.get("is_dir"))) {
+                return 1;
+            } else {
+                return ((String) hashA.get("filetype"))
+                        .compareTo((String) hashB.get("filetype"));
+            }
+        }
+    }
 
 }

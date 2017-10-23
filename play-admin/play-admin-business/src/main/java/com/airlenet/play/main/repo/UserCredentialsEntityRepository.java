@@ -5,6 +5,6 @@ import com.airlenet.repo.jpa.EntityRepository;
 
 public interface UserCredentialsEntityRepository extends EntityRepository<UserCredentialsEntity, Long> {
 
-	UserCredentialsEntity findByAccountAndType(String account, String type);
+    UserCredentialsEntity findByAccountAndType(String account, String type);
 
 }

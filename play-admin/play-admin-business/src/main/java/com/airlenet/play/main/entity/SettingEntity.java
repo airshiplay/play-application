@@ -13,184 +13,214 @@ import javax.validation.constraints.Size;
 @Table(name = "sys_setting")
 public class SettingEntity extends DataEntity<AdminUserEntity, Long> {
 
-	private static final long serialVersionUID = -7311556460000491508L;
+    private static final long serialVersionUID = -7311556460000491508L;
 
-	/** 网站名称 */
-	@NotNull
-	@Size(min = 2, max = 50)
-	@Column(length = 200)
-	private String siteName;
+    /**
+     * 网站名称
+     */
+    @NotNull
+    @Size(min = 2, max = 50)
+    @Column(length = 200)
+    private String siteName;
 
-	@NotNull
-	@Size(min = 2, max = 20)
-	@Column(length = 20)
-	private String shortSiteName;
-	
-	/** logo */
-	@Column(length = 200)
-	private String logo;
-	
-	/** adminLoginBanner */
-	@Column(length = 200)
-	private String adminLoginBanner;
-	
-	/**  介绍*/
-	@Lob
-	private String introduction;
+    @NotNull
+    @Size(min = 2, max = 20)
+    @Column(length = 20)
+    private String shortSiteName;
 
-	/** 热门搜索 */
-	@Column(length = 200)
-	private String hotSearch;
+    /**
+     * logo
+     */
+    @Column(length = 200)
+    private String logo;
 
-	/** 联系地址 */
-	@Column(length = 500)
-	private String address;
+    /**
+     * adminLoginBanner
+     */
+    @Column(length = 200)
+    private String adminLoginBanner;
 
-	/** 联系人 */
-	@Column(length = 100)
-	private String contact;
-	/** 联系电话1 */
-	@Column(length = 50)
-	private String phone1;
-	
-	/** 联系电话2 */
-	@Column(length = 50)
-	private String phone2;
+    /**
+     * 介绍
+     */
+    @Lob
+    private String introduction;
 
-	/** 邮政编码 */
-	@Column(length = 50)
-	private String zipCode;
+    /**
+     * 热门搜索
+     */
+    @Column(length = 200)
+    private String hotSearch;
 
-	/** E-mail */
-	@Column(length = 50)
-	private String email;
+    /**
+     * 联系地址
+     */
+    @Column(length = 500)
+    private String address;
 
-	/** 备案编号 */
-	@Column(length = 100)
-	private String certtext;
+    /**
+     * 联系人
+     */
+    @Column(length = 100)
+    private String contact;
+    /**
+     * 联系电话1
+     */
+    @Column(length = 50)
+    private String phone1;
 
-	/** 是否网站开启 */
-	private Boolean isSiteEnabled;
+    /**
+     * 联系电话2
+     */
+    @Column(length = 50)
+    private String phone2;
 
-	/** 网站关闭消息 */
-	@Column(length = 500)
-	private String siteCloseMessage;
+    /**
+     * 邮政编码
+     */
+    @Column(length = 50)
+    private String zipCode;
 
-	public String getSiteName() {
-		return siteName;
-	}
+    /**
+     * E-mail
+     */
+    @Column(length = 50)
+    private String email;
 
-	public void setSiteName(String siteName) {
-		this.siteName = siteName;
-	}
+    /**
+     * 备案编号
+     */
+    @Column(length = 100)
+    private String certtext;
 
-	public String getLogo() {
-		return logo;
-	}
+    /**
+     * 是否网站开启
+     */
+    private Boolean isSiteEnabled;
 
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
+    /**
+     * 网站关闭消息
+     */
+    @Column(length = 500)
+    private String siteCloseMessage;
 
-	public String getAdminLoginBanner() {
-		return adminLoginBanner;
-	}
+    public String getSiteName() {
+        return siteName;
+    }
 
-	public void setAdminLoginBanner(String adminLoginBanner) {
-		this.adminLoginBanner = adminLoginBanner;
-	}
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
+    }
 
-	public String getIntroduction() {
-		return introduction;
-	}
+    public String getLogo() {
+        return logo;
+    }
 
-	public void setIntroduction(String introduction) {
-		this.introduction = introduction;
-	}
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
-	public String getHotSearch() {
-		return hotSearch;
-	}
+    public String getAdminLoginBanner() {
+        return adminLoginBanner;
+    }
 
-	public void setHotSearch(String hotSearch) {
-		this.hotSearch = hotSearch;
-	}
+    public void setAdminLoginBanner(String adminLoginBanner) {
+        this.adminLoginBanner = adminLoginBanner;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getIntroduction() {
+        return introduction;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
 
-	public String getContact() {
-		return contact;
-	}
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-	public String getPhone1() {
-		return phone1;
-	}
+    public String getHotSearch() {
+        return hotSearch;
+    }
 
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
+    public void setHotSearch(String hotSearch) {
+        this.hotSearch = hotSearch;
+    }
 
-	public String getPhone2() {
-		return phone2;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public String getZipCode() {
-		return zipCode;
-	}
+    public String getContact() {
+        return contact;
+    }
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getPhone1() {
+        return phone1;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
 
-	public String getCerttext() {
-		return certtext;
-	}
+    public String getPhone2() {
+        return phone2;
+    }
 
-	public void setCerttext(String certtext) {
-		this.certtext = certtext;
-	}
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
+    }
 
-	public Boolean getIsSiteEnabled() {
-		return isSiteEnabled;
-	}
+    public String getZipCode() {
+        return zipCode;
+    }
 
-	public void setIsSiteEnabled(Boolean isSiteEnabled) {
-		this.isSiteEnabled = isSiteEnabled;
-	}
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
 
-	public String getSiteCloseMessage() {
-		return siteCloseMessage;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setSiteCloseMessage(String siteCloseMessage) {
-		this.siteCloseMessage = siteCloseMessage;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getShortSiteName() {
-		return shortSiteName;
-	}
+    public String getCerttext() {
+        return certtext;
+    }
 
-	public void setShortSiteName(String shortSiteName) {
-		this.shortSiteName = shortSiteName;
-	}
+    public void setCerttext(String certtext) {
+        this.certtext = certtext;
+    }
+
+    public Boolean getIsSiteEnabled() {
+        return isSiteEnabled;
+    }
+
+    public void setIsSiteEnabled(Boolean isSiteEnabled) {
+        this.isSiteEnabled = isSiteEnabled;
+    }
+
+    public String getSiteCloseMessage() {
+        return siteCloseMessage;
+    }
+
+    public void setSiteCloseMessage(String siteCloseMessage) {
+        this.siteCloseMessage = siteCloseMessage;
+    }
+
+    public String getShortSiteName() {
+        return shortSiteName;
+    }
+
+    public void setShortSiteName(String shortSiteName) {
+        this.shortSiteName = shortSiteName;
+    }
 }

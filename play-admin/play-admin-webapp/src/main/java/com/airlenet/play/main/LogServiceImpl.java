@@ -14,33 +14,33 @@ import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class LogServiceImpl implements LogService {
-	@Autowired
-	LogEntityService logEntityService;
+    @Autowired
+    LogEntityService logEntityService;
 
-	/**
-	 * 日志记录
-	 * 
-	 * @param operateType
-	 * @param level
-	 * @param content
-	 */
-	public void addLog(OperateType operateType, LogLevel level, String content) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    /**
+     * 日志记录
+     *
+     * @param operateType
+     * @param level
+     * @param content
+     */
+    public void addLog(OperateType operateType, LogLevel level, String content) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 //		String browser = BrowserUtil.checkBrowse(request);
 //		logEntityService.addLog(browser, operateType, level, IpUtil.getIpAddr(request), content);
-	}
+    }
 
-	@Override
-	public void addLog(OperateType operateType, LogLevel level, Throwable thr) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    @Override
+    public void addLog(OperateType operateType, LogLevel level, Throwable thr) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 //		String browser = BrowserUtil.checkBrowse(request);
 //		logEntityService.addLog(browser, operateType, level, IpUtil.getIpAddr(request), LogUtil.getThrowableString(thr));
-	}
+    }
 
-	@Override
-	public void addLog(OperateType operateType, LogLevel level, String content, Throwable thr) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    @Override
+    public void addLog(OperateType operateType, LogLevel level, String content, Throwable thr) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 //		String browser = BrowserUtil.checkBrowse(request);
 //		logEntityService.addLog(browser, operateType, level, IpUtil.getIpAddr(request), content + "\n\n" + LogUtil.getThrowableString(thr));
-	}
+    }
 }

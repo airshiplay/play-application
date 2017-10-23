@@ -42,16 +42,16 @@ public class UserRestController {
             return Result.validateError();
         }
 
-        if(user.isNew()) {
-            if(Strings.isNullOrEmpty(newPassword)) {
+        if (user.isNew()) {
+            if (Strings.isNullOrEmpty(newPassword)) {
                 return Result.validateError();
             }
-            String salt= StringUtils.isEmpty(user.getSalt())?passwordService.generatorSalt():user.getSalt();
+            String salt = StringUtils.isEmpty(user.getSalt()) ? passwordService.generatorSalt() : user.getSalt();
             user.setSalt(salt);
             user.setPassword(passwordService.encryptPassword(newPassword, salt));
-        }else{
-            if(!Strings.isNullOrEmpty(newPassword)) {
-                String salt= StringUtils.isEmpty(user.getSalt())?passwordService.generatorSalt():user.getSalt();
+        } else {
+            if (!Strings.isNullOrEmpty(newPassword)) {
+                String salt = StringUtils.isEmpty(user.getSalt()) ? passwordService.generatorSalt() : user.getSalt();
                 user.setSalt(salt);
                 user.setPassword(passwordService.encryptPassword(newPassword, salt));
             }

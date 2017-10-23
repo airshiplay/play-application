@@ -14,91 +14,91 @@ import java.util.Set;
 @Entity
 @Table(name = "sys_role")
 public class RoleEntity extends DataEntity<AdminUserEntity, Long> implements
-		Lockedable {
+        Lockedable {
 
-	private static final long serialVersionUID = 5364423002312524895L;
+    private static final long serialVersionUID = 5364423002312524895L;
 
-	@NotNull
-	@Size(min = 1, max = 50)
-	@Column(nullable = false, length = 100)
-	private String name;
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(nullable = false, length = 100)
+    private String name;
 
-	@NotNull
-	@Size(min = 1, max = 50)
-	@Column(nullable = false, length = 50,unique=true)	
-	private String code;
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(nullable = false, length = 50, unique = true)
+    private String code;
 
-	private boolean locked = false;
+    private boolean locked = false;
 
-	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-	private Set<AdminUserEntity> users = new HashSet<>();
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private Set<AdminUserEntity> users = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "sys_role_menu", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "menu_id"))
-	@OrderBy("sortNo asc")
-	private Set<MenuEntity> menus = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "sys_role_menu", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "menu_id"))
+    @OrderBy("sortNo asc")
+    private Set<MenuEntity> menus = new HashSet<>();
 
 //	@ElementCollection
 //	@CollectionTable(name = "sys_role_authority", joinColumns = @JoinColumn(name = "role_id"))
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "sys_role_authority", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
-	@OrderBy("sortNo asc")
-	private List<AuthorityEntity> authorities = new ArrayList<AuthorityEntity>();
 
-	public String getName() {
-		return name;
-	}
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "sys_role_authority", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    @OrderBy("sortNo asc")
+    private List<AuthorityEntity> authorities = new ArrayList<AuthorityEntity>();
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public Set<MenuEntity> getMenus() {
-		return menus;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public Set<AdminUserEntity> getUsers() {
-		return users;
-	}
+    public Set<MenuEntity> getMenus() {
+        return menus;
+    }
 
-	public void setUsers(Set<AdminUserEntity> users) {
-		this.users = users;
-	}
+    public Set<AdminUserEntity> getUsers() {
+        return users;
+    }
 
-	public void setMenus(Set<MenuEntity> menus) {
-		this.menus = menus;
-	}
+    public void setUsers(Set<AdminUserEntity> users) {
+        this.users = users;
+    }
 
-	public List<AuthorityEntity> getAuthorities() {
-		return authorities;
-	}
+    public void setMenus(Set<MenuEntity> menus) {
+        this.menus = menus;
+    }
 
-	public void setAuthorities(List<AuthorityEntity> authorities) {
-		this.authorities = authorities;
-	}
+    public List<AuthorityEntity> getAuthorities() {
+        return authorities;
+    }
 
-	@Override
-	public boolean isLocked() {
-		return locked;
-	}
+    public void setAuthorities(List<AuthorityEntity> authorities) {
+        this.authorities = authorities;
+    }
 
-	@Override
-	public void setLocked(boolean locked) {
-		this.locked = locked;
-	}
+    @Override
+    public boolean isLocked() {
+        return locked;
+    }
 
-	@Override
-	public void markLocked() {
-		locked = true;
-	}
+    @Override
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
+    @Override
+    public void markLocked() {
+        locked = true;
+    }
 
 }

@@ -13,36 +13,40 @@ import com.airlenet.security.PlayPasswordService;
 
 /**
  * 会员
+ *
  * @author airlenet
  * @version 2017-09-12
  */
 @Controller
 @RequestMapping("/center/member")
 public class MemberController {
-	@Autowired
-	private PlayPasswordService passwordService;
-	
-	@Autowired
-	private MemberUserEntityService userEntityService;
+    @Autowired
+    private PlayPasswordService passwordService;
 
-	@RequestMapping(value="/list",method = RequestMethod.GET)
-	public String getUsrList(){
-		return "classpath:/admin/member/list";
-	}
-	@RequestMapping(value="/add",method = RequestMethod.GET)
-	public String getUsrAdd(){
-		return "classpath:/admin/member/memberForm";
-	}
-	@RequestMapping(value="/edit/{userId}",method = RequestMethod.GET)
-	public String getUsrEdit(@PathVariable Long userId,Model model){
-		MemberUserEntity userEntity= userEntityService.findOne(userId);
-		model.addAttribute("member", userEntity);
-		return "classpath:/admin/member/memberForm";
-	}
-	@RequestMapping(value="/{memberId}/rank/update",method = RequestMethod.GET)
-	public String setMemberRank(Model model,@PathVariable Long memberId){
-		model.addAttribute("memberId", memberId);
-		return  "classpath:/admin/member/memberRankDialog";
-	}
+    @Autowired
+    private MemberUserEntityService userEntityService;
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String getUsrList() {
+        return "classpath:/admin/member/list";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String getUsrAdd() {
+        return "classpath:/admin/member/memberForm";
+    }
+
+    @RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
+    public String getUsrEdit(@PathVariable Long userId, Model model) {
+        MemberUserEntity userEntity = userEntityService.findOne(userId);
+        model.addAttribute("member", userEntity);
+        return "classpath:/admin/member/memberForm";
+    }
+
+    @RequestMapping(value = "/{memberId}/rank/update", method = RequestMethod.GET)
+    public String setMemberRank(Model model, @PathVariable Long memberId) {
+        model.addAttribute("memberId", memberId);
+        return "classpath:/admin/member/memberRankDialog";
+    }
 
 }

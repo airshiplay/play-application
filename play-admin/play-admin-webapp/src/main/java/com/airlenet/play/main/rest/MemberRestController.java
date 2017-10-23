@@ -29,10 +29,10 @@ public class MemberRestController {
     @Autowired
     private MemberUserEntityService userEntityService;
 
-    @RequestMapping(value="/{memberId}/rank/update",method = RequestMethod.POST, params = "id")
+    @RequestMapping(value = "/{memberId}/rank/update", method = RequestMethod.POST, params = "id")
     @ResponseBody
-    public Result doSetRank(@PathVariable Long memberId, @RequestParam(value = "id") MemberRankEntity entity){
-        MemberUserEntity userEntity= userEntityService.findOne(memberId);
+    public Result doSetRank(@PathVariable Long memberId, @RequestParam(value = "id") MemberRankEntity entity) {
+        MemberUserEntity userEntity = userEntityService.findOne(memberId);
         userEntity.setRank(entity);
         userEntityService.save(userEntity);
         return Result.success();
@@ -51,16 +51,16 @@ public class MemberRestController {
             return Result.validateError();
         }
 
-        if(user.isNew()) {
-            if(Strings.isNullOrEmpty(newPassword)) {
+        if (user.isNew()) {
+            if (Strings.isNullOrEmpty(newPassword)) {
                 return Result.validateError();
             }
-            String salt= StringUtils.isEmpty(user.getSalt())?passwordService.generatorSalt():user.getSalt();
+            String salt = StringUtils.isEmpty(user.getSalt()) ? passwordService.generatorSalt() : user.getSalt();
             user.setSalt(salt);
             user.setPassword(passwordService.encryptPassword(newPassword, salt));
-        }else{
-            if(!Strings.isNullOrEmpty(newPassword)) {
-                String salt= StringUtils.isEmpty(user.getSalt())?passwordService.generatorSalt():user.getSalt();
+        } else {
+            if (!Strings.isNullOrEmpty(newPassword)) {
+                String salt = StringUtils.isEmpty(user.getSalt()) ? passwordService.generatorSalt() : user.getSalt();
                 user.setSalt(salt);
                 user.setPassword(passwordService.encryptPassword(newPassword, salt));
             }

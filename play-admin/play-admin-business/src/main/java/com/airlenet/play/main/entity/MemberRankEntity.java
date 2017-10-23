@@ -17,26 +17,26 @@ import java.util.Set;
 @Entity
 public class MemberRankEntity extends DataEntity<AdminUserEntity, Long> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	@Size(min = 1, max = 50)
-	@Column(nullable = false, length = 200)
-	private String name;
+    @Size(min = 1, max = 50)
+    @Column(nullable = false, length = 200)
+    private String name;
 
-	@Size(min = 1, max = 50)
-	@Column(nullable = false, length = 200)
-	private String code;
+    @Size(min = 1, max = 50)
+    @Column(nullable = false, length = 200)
+    private String code;
 
-	@Column(length = 500)
-	private String icon;
-	
-	@Column(length=500)
-	private String description;
-	
-	@OneToMany(mappedBy = "rank")
-	private Set<MemberUserEntity> members;
+    @Column(length = 500)
+    private String icon;
+
+    @Column(length = 500)
+    private String description;
+
+    @OneToMany(mappedBy = "rank")
+    private Set<MemberUserEntity> members;
 
 }

@@ -16,26 +16,28 @@ import com.airlenet.security.PlayPasswordService;
 @RequestMapping("center/user")
 public class UserController {
 
-	@Autowired
-	private PlayPasswordService passwordService;
-	
-	@Autowired
-	private UserEntityService userEntityService;
+    @Autowired
+    private PlayPasswordService passwordService;
 
-	@RequestMapping(value="/list",method = RequestMethod.GET)
-	public String getUsrList(){
-		return "classpath:/admin/user/list";
-	}
-	@RequestMapping(value="/add",method = RequestMethod.GET)
-	public String getUsrAdd(){
-		return "classpath:/admin/user/userForm";
-	}
-	@RequestMapping(value="/edit/{userId}",method = RequestMethod.GET)
-	public String getUsrEdit(@PathVariable Long userId,Model model){
-		AdminUserEntity userEntity= userEntityService.findOne(userId);
-		model.addAttribute("user", userEntity);
-		return "classpath:/admin/user/userForm";
-	}
+    @Autowired
+    private UserEntityService userEntityService;
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String getUsrList() {
+        return "classpath:/admin/user/list";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String getUsrAdd() {
+        return "classpath:/admin/user/userForm";
+    }
+
+    @RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
+    public String getUsrEdit(@PathVariable Long userId, Model model) {
+        AdminUserEntity userEntity = userEntityService.findOne(userId);
+        model.addAttribute("user", userEntity);
+        return "classpath:/admin/user/userForm";
+    }
 
 
 }

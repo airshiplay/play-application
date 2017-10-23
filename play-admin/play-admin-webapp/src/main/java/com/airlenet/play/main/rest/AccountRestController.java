@@ -30,6 +30,7 @@ public class AccountRestController {
 //	OauthPluginService oauthPluginService;
     @Autowired
     PlayPasswordService passwordService;
+
     @RequestMapping(value = "/oauth/unbind", method = RequestMethod.POST)
     @ResponseBody
     public Result unBind(@RequestParam String oauthPluginId, @CurrentUser CustomUserDetails<Long, AdminUserEntity> user) {
@@ -39,15 +40,15 @@ public class AccountRestController {
 
     @RequestMapping(value = "/password", method = RequestMethod.POST)
     @ResponseBody
-    public Result postPassword(@CurrentUser CustomUserDetails<Long, AdminUserEntity> customUser,@RequestParam String password,@RequestParam String newPassword) {
-        AdminUserEntity adminUser =customUser.getCustomUser();
-        if(StringUtils.isEmpty(password)&&!StringUtils.isEmpty(adminUser.getPassword())){
+    public Result postPassword(@CurrentUser CustomUserDetails<Long, AdminUserEntity> customUser, @RequestParam String password, @RequestParam String newPassword) {
+        AdminUserEntity adminUser = customUser.getCustomUser();
+        if (StringUtils.isEmpty(password) && !StringUtils.isEmpty(adminUser.getPassword())) {
             return Result.validateError();
         }
-        if(!StringUtils.isEmpty(password)&&!passwordService.passwordsMatch(password, adminUser.getSalt(), adminUser.getPassword())){
+        if (!StringUtils.isEmpty(password) && !passwordService.passwordsMatch(password, adminUser.getSalt(), adminUser.getPassword())) {
             return Result.validateError();
         }
-        if(!StringUtils.isEmpty(newPassword)){
+        if (!StringUtils.isEmpty(newPassword)) {
             adminUser.setPassword(passwordService.encryptPassword(newPassword, adminUser.getSalt()));
         }
         userEntityService.save(adminUser);
@@ -61,7 +62,7 @@ public class AccountRestController {
             return Result.validateError();
         }
         user.setPhoto(avatar);
-        if(!StringUtils.isEmpty(newPassword)){
+        if (!StringUtils.isEmpty(newPassword)) {
             user.setPassword(passwordService.encryptPassword(newPassword, user.getSalt()));
         }
         user = userEntityService.save(user);

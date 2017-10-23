@@ -31,8 +31,9 @@ public class MemberRankRestController {
     @RequestMapping(value = "/{id}/member/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<MemberUserEntity> doMemberPage(@PathVariable Long id, Predicate predicate, Pageable pageable) {
-        return memberUserEntityService.findByRankId(id,predicate,pageable);
+        return memberUserEntityService.findByRankId(id, predicate, pageable);
     }
+
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<MemberRankEntity> doPage(Predicate predicate, Pageable pageable) {

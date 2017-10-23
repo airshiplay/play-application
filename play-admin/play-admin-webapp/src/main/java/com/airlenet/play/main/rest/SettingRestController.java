@@ -21,11 +21,11 @@ public class SettingRestController {
     private SettingEntityService settingEntityService;
 
 
-     @RequestMapping(value = "/get", method = RequestMethod.GET)
-     @ResponseBody
-     public SettingEntity doGet() {
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @ResponseBody
+    public SettingEntity doGet() {
         return settingEntityService.get();
-     }
+    }
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

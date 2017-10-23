@@ -5,6 +5,6 @@ import com.airlenet.repo.jpa.EntityRepository;
 
 public interface SettingEntityRepository extends EntityRepository<SettingEntity, Long> {
 
-	SettingEntity findTopByOrderByCreatedDateDesc();
-	
+    SettingEntity findTopByOrderByCreatedDateDesc();
+
 }

@@ -12,28 +12,28 @@ import java.util.List;
 
 @Service
 public class AuthorityEntityService extends
-		EntityService<AuthorityEntity, Long> {
+        EntityService<AuthorityEntity, Long> {
 
-	@Autowired
-	private AuthorityEntityRespository authorityEntityRespository;
+    @Autowired
+    private AuthorityEntityRespository authorityEntityRespository;
 
-	@Autowired
-	private RoleEntityRepository roleEntityRespository;
+    @Autowired
+    private RoleEntityRepository roleEntityRespository;
 
-	public Iterable<AuthorityEntity> findAuthoritiesByMenuId(Long menuId) {
-		return authorityEntityRespository
-				.findAll(QAuthorityEntity.authorityEntity.menu.id.eq(menuId));
-	}
+    public Iterable<AuthorityEntity> findAuthoritiesByMenuId(Long menuId) {
+        return authorityEntityRespository
+                .findAll(QAuthorityEntity.authorityEntity.menu.id.eq(menuId));
+    }
 
-	public Iterable<AuthorityEntity> findAuthoritiesByMenuIdAndType(
-			Long menuId, AuthorityEntity.PermissionType type) {
-		return authorityEntityRespository
-				.findAll(QAuthorityEntity.authorityEntity.menu.id.eq(menuId)
-						.and(QAuthorityEntity.authorityEntity.type.eq(type)));
-	}
+    public Iterable<AuthorityEntity> findAuthoritiesByMenuIdAndType(
+            Long menuId, AuthorityEntity.PermissionType type) {
+        return authorityEntityRespository
+                .findAll(QAuthorityEntity.authorityEntity.menu.id.eq(menuId)
+                        .and(QAuthorityEntity.authorityEntity.type.eq(type)));
+    }
 
-	public List<AuthorityEntity> findAuthoritiesByRoleId(Long roleId) {
-		return roleEntityRespository.findOne(roleId).getAuthorities();
-	}
+    public List<AuthorityEntity> findAuthoritiesByRoleId(Long roleId) {
+        return roleEntityRespository.findOne(roleId).getAuthorities();
+    }
 
 }

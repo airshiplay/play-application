@@ -16,17 +16,17 @@ import com.querydsl.core.types.Predicate;
 @RequestMapping("/center/dict")
 public class DictController {
 
-	@Autowired
-	DictEntityService dictEntityService;
-	
-	@RequestMapping(value="/list",method = RequestMethod.GET)
-	public String getUsrList(){
-		return "classpath:/admin/dict/list";
-	}
-	
-	@RequestMapping(value = "/page", method = RequestMethod.POST)
-	@ResponseBody
-	public Page<DictEntity> doPage(Predicate predicate, Pageable pageable) {
-		return dictEntityService.findAll(predicate, pageable);
-	}
+    @Autowired
+    DictEntityService dictEntityService;
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String getUsrList() {
+        return "classpath:/admin/dict/list";
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.POST)
+    @ResponseBody
+    public Page<DictEntity> doPage(Predicate predicate, Pageable pageable) {
+        return dictEntityService.findAll(predicate, pageable);
+    }
 }

@@ -5,6 +5,6 @@ import com.airlenet.play.main.entity.MenuEntity;
 
 public interface MenuEntityRepository extends HierarchicalEntityRepository<MenuEntity, Long> {
 
-	MenuEntity findByCode(String code);
+    MenuEntity findByCode(String code);
 
 }

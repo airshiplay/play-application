@@ -13,21 +13,21 @@ import java.util.*;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class MainWebSecurityConfigBean {
     @Value("${path.admin?:/admin}")
-    private  String adminPath;
+    private String adminPath;
 
     @Bean("admin")
-    public AdminUserFilter getAdminUserFilter(){
+    public AdminUserFilter getAdminUserFilter() {
         AdminUserFilter adminUserFilter = new AdminUserFilter();
-        adminUserFilter.setLoginUrl(adminPath.startsWith("/")||adminPath.equals("")?adminPath+"/login":"/"+adminPath+"/login");
+        adminUserFilter.setLoginUrl(adminPath.startsWith("/") || adminPath.equals("") ? adminPath + "/login" : "/" + adminPath + "/login");
         return adminUserFilter;
     }
 
     @Bean
-    public List<FilterChainDefinition> getFilterChainDefinitionList(){
-        List<FilterChainDefinition> list=  new ArrayList<>();
-        list.add(new FilterChainDefinition(adminPath.startsWith("/")||adminPath.equals("")?adminPath+"/login":("/"+adminPath+"/login"), "anon"));
-        list.add(new FilterChainDefinition(adminPath.startsWith("/")?adminPath:"/"+adminPath,"admin"));
-        list.add(new FilterChainDefinition(adminPath.startsWith("/")?adminPath+"/**":"/"+adminPath+"/**", "admin"));
+    public List<FilterChainDefinition> getFilterChainDefinitionList() {
+        List<FilterChainDefinition> list = new ArrayList<>();
+        list.add(new FilterChainDefinition(adminPath.startsWith("/") || adminPath.equals("") ? adminPath + "/login" : ("/" + adminPath + "/login"), "anon"));
+        list.add(new FilterChainDefinition(adminPath.startsWith("/") ? adminPath : "/" + adminPath, "admin"));
+        list.add(new FilterChainDefinition(adminPath.startsWith("/") ? adminPath + "/**" : "/" + adminPath + "/**", "admin"));
         list.add(new FilterChainDefinition("/**/**.view", "admin"));
         return list;
     }

@@ -4,6 +4,6 @@ import com.airlenet.repo.jpa.EntityRepository;
 import com.airlenet.play.main.entity.AuthorityEntity;
 
 public interface AuthorityEntityRespository extends
-		EntityRepository<AuthorityEntity, Long> {
+        EntityRepository<AuthorityEntity, Long> {
 
 }

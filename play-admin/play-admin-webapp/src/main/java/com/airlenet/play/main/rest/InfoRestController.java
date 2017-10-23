@@ -19,34 +19,34 @@ import java.util.Map;
 @RequestMapping("/sysinfo")
 public class InfoRestController {
 
-	@Value("${info.system_name?:play platform}")
-	private String systemName;
+    @Value("${info.system_name?:play platform}")
+    private String systemName;
 
-	@Value("${info.system_version?:1.0}")
-	private String systemVersion;
+    @Value("${info.system_version?:1.0}")
+    private String systemVersion;
 
-	@Value("${info.company_name?:airlenet}")
-	private String companyName;
-	
-	@Autowired
-	private ServletContext servletContext;
+    @Value("${info.company_name?:airlenet}")
+    private String companyName;
 
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> get() {
-		Map<String, Object> appInfo = new HashMap<>();
-		appInfo.put("system_name", systemName);
-		appInfo.put("system_version", systemVersion);
-		appInfo.put("company_name", companyName);
-		
-		appInfo.put("javaVersion", System.getProperty("java.version"));
-		appInfo.put("javaHome", System.getProperty("java.home"));
-		appInfo.put("osName", System.getProperty("os.name"));
-		appInfo.put("osArch", System.getProperty("os.arch"));
-		appInfo.put("serverInfo", servletContext.getServerInfo());
-		appInfo.put("servletVersion", servletContext.getMajorVersion() + "." + servletContext.getMinorVersion());
-		
-		return appInfo;
-	}
+    @Autowired
+    private ServletContext servletContext;
+
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> get() {
+        Map<String, Object> appInfo = new HashMap<>();
+        appInfo.put("system_name", systemName);
+        appInfo.put("system_version", systemVersion);
+        appInfo.put("company_name", companyName);
+
+        appInfo.put("javaVersion", System.getProperty("java.version"));
+        appInfo.put("javaHome", System.getProperty("java.home"));
+        appInfo.put("osName", System.getProperty("os.name"));
+        appInfo.put("osArch", System.getProperty("os.arch"));
+        appInfo.put("serverInfo", servletContext.getServerInfo());
+        appInfo.put("servletVersion", servletContext.getMajorVersion() + "." + servletContext.getMinorVersion());
+
+        return appInfo;
+    }
 
 }

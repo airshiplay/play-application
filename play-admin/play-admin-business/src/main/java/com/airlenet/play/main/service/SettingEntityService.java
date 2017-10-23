@@ -9,25 +9,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class SettingEntityService extends EntityService<SettingEntity, Long> {
 
-	@Autowired
-	private SettingEntityRepository settingEntityRepository;
+    @Autowired
+    private SettingEntityRepository settingEntityRepository;
 
-	private SettingEntity settingEntity;
+    private SettingEntity settingEntity;
 
-	public SettingEntity get() {
-		if (settingEntity == null) {
-			settingEntity = settingEntityRepository.findTopByOrderByCreatedDateDesc();
-			if (settingEntity == null) {
-				settingEntity = new SettingEntity();
-			}
-		}
-		return settingEntity;
-	}
+    public SettingEntity get() {
+        if (settingEntity == null) {
+            settingEntity = settingEntityRepository.findTopByOrderByCreatedDateDesc();
+            if (settingEntity == null) {
+                settingEntity = new SettingEntity();
+            }
+        }
+        return settingEntity;
+    }
 
-	@Override
-	public SettingEntity save(SettingEntity entity) {
-		settingEntity = super.save(entity);
-		return settingEntity;
-	}
+    @Override
+    public SettingEntity save(SettingEntity entity) {
+        settingEntity = super.save(entity);
+        return settingEntity;
+    }
 
 }

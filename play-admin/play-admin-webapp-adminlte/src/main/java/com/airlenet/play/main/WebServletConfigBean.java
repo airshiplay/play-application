@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = { "com.airshiplay" }, useDefaultFilters = false, includeFilters = { @Filter({ Controller.class, RestController.class}),
-        @Filter({ ServletSupport.class }) }, nameGenerator = FullBeanNameGenerator.class)
+@ComponentScan(basePackages = {"com.airshiplay"}, useDefaultFilters = false, includeFilters = {@Filter({Controller.class, RestController.class}),
+        @Filter({ServletSupport.class})}, nameGenerator = FullBeanNameGenerator.class)
 @EnableWebMvc
 public class WebServletConfigBean {
 

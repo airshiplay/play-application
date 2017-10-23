@@ -21,7 +21,7 @@
 //
 //import com.google.common.base.Strings;
 //import com.airshiplay.play.main.service.ServiceSelector;
-//import com.airlenet.repo.jpa.BaseEntity;
+//import com.airlenet.repo.jpa.DataEntity;
 //
 //public class EntityModelAttributeMethodProcessor extends ModelAttributeMethodProcessor {
 //
@@ -48,7 +48,7 @@
 //			}
 //		} else {
 //			Class<?> parameterType = methodParam.getParameterType();
-//			if (ClassUtils.isAssignable(BaseEntity.class, parameterType)) {
+//			if (ClassUtils.isAssignable(DataEntity.class, parameterType)) {
 //				String id = request.getParameter("id");
 //				if (!Strings.isNullOrEmpty(id)) {
 //					return conversionService.convert(id, methodParam.getParameterType());

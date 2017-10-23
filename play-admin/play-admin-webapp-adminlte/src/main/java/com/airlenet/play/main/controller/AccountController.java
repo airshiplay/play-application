@@ -1,6 +1,7 @@
 package com.airlenet.play.main.controller;
 
 //import org.apache.commons.lang3.StringUtils;
+
 import com.airlenet.play.main.entity.AdminUserEntity;
 import com.airlenet.play.main.service.UserEntityService;
 import org.apache.shiro.SecurityUtils;
@@ -8,15 +9,16 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-//import com.airshiplay.play.plugin.oauth.model.OauthPlugin;
-//import com.airshiplay.play.plugin.oauth.model.OauthUserEntity;
-//import com.airshiplay.play.plugin.oauth.service.OauthPluginService;
-//import com.airshiplay.play.plugin.oauth.service.OauthUserService;
-        import com.airlenet.security.CustomUserDetails;
+//import OauthPlugin;
+//import OauthUserEntity;
+//import OauthPluginService;
+//import OauthUserService;
+import com.airlenet.security.CustomUserDetails;
 import com.airlenet.security.PlayPasswordService;
+
 /**
  * @author airlenet
  * @version 2017-09-12
@@ -25,20 +27,20 @@ import com.airlenet.security.PlayPasswordService;
 @RequestMapping("/center/account")
 public class AccountController {
 
-	@Autowired
+    @Autowired
     UserEntityService userEntityService;
 
-//	@Autowired
+    //	@Autowired
 //	OauthUserService oauthUserService;
 //	@Autowired
 //	OauthPluginService oauthPluginService;
-	@Autowired
-	PlayPasswordService passwordService;
+    @Autowired
+    PlayPasswordService passwordService;
 
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public String get(Model model) {
-		Subject subject = SecurityUtils.getSubject();
-		@SuppressWarnings("unchecked")
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String get(Model model) {
+        Subject subject = SecurityUtils.getSubject();
+        @SuppressWarnings("unchecked")
         AdminUserEntity user = ((CustomUserDetails<Long, AdminUserEntity>) subject.getPrincipal()).getCustomUser();
 //		List<OauthUserEntity> oauthUsers = oauthUserService.findByAdminUserId(user.getId());
 //		List<OauthPlugin> oauthPlugins = oauthPluginService.getAvailableOauthPlugins();
@@ -59,17 +61,17 @@ public class AccountController {
 //				});
 //			}
 //		});
-		model.addAttribute("user", user);
+        model.addAttribute("user", user);
 //		model.addAttribute("oauthUsers", oauthUsers);
 //		model.addAttribute("oauthPlugins", oauthPlugins);
 //		model.addAttribute("oauthUserPluginIds", oauthUserPluginIds);
-		return "classpath:/admin/account/info";
-	}
+        return "classpath:/admin/account/info";
+    }
 
-	@RequestMapping(value = "/password", method = RequestMethod.GET)
-	public String getPassword(Model model) {
-		return "classpath:/admin/account/password";
-	}
+    @RequestMapping(value = "/password", method = RequestMethod.GET)
+    public String getPassword(Model model) {
+        return "classpath:/admin/account/password";
+    }
 
 
 }

@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>play-application</artifactId>
-        <groupId>com.airshiplay</groupId>
+        <groupId>com.airlenet.play</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.airshiplay.admin</groupId>
+    <groupId>com.airlenet.play.admin</groupId>
     <artifactId>play-admin</artifactId>
 
     <packaging>pom</packaging>
@@ -23,22 +23,22 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.airshiplay.admin</groupId>
+                <groupId>com.airlenet.play.admin</groupId>
                 <artifactId>play-admin-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.airshiplay.admin</groupId>
+                <groupId>com.airlenet.play.admin</groupId>
                 <artifactId>play-admin-business</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.airshiplay.admin</groupId>
+                <groupId>com.airlenet.play.admin</groupId>
                 <artifactId>play-admin-webapp</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.airshiplay.admin</groupId>
+                <groupId>com.airlenet.play.admin</groupId>
                 <artifactId>play-admin-webapp-adminlte</artifactId>
                 <version>${project.version}</version>
             </dependency>

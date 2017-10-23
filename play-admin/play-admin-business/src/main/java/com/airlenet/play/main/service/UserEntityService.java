@@ -10,22 +10,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserEntityService extends EntityService<AdminUserEntity, Long> {
 
-	@Autowired
-	private AdminUserEntityRepository userEntityRepository;
+    @Autowired
+    private AdminUserEntityRepository userEntityRepository;
 
-	@Transactional(readOnly = true)
-	public AdminUserEntity findByUsername(String username) {
-		return userEntityRepository.findByUsername(username);
-	}
+    @Transactional(readOnly = true)
+    public AdminUserEntity findByUsername(String username) {
+        return userEntityRepository.findByUsername(username);
+    }
 
-	@Transactional(readOnly = true)
-	public AdminUserEntity findByEmail(String email) {
-		return userEntityRepository.findByEmail(email);
-	}
+    @Transactional(readOnly = true)
+    public AdminUserEntity findByEmail(String email) {
+        return userEntityRepository.findByEmail(email);
+    }
 
-	@Transactional(readOnly = true)
-	public AdminUserEntity findByMobile(String mobile) {
-		return userEntityRepository.findByMobile(mobile);
-	}
+    @Transactional(readOnly = true)
+    public AdminUserEntity findByMobile(String mobile) {
+        return userEntityRepository.findByMobile(mobile);
+    }
 
 }
