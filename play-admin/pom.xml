@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>play-application</artifactId>
+        <groupId>com.airshiplay</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.airshiplay.admin</groupId>
+    <artifactId>play-admin</artifactId>
+
+    <packaging>pom</packaging>
+    <modules>
+        <module>play-admin-api</module>
+        <module>play-admin-business</module>
+        <module>play-admin-webapp</module>
+        <module>play-admin-webapp-adminlte</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.airshiplay.admin</groupId>
+                <artifactId>play-admin-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.airshiplay.admin</groupId>
+                <artifactId>play-admin-business</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.airshiplay.admin</groupId>
+                <artifactId>play-admin-webapp</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.airshiplay.admin</groupId>
+                <artifactId>play-admin-webapp-adminlte</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
