@@ -24,18 +24,4 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <!-- 把class打包jar作为附件 <attachClasses>true</attachClasses> -->
-                    <!-- 将项目的类文件打成jar放到lib目录中 <archiveClasses>true</archiveClasses> -->
-                </configuration>
-
-            </plugin>
-        </plugins>
-    </build>
 </project>

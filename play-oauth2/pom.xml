@@ -13,6 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>play-oauth2-business</module>
-        <module>play-oauth2-webapp-bootstrap</module>
+        <module>play-oauth2-webapp-adminlte</module>
     </modules>
 </project>

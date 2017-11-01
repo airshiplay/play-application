@@ -8,12 +8,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>com.airlenet.play.wechat</groupId>
     <artifactId>play-wechat</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>play-wechat-business</module>
         <module>play-wechat-website</module>
-        <module>play-wechat-webapp-bootstrap</module>
+        <module>play-wechat-webapp-adminlte</module>
     </modules>
 </project>

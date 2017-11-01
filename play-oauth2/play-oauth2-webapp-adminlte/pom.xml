@@ -6,7 +6,7 @@
         <artifactId>play-oauth2</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>play-oauth2-webapp-bootstrap</artifactId>
+    <artifactId>play-oauth2-webapp-adminlte</artifactId>
 
     <dependencies>
         <dependency>
