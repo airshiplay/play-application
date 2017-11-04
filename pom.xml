@@ -36,6 +36,7 @@
 
         <module>play-website</module>
         <module>play-website-business</module>
+        <module>min-application</module>
         <!--<module>play-oauth2-business</module>-->
         <!--<module>play-oauth2-webapp-bootstrap</module>-->
         <!--<module>play-plugin-business</module>-->
