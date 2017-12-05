@@ -8,93 +8,16 @@
         <artifactId>play-application</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    <groupId>com.airlenet.play.website</groupId>
     <artifactId>play-website</artifactId>
 
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>play-website</name>
-    <url>http://maven.apache.org</url>
-    <dependencies>
-        <dependency>
-            <groupId>com.airlenet</groupId>
-            <artifactId>play-integration-webapp</artifactId>
-            <version>${play.framework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet</groupId>
-            <artifactId>play-security-shiro</artifactId>
-            <version>${play.framework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet</groupId>
-            <artifactId>play-config</artifactId>
-            <version>${play.framework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet</groupId>
-            <artifactId>play-template-thymeleaf</artifactId>
-            <version>${play.framework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet.play.admin</groupId>
-            <artifactId>play-admin-webapp-adminlte</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet.play</groupId>
-            <artifactId>play-shop-webapp</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet.play</groupId>
-            <artifactId>play-cms-webapp-adminlte</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet.play</groupId>
-            <artifactId>play-app-webapp-adminlte</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet.play</groupId>
-            <artifactId>play-plugin-oauth-business</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet.play.im</groupId>
-            <artifactId>play-im-webapp</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-
-                    <!-- 把class打包jar作为附件 -->
-                    <!-- <attachClasses>true</attachClasses> -->
-                    <!-- 将项目的类文件打成jar放到lib目录中 <archiveClasses>true</archiveClasses> -->
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <configuration>
-                    <httpConnector>
-                        <port>8080</port>
-                    </httpConnector>
-                    <webAppSourceDirectory>src\main\webapp</webAppSourceDirectory>
-                    <classesDirectory>target\classes</classesDirectory>
-                    <webAppConfig>
-                        <contextPath>/</contextPath>
-                    </webAppConfig>
-                </configuration>
-            </plugin>
-        </plugins>
-        <finalName>play-website</finalName>
-    </build>
+    <modules>
+        <module>play-entry</module>
+        <module>play-website-business</module>
+        <module>play-website-webapp</module>
+        <module>play-website-webapp-adminlte</module>
+    </modules>
 
 </project>

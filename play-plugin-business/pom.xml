@@ -2,22 +2,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.airlenet.play.shop</groupId>
-        <artifactId>play-shop</artifactId>
+        <groupId>com.airlenet.play</groupId>
+        <artifactId>play-module</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>play-shop-business</artifactId>
+    <artifactId>play-plugin-business</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.airlenet.play</groupId>
-            <artifactId>play-cms-business</artifactId>
+            <artifactId>play-admin-business</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.airlenet.play.admin</groupId>
-            <artifactId>play-admin-business</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
         </dependency>
     </dependencies>
 

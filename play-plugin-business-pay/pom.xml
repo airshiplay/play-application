@@ -2,22 +2,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.airlenet.play.shop</groupId>
-        <artifactId>play-shop</artifactId>
+        <groupId>com.airlenet.play</groupId>
+        <artifactId>play-module</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>play-shop-business</artifactId>
-
+    <artifactId>play-plugin-business-pay</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.airlenet.play</groupId>
-            <artifactId>play-cms-business</artifactId>
+            <artifactId>play-plugin-business</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.airlenet.play.admin</groupId>
-            <artifactId>play-admin-business</artifactId>
-            <version>${project.version}</version>
+            <groupId>alipay</groupId>
+            <artifactId>sdk</artifactId>
+            <version>java20161129201425</version>
         </dependency>
     </dependencies>
 
@@ -47,4 +46,10 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>basedir</id>
+            <url>file://${project.basedir}/repo/</url>
+        </repository>
+    </repositories>
 </project>
