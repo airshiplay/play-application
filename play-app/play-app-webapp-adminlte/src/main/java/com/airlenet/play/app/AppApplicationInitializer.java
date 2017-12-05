@@ -14,8 +14,6 @@ public class AppApplicationInitializer extends ApplicationInitializer {
 
     @Override
     public void onRootContextRefreshed() {
-
-
         if (!tools.existMenuCode("app_management")) {
             int sortNo = 5;
             MenuEntity appManagement = tools

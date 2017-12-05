@@ -23,6 +23,11 @@
             <artifactId>play-integration-webapp</artifactId>
             <version>${play.framework.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.airlenet</groupId>-->
+            <!--<artifactId>play-integration-swagger</artifactId>-->
+            <!--<version>${play.framework.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.airlenet</groupId>
             <artifactId>play-security-shiro</artifactId>

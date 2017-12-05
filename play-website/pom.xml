@@ -60,6 +60,11 @@
             <artifactId>play-plugin-oauth-business</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.airlenet.play.im</groupId>
+            <artifactId>play-im-webapp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
