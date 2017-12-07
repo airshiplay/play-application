@@ -10,7 +10,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.airlenet.play</groupId>
+            <groupId>com.airlenet.play.cms</groupId>
             <artifactId>play-cms-business</artifactId>
             <version>${project.version}</version>
         </dependency>

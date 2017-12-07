@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>play-entry</artifactId>
+    <artifactId>play-website-entry</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <url>http://www.airlenet.com</url>
@@ -40,17 +40,17 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.airlenet.play</groupId>
+            <groupId>com.airlenet.play.shop</groupId>
             <artifactId>play-shop-webapp</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.airlenet.play</groupId>
+            <groupId>com.airlenet.play.cms</groupId>
             <artifactId>play-cms-webapp-adminlte</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.airlenet.play</groupId>
+            <groupId>com.airlenet.play.app</groupId>
             <artifactId>play-app-webapp-adminlte</artifactId>
             <version>${project.version}</version>
         </dependency>

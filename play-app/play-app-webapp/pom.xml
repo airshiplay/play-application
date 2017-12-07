@@ -19,7 +19,7 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.airlenet.play</groupId>
+            <groupId>com.airlenet.play.app</groupId>
             <artifactId>play-app-business</artifactId>
             <version>${project.version}</version>
         </dependency>

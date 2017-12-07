@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
     <name>play-website</name>
     <modules>
-        <module>play-entry</module>
+        <module>play-website-entry</module>
         <module>play-website-business</module>
         <module>play-website-webapp</module>
         <module>play-website-webapp-adminlte</module>
