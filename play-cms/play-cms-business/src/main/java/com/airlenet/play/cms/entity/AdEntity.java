@@ -53,7 +53,16 @@ public class AdEntity extends SortEntity<AdminUserEntity, Long> {
          */
         video
     }
-
+    public enum Status {
+        /**
+         * 创建
+         */
+        created,
+        /**
+         * 发布
+         */
+        release
+    }
     /**
      * 标题
      */
@@ -100,6 +109,13 @@ public class AdEntity extends SortEntity<AdminUserEntity, Long> {
     @Size(max = 200)
     @Column(length = 200)
     private String url;
+
+    /**
+     * 状态
+     */
+    @NotNull
+    @Column(nullable = false, length = 50)
+    private Status status;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -170,4 +186,11 @@ public class AdEntity extends SortEntity<AdminUserEntity, Long> {
         this.adPosition = adPosition;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }

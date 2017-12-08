@@ -35,6 +35,7 @@
         <module>play-oauth2</module>
         <module>play-website</module>
         <module>min-application</module>
+        <module>play-blog</module>
         <!--<module>play-im</module>-->
         <!--<module>play-oauth2-business</module>-->
         <!--<module>play-oauth2-webapp-bootstrap</module>-->

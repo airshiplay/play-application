@@ -64,7 +64,7 @@
 								</ul></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="signin.html" >登录</a></li>
+							<li><a href="signin.html" th:href="@{/signin.html}" >登录</a></li>
 						</ul>
 					</div>
 					<!--/.nav-collapse -->
@@ -80,8 +80,8 @@
 		<ol class="carousel-indicators">
 			<li th:each="carousel,carouselStat:${carouseList}" data-target="#myCarousel" data-slide-to="0" th:data-slide-to=${carouselStat.index}
 				class="active" th:class="${carouselStat.index==0}? 'active' : ''"></li>
-			<li data-target="#myCarousel" data-slide-to="1" th:if="${ #lists.isEmpty(carouseList)}"></li>
-			<li data-target="#myCarousel" data-slide-to="2" th:if="${ #lists.isEmpty(carouseList)}"></li>
+			<li data-target="#myCarousel" data-slide-to="0" class="active" th:if="${ #lists.isEmpty(carouseList)}"></li>
+			<!--<li data-target="#myCarousel" data-slide-to="1" th:if="${ #lists.isEmpty(carouseList)}"></li>-->
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<div class="item active" th:each="carousel,carouselStat:${carouseList}" th:class="${carouselStat.index==0}? 'item active' : 'item'" >
@@ -100,32 +100,29 @@
 					</div>
 				</div>
 			</div>
-			<div class="item" th:if="${ #lists.isEmpty(carouseList)}">
+			<div class="item active" th:if="${ #lists.isEmpty(carouseList)}">
 				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
 				<div class="container">
 					<div class="carousel-caption">
-						<h1>Another example headline.</h1>
-						<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh
-							ultricies vehicula ut id elit.</p>
-						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a>
-						</p>
+						<h1>提供行业软件开发服务</h1>
+						<h2 style="color: #ff0038;font-size: 99px">airlenet.com</h2>
+						<p>一直致力于提供专业的软件开发设计，服务覆盖互联网、移动平台，为您提供全方位的信息化解决方案。</p>
 					</div>
 				</div>
 			</div>
-			<div class="item" th:if="${ #lists.isEmpty(carouseList)}">
-				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>One more for good measure.</h1>
-						<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh
-							ultricies vehicula ut id elit.</p>
-						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a>
-						</p>
-					</div>
-				</div>
-			</div>
+			<!--<div class="item" th:if="${ #lists.isEmpty(carouseList)}">-->
+				<!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">-->
+				<!--<div class="container">-->
+					<!--<div class="carousel-caption">-->
+						<!--<h1>One more for good measure.</h1>-->
+						<!--<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh-->
+							<!--ultricies vehicula ut id elit.</p>-->
+						<!--<p>-->
+							<!--<a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a>-->
+						<!--</p>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
 		</div>
 		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> <span
 			class="sr-only">Previous</span>

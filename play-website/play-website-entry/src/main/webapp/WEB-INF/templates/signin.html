@@ -16,7 +16,7 @@
 
 <!-- Custom styles for this template -->
 <link th:href="@{/assets/css/signin.css}" rel="stylesheet">
-
+    <link th:href="@{/assets/plugins/formValidation/css/formValidation.css}" rel="stylesheet">
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script th:src="@{/assets/js/ie-emulation-modes-warning.js}"></script>
@@ -31,18 +31,22 @@
 <body>
 
 	<div class="container">
-
-		<form class="form-signin" role="form" method="post" action="login">
+		<form class="form-signin" role="form" method="post" action="signin" data-fv-message="This value is not valid">
 			<h2 class="form-signin-heading">Please sign in</h2>
-			<input type="email" name="email" class="form-control" placeholder="Email address" required autofocus> <input type="text" name="username"
-				class="form-control" placeholder="username" required autofocus> <input type="password" name="password" class="form-control"
-				placeholder="Password" required>
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="请输入验证码" name="captcha" data-bv-notempty="true" data-bv-notempty-message="请填写验证码"
-					aria-describedby="validate-code-addon"> <span class="input-group-btn" id="validate-code-addon"> <a href="javascript:;"
-					id="refreshCaptchaButton"> <img th:src="@{/captcha.jpg}" style="height: 34px;" />
-				</a>
-				</span>
+			<div class="form-group">
+				<input type="text" name="username" class="form-control" placeholder="username" required autofocus data-fv-notempty-message="请填写用户名"/>
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control" placeholder="Password" required data-fv-notempty-message="请填写密码"/>
+			</div>
+			<div class="form-group has-feedback">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="请输入验证码" name="captcha" data-fv-notempty data-fv-notempty-message="请填写验证码"
+						aria-describedby="validate-code-addon"/> <span class="input-group-btn" id="validate-code-addon"> <a href="javascript:;"
+						id="refreshCaptchaButton"> <img th:src="@{/captcha.jpg}" style="height: 34px;" />
+					</a>
+					</span>
+				</div>
 			</div>
 			<div class="checkbox">
 				<label> <input type="checkbox" name="remember" value="remember-me"> Remember me
@@ -54,11 +58,55 @@
 	</div>
 	<!-- /container -->
 
+    <script src="assets/plugins/jquery/3.1.1/jquery.min.js"></script>
+    <script src="assets/plugins/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/formValidation/js/formValidation.js"></script>
+    <script type="text/javascript" src="assets/plugins/formValidation/js/framework/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/plugins/formValidation/js/language/zh_CN.js"></script>
 
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+	<!--<script type="text/javascript" src="assets/vendor/plugins/bootstrapvalidator/js/bootstrapValidator.min.js"></script>-->
+	<!--<script type="text/javascript" src="assets/vendor/plugins/bootstrapvalidator/js/language/zh_CN.js"></script>-->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script th:src="@{/assets/js/ie10-viewport-bug-workaround.js}"></script>
 	<script type="text/javascript">
-		
+        $(document).ready(function() {
+            var base = "";
+            $("#refreshCaptchaButton").on(
+                "click",
+                function () {
+                    $(this).children("img").attr("src", base + "captcha.jpg?_t=" + new Date().getTime());
+                });
+            $("form")
+                .formValidation( {locale: 'zh_CN'})
+                .on('success.form.fv',
+                    function (e) {
+                        // Prevent form submission
+                        e.preventDefault();
+                        // Get the form instance
+                        var $form = $(e.target);
+                        // Get the FormValidation instance
+                        var bv = $form.data('formValidation');
+                        $.post(
+                            $form.attr('action'),
+                            $form.serialize(),
+                            function (result) {
+                                bv.disableSubmitButtons(false);
+                                if (result.success) {
+                                    $(".form-signin-heading").nextAll(".alert").remove();
+                                    location.href = "profile.html";
+                                } else {
+                                    $(".form-signin-heading").nextAll(".alert").remove();
+                                    $(".form-signin-heading").after("\
+                            <div class=\"alert alert-danger alert-dismissible\" role=\"alert\">\
+                            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\
+                            <strong>错误提示!</strong> " + result.msg + "\</div>");
+                                    $("#refreshCaptchaButton").children("img").attr("src", base + "captcha.jpg?_t=" + new Date().getTime());
+
+                                }
+                            }, 'json');
+                    });
+        });
 	</script>
 </body>
 </html>
