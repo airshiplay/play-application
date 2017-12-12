@@ -36,6 +36,7 @@
         <module>play-website</module>
         <module>min-application</module>
         <module>play-blog</module>
+        <module>play-ui</module>
         <!--<module>play-im</module>-->
         <!--<module>play-oauth2-business</module>-->
         <!--<module>play-oauth2-webapp-bootstrap</module>-->
@@ -110,6 +111,14 @@
                 <groupId>com.airlenet.play.maven</groupId>
                 <artifactId>play-maven-plugin</artifactId>
                 <version>${project.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>com.rimerosolutions.maven.plugins</groupId>
+                <artifactId>wrapper-maven-plugin</artifactId>
+                <version>0.0.4</version>
+                <configuration>
+                    <mavenVersion>3.3.3</mavenVersion>
+                </configuration>
             </plugin>
         </plugins>
     </build>

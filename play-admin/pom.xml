@@ -18,6 +18,7 @@
         <module>play-admin-business</module>
         <module>play-admin-webapp</module>
         <module>play-admin-webapp-adminlte</module>
+        <module>play-admin-webapp-react</module>
     </modules>
 
     <dependencyManagement>

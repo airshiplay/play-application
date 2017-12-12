@@ -22,10 +22,10 @@ public class AdEntityService extends EntityService<AdEntity, Long> {
     public List<AdEntity> findTop3(String positionCode, AdEntity.Type type,AdEntity.Status status) {
         BooleanExpression positionCodeExp = QAdEntity.adEntity.adPosition.code.eq(positionCode);
         if(type!=null){
-            positionCodeExp.and( QAdEntity.adEntity.type.eq(type));
+            positionCodeExp = positionCodeExp.and(QAdEntity.adEntity.type.eq(type));
         }
         if(status!=null){
-            positionCodeExp.and(QAdEntity.adEntity.status.eq(status));
+            positionCodeExp = positionCodeExp.and(QAdEntity.adEntity.status.eq(status));
         }
 
         return Lists.newArrayList(adEntityRepository.findAll(positionCodeExp,
