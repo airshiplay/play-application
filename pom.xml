@@ -115,9 +115,9 @@
             <plugin>
                 <groupId>com.rimerosolutions.maven.plugins</groupId>
                 <artifactId>wrapper-maven-plugin</artifactId>
-                <version>0.0.4</version>
+                <version>0.0.5</version>
                 <configuration>
-                    <mavenVersion>3.3.3</mavenVersion>
+                    <mavenVersion>3.5.0</mavenVersion>
                 </configuration>
             </plugin>
         </plugins>
