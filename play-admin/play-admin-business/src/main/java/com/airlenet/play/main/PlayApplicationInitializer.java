@@ -13,10 +13,12 @@ import com.airlenet.play.main.entity.AuthorityEntity;
 import com.airlenet.play.main.entity.MenuEntity;
 import com.airlenet.play.main.entity.OrganizationEntity;
 import com.airlenet.play.main.entity.RoleEntity;
-import com.airlenet.play.main.init.InitDataTools;
+import com.airlenet.play.main.InitDataTools;
 import com.airlenet.security.PlayPasswordService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
+import java.util.Locale;
 
 @Component
 public class PlayApplicationInitializer extends ApplicationInitializer {
@@ -77,12 +79,15 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
             org.setPrimaryLeader(admin);
             organizationEntityService.save(org);
 
+
         }
+
+
 
         if (!tools.existMenu()) {
             int sortNo = 0;
 
-            MenuEntity systemManagement = tools.createMenuByParent("系统管理", "center_system_management", "fa fa-desktop", null, null, sortNo++, null);
+            MenuEntity systemManagement = tools.createMenuByParent("系统管理", "center_system_management", "fa fa-cogs", null, null, sortNo++, null);
 //			MenuEntity userManagement = tools.createMenuByParent("用户管理", "center_user_management", "fa fa-users", null, null, sortNo++, null);
             tools.createMenuByParent("用户列表", "center_member_list", "fa fa-user", "page/center/user/list", null, sortNo++, systemManagement);
             tools.createMenuByParent("组织机构", "center_org_list", "fa fa-sitemap", "page/center/org/list", null, sortNo++, systemManagement);
@@ -97,10 +102,10 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
             tools.createMenuByParent("系统日志", "center_system_log", "fa fa-building", "page/center/log/list", null, sortNo++, systemManagement);
 
 
-            MenuEntity paramSetting = tools.createMenuByParent("参数设置", "center_parameter_setting", "fa fa-cogs", "page/center/setting/info", null, sortNo++, systemManagement);
+            MenuEntity paramSetting = tools.createMenuByParent("参数设置", "center_parameter_setting", "fa fa-cog", "page/center/setting/info", null, sortNo++, systemManagement);
             tools.createPemission(paramSetting, AuthorityEntity.PermissionType.page, "参数查询", "page:sys:param:read");
             tools.createPemission(paramSetting, AuthorityEntity.PermissionType.page, "参数更新", "page:sys:param:update");
-
+            MenuEntity language = tools.createMenuByParent("语言管理", "center_language_list", "fa fa-language", "page/center/language/list", null, sortNo++, systemManagement);
 
             MenuEntity businessManagement = tools.createMenuByParent("业务管理", "business_management", "fa fa-plug", null, null, sortNo++, null);
             tools.createMenuByParent("会员管理", "business_member", "fa fa-user", "page/center/member/list", null, sortNo++, businessManagement);
@@ -109,7 +114,6 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
             MenuEntity pluginManagement = tools.createMenuByParent("插件管理", "plugin_management", "fa fa-plug", null, null, sortNo++, null);
             tools.createMenuByParent("oauth认证", "plugin_oauth", "fa fa-cogs", "page/plugin/oauth/list", null, sortNo++, pluginManagement);
             tools.createMenuByParent("支付方式", "plugin_payment", "fa fa-credit-card", "page/plugin/payment/list", null, sortNo++, pluginManagement);
-
 ////////////////////
             MenuEntity accountManagement = tools.createMenuByParent("账户管理", "center_account_management", "fa fa-user", null, null, sortNo++, null);
             tools.createMenuByParent("个人信息", "center_account_info", "fa fa-user", "page/center/account/info", null, sortNo++, accountManagement);

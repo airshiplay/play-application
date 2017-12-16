@@ -37,6 +37,8 @@ public class MenuController {
 
     @RequestMapping(value = "/edit/{id}.view", method = RequestMethod.GET)
     public String getMenuEdit(Model model, @PathVariable Long id) {
+        MenuEntity menuEntity = menuEntityService.findOne(id);
+        model.addAttribute("menu",menuEntity);
         return "classpath:/admin/menu/edit";
     }
 

@@ -17,17 +17,17 @@ public class MemberUserEntityService extends EntityService<MemberUserEntity, Lon
     @Autowired
     private MemberUserEntityRepository memberUserEntityRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public MemberUserEntity findByUsername(String username) {
         return memberUserEntityRepository.findByUsername(username);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public MemberUserEntity findByEmail(String email) {
         return memberUserEntityRepository.findByEmail(email);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public MemberUserEntity findByMobile(String mobile) {
         return memberUserEntityRepository.findByMobile(mobile);
     }

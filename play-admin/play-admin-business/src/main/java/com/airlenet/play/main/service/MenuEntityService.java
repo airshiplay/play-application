@@ -22,18 +22,18 @@ public class MenuEntityService extends HierarchicalEntityService<MenuEntity, Lon
     @Autowired
     private RoleEntityRepository roleEntityRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public MenuEntity findByCode(String code) {
         return menuEntityRepository.findByCode(code);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public Tree<MenuEntity> getAllMenuTree() {
         Tree<MenuEntity> tree = findTree(null);
         return tree;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public Tree<MenuEntity> getMenuTreeByUserId(Long userId) {
         RoleEntity roleEntity = roleEntityRepository.findOne(QRoleEntity.roleEntity.users.any().id.eq(userId));
         if (roleEntity.getCode().equals("superadmin")) {

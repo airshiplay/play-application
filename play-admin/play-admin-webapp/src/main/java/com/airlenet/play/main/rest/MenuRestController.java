@@ -1,8 +1,10 @@
 package com.airlenet.play.main.rest;
 
+import com.airlenet.play.main.entity.AdminUserEntity;
 import com.airlenet.play.main.entity.MenuEntity;
 import com.airlenet.play.main.service.MenuEntityService;
 import com.airlenet.play.main.service.RoleEntityService;
+import com.airlenet.repo.domain.Result;
 import com.airlenet.repo.domain.Tree;
 import com.querydsl.core.types.Predicate;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -10,10 +12,10 @@ import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @author airlenet
@@ -45,7 +47,15 @@ public class MenuRestController {
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<MenuEntity> page(Predicate predicate, Pageable pageable) {
-
         return menuEntityService.findAll(predicate, pageable);
+    }
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ResponseBody
+    public Result doSave(@ModelAttribute @Valid MenuEntity menu, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return Result.validateError();
+        }
+        menuEntityService.save(menu);
+        return Result.success();
     }
 }

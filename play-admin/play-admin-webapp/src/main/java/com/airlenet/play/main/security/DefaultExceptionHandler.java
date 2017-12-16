@@ -77,7 +77,7 @@ public class DefaultExceptionHandler {
     }
 
     @SuppressWarnings("resource")
-    @ExceptionHandler({Exception.class,})
+    @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ModelAndView processException(HttpServletRequest request, HttpServletResponse response, Exception e, HandlerMethod handlerMethod) throws HttpMessageNotWritableException, IOException {
@@ -95,9 +95,9 @@ public class DefaultExceptionHandler {
                 SQLException sqlE = (SQLException) e.getCause().getCause();
                 if (sqlE.getMessage().contains("Duplicate entry")) {
                     String message = sqlE.getMessage();
-                    result = Result.validateError().addProperties("exception", message.split("'")[1] + "已存在");
+                    result = Result.exception().message(message.split("'")[1] + "已存在").addProperties("exception", message.split("'")[1] + "已存在");
                 } else {
-                    result = Result.validateError().addProperties("exception", e.getMessage());
+                    result = Result.exception().addProperties("exception", e.getMessage());
                 }
             } else {
                 result = Result.exception().addProperties("exception", e.getMessage());

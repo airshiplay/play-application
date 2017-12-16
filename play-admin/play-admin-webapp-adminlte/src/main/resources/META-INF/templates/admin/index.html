@@ -161,7 +161,7 @@
 
 		requirejs([ "jquery", "router", "text", "app" ], function($) {
 			$(function() {
-
+                jQuery.ajaxSettings.traditional = true;
 				var contentWrapper = $(".content-wrapper");
 				var routes = {
 					"/page" : {

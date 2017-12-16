@@ -1,4 +1,4 @@
-package com.airlenet.play.main.init;
+package com.airlenet.play.main;
 
 import com.airlenet.play.main.entity.AreaEntity;
 import com.airlenet.play.main.entity.AuthorityEntity;

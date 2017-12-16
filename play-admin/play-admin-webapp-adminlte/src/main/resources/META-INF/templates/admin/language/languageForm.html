@@ -1,0 +1,140 @@
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/bootstrap-fileinput/4.3.3/css/fileinput.min.css">
+<link type="text/css" rel="stylesheet" href="assets/vendor/plugins/select2/select2.min.css">
+<style>
+.kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-shadow: none;
+	text-align: center;
+}
+
+.kv-avatar .file-input {
+	display: table-cell;
+	max-width: 220px;
+}
+</style>
+
+<section class="content-header">
+	<h1>
+		语言管理列表 <small>开始管理语言</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="javascript:;">
+				<i class="fa fa-home"></i> Home
+			</a></li>
+		<li><a href="#/page/center/language/list">
+				<i class="fa fa-user"></i>语言管理列表
+			</a></li>
+		<li class="active" th:text="${language==null?'新增语言':'编辑语言'}">新增语言</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${language==null?'新增语言':'编辑语言'}">新增语言</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="language-form" action="/center/language/save">
+					<input type="hidden" name="id" th:value="${language==null?'':language.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="nameInput">语言名称</label>
+							<input type="text" name="name" class="form-control" id="nameInput" placeholder="请填写名称" data-bv-notempty="true" data-bv-notempty-message="请填写名称"
+								   data-bv-stringlength="true"
+								   data-bv-stringlength-min="2"
+								   data-bv-stringlength-max="50"
+								   data-bv-stringlength-message="名称长度必须在2和50之间"
+								   th:value="${language==null?'':language.name}">
+						</div>
+						<div class="form-group">
+							<label for="codeInput">代码选择</label>
+                            <select id="codeInput"  name="code"  class="form-control" style="width:100%"></select>
+						</div>
+						<div class="form-group">
+							<label for="localInput">本地化</label>
+							<input type="text" name="local" class="form-control" id="localInput" placeholder="请填写本地化"
+								data-bv-regexp="true"
+				                data-bv-regexp-regexp="[a-zA-Z0-9_\.]+"
+								th:value="${language==null?'':language.local}">
+						</div>
+                        <div class="form-group">
+                            <label for="statusInput">状态</label>
+                            <select id="statusInput"  name="status"  class="form-control" style="width:100%"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sortNoInput">排序</label>
+                            <input type="text" name="sortNo" class="form-control" id="sortNoInput" placeholder="请填写排序"
+                                   data-bv-regexp="true"
+                                   data-bv-regexp-regexp="[0-9_\.]+"
+                                   th:value="${language==null?'':language.sortNo}">
+                        </div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/center/language/list'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady", "fileinputzh","kindeditor", "select2zh" ], function(domReady) {
+		domReady(function() {
+			activeMenu("center_language_list");
+
+            $("#codeInput").select2({
+                placeholder: '---请选择类型---',
+                data:[{id:'zh-CN',text:'zh-CN'},
+                    {id:'en-US',text:'en-US'}]
+            });
+            $status=$("#statusInput").select2({
+                placeholder: '---请选择类型---',
+                data:[{id:'enabled',text:'启用'},
+                    {id:'disabled',text:'禁用'}]
+            });
+            $status.val("[[${language==null?'enabled':language.status}]]").trigger("change");
+			var $form = $(".language-form");
+
+			$(".language-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+
+				var $form = $(e.target);
+
+				var bv = $form.data('bootstrapValidator');
+
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/center/language/list";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : ""+result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

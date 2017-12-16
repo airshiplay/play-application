@@ -49,7 +49,7 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
     EntityManager entityManager;
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public AdminUserDetails findByUsername(String username) {
         AdminUserEntity userEntity = adminUserEntityRepository.findByUsername(username);
         if (userEntity == null) {
@@ -81,7 +81,7 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 
     //
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     @Override
     public Set<String> findRoles(String username, Serializable uid) {
         Iterator<RoleEntity> result = roleEntityRepository.findAll(QRoleEntity.roleEntity.users.any().id.eq((Long) uid)).iterator();
@@ -93,7 +93,7 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
         return Sets.newHashSet("admin");
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     @Override
     public Set<String> findPermissions(String username, Serializable uid) {
 

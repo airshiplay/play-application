@@ -16,26 +16,10 @@
 
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="mailbox-controls" style="display:none;">
+			<div class="mailbox-controls" >
 				<div class="btn-group btn-group-sm">
 					<a type="button" class="btn btn-primary" href="#/page/center/menu/add"> <i class="fa fa-plus"></i> 添加
-					</a><a aria-expanded="false" aria-haspopup="true"
-						data-toggle="dropdown"
-						class="btn btn-primary btn-sm dropdown-toggle" type="button">
-						批量 <span class="ion-arrow-down-b"></span>
 					</a>
-					<ul class="dropdown-menu">
-						<li><a href="javascript:;" id="batchInstallButton"> <i
-								class="glyphicon glyphicon-send"></i>安装/更新到设备
-						</a></li>
-						<li><a href="javascript:;" id="batchRemoveButton"> <i
-								class="glyphicon glyphicon-erase"></i>从设备移除
-						</a></li>
-						<li class="divider" role="separator"></li>
-						<li><a href="javascript:;" id="batchDeleteButton"> <i
-								class="glyphicon glyphicon-remove"></i>移除
-						</a></li>
-					</ul>
 				</div>
 				<!-- /.btn-group -->
 				<a type="button" class="btn btn-warning btn-sm" id="refreshButton"> <i class="fa fa-refresh"></i>
@@ -71,6 +55,7 @@
 								
 								<th data-column-id="code">标识</th>
 								<th data-column-id="icon">图标</th>
+								<th data-column-id="sortNo">排序</th>
 								<th data-formatter="commands" data-css-class="command-column" data-width="150px" data-sortable="false" data-align="center"
 									data-header-align="center">操作</th>
 							</tr>
@@ -79,6 +64,7 @@
 							<tr>
 								<td></td>
 								
+								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -138,8 +124,15 @@
 					$tdList.eq(0).html("<input type='checkbox' name='like' value='" + node.key + "'>"+"<span style='padding-left: 5px;'>"+node.getIndexHier()+"</span>");
 					/* $tdList.eq(1).text(node.getIndexHier()); */
 					$tdList.eq(2).text(node.data.code);
-					$tdList.eq(3).html("<span class=\""+node.data.iconCls+"\"></span>"); 
-				}
+					$tdList.eq(3).html("<span class=\""+node.data.iconCls+"\"></span>");
+                    $tdList.eq(4).text(node.data.sortNo);
+                    $tdList.eq(5).html("\
+								<div class=\"btn-group btn-group-sm\" data-row-id=\""+node.data.id+"\">\
+									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/center/menu/edit/"+node.data.id+"\">\
+										<i class=\"glyphicon glyphicon-edit\"></i>\
+									</a>\
+								</div>");
+                }
 			});
 			/* Handle custom checkbox clicks */
 		    $("#grid-basic").delegate("input[name=like]", "click", function(e){

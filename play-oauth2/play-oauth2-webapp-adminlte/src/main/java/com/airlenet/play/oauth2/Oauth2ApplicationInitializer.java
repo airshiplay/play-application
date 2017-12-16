@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.airlenet.integration.core.ApplicationInitializer;
-import com.airlenet.play.main.init.InitDataTools;
+import com.airlenet.play.main.InitDataTools;
 
 @Component
 public class Oauth2ApplicationInitializer extends ApplicationInitializer {

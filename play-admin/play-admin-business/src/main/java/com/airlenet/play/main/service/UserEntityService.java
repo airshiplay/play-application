@@ -13,17 +13,17 @@ public class UserEntityService extends EntityService<AdminUserEntity, Long> {
     @Autowired
     private AdminUserEntityRepository userEntityRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public AdminUserEntity findByUsername(String username) {
         return userEntityRepository.findByUsername(username);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public AdminUserEntity findByEmail(String email) {
         return userEntityRepository.findByEmail(email);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public AdminUserEntity findByMobile(String mobile) {
         return userEntityRepository.findByMobile(mobile);
     }

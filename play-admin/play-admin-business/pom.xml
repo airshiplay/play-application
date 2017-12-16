@@ -20,12 +20,22 @@
             <version>${play.framework.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.airlenet</groupId>
+            <artifactId>play-integration-core</artifactId>
+            <version>${play.framework.version}</version>
+        </dependency>
+        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.airlenet</groupId>
             <artifactId>play-plugin-core</artifactId>
+            <version>${play.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.airlenet</groupId>
+            <artifactId>play-security-shiro</artifactId>
             <version>${play.framework.version}</version>
         </dependency>
         <dependency>

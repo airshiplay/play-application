@@ -17,12 +17,12 @@ public class DictEntityService extends EntityService<DictEntity, Long> {
     @Autowired
     private DictEntityRepository dictEntityRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public List<DictEntity> findByType(String type) {
         return dictEntityRepository.findByType(type);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public int countByType(String type) {
         return dictEntityRepository.countByType(type);
     }

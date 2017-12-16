@@ -26,13 +26,13 @@ public class RoleEntityService extends EntityService<RoleEntity, Long> {
     @Autowired
     private AdminUserEntityRepository userEntityRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public Page<AdminUserEntity> findUserPageByRoleId(Predicate predicate, Long roleId, Pageable pageable) {
         return userEntityRepository.findAll(
                 QAdminUserEntity.adminUserEntity.roles.any().id.eq(roleId).and(predicate), pageable);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public Page<AdminUserEntity> findUnExistUserPageByRoleId(Long roleId,
                                                              Predicate predicate, Pageable pageable) {
         Page<AdminUserEntity> result = userEntityRepository.findAll(

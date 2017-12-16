@@ -30,11 +30,6 @@
         <!--</dependency>-->
         <dependency>
             <groupId>com.airlenet</groupId>
-            <artifactId>play-security-shiro</artifactId>
-            <version>${play.framework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet</groupId>
             <artifactId>play-plugin-storage</artifactId>
             <version>${play.framework.version}</version>
         </dependency>

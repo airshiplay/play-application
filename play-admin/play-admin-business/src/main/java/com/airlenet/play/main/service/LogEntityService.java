@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LogEntityService extends EntityService<LogEntity, Long> {
 
-    @Transactional
+    @Transactional("transactionManager")
     public LogEntity addLog(String broswer, LogService.OperateType operateType, LogService.LogLevel level, String ip, String content) {
         LogEntity entity = new LogEntity();
         entity.setLevel(level);

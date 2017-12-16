@@ -13,7 +13,7 @@ public class AreaEntityService extends HierarchicalEntityService<AreaEntity, Lon
     @Autowired
     private AreaEntityRepository areaEntityRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,value = "transactionManager")
     public AreaEntity findByFullNameAndType(String fullName, AreaEntity.AreaType type) {
         return areaEntityRepository.findByFullNameAndType(fullName, type);
     }

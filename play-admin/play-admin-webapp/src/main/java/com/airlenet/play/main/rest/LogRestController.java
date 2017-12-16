@@ -45,7 +45,6 @@ public class LogRestController {
         for (LogEntity entity : entities) {
             logEntityService.delete(entity);
         }
-
         return Result.success();
     }
 }

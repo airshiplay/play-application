@@ -9,3 +9,72 @@
 		<li class="active">编辑菜单</li>
 	</ol>
 </section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${menu==null?'新增菜单':'编辑菜单'}">新增菜单</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="user-form" action="/center/menu/save">
+					<input type="hidden" name="id" th:value="${user==null?'':user.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="textInput">名称</label>
+							<input type="text" name="text" class="form-control" id="textInput" placeholder="请填写名称" data-bv-notempty="true" data-bv-notempty-message="请填写名称"
+								   data-bv-stringlength="true"
+								   data-bv-stringlength-min="2"
+								   data-bv-stringlength-max="50"
+								   data-bv-stringlength-message="名称长度必须在2和50之间"
+								   th:value="${menu==null?'':menu.text}">
+						</div>
+						<div class="form-group">
+							<label for="codeInput">标识</label>
+							<input type="text" name="code" class="form-control" id="codeInput" placeholder="请填写标识"
+								   data-bv-notempty="true"
+								   data-bv-notempty-message="请填写标识"
+								   data-bv-regexp="true"
+								   data-bv-regexp-regexp="[a-zA-Z0-9_\.]+"
+								   data-bv-stringlength="true"
+								   data-bv-stringlength-min="4"
+								   data-bv-stringlength-max="20"
+								   data-bv-stringlength-message="标识长度必须在4和20之间"
+								   th:value="${menu==null?'':menu.code}">
+						</div>
+						<div class="form-group">
+							<label for="emailInput">邮箱</label>
+							<input type="email" name="email" class="form-control" id="emailInput" placeholder="请填写邮箱"
+								   data-bv-regexp="true"
+								   data-bv-regexp-regexp="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+"
+								   th:value="${user==null?'':user.email}">
+						</div>
+						<div class="form-group">
+							<label for="photoInput">头像</label>
+							<div class="kv-avatar">
+								<input name="photo" type="hidden" value="">
+								<input id="photoInput" name="file" type="file" class="file-loading">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="newPasswordInput">密码</label>
+							<input type="password" name="newPassword" class="form-control" id="newPasswordInput" placeholder="请填写密码" value="">
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/center/user/list'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

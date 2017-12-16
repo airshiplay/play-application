@@ -2,11 +2,10 @@ package com.airlenet.play.main.entity;
 
 import com.airlenet.repo.jpa.HierarchicalEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "sys_menu")
@@ -32,6 +31,9 @@ public class MenuEntity extends HierarchicalEntity<AdminUserEntity, Long, MenuEn
 
     @Column(length = 500)
     private String config;
+
+    @OneToMany(mappedBy = "menu")
+    private Set<MenuLangEntity> menuLang;
 
     public String getText() {
         return text;
@@ -73,4 +75,11 @@ public class MenuEntity extends HierarchicalEntity<AdminUserEntity, Long, MenuEn
         this.config = config;
     }
 
+    public Set<MenuLangEntity> getMenuLang() {
+        return menuLang;
+    }
+
+    public void setMenuLang(Set<MenuLangEntity> menuLang) {
+        this.menuLang = menuLang;
+    }
 }

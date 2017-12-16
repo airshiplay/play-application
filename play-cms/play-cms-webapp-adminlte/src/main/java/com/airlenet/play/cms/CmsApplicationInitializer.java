@@ -3,7 +3,7 @@ package com.airlenet.play.cms;
 import com.airlenet.integration.core.ApplicationInitializer;
 import com.airlenet.play.main.entity.AuthorityEntity.PermissionType;
 import com.airlenet.play.main.entity.MenuEntity;
-import com.airlenet.play.main.init.InitDataTools;
+import com.airlenet.play.main.InitDataTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

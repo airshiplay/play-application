@@ -93,6 +93,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>play-entry</finalName>
+        <finalName>play-website-entry</finalName>
     </build>
 </project>

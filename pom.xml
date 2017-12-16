@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <servlet-api.version>3.1.0</servlet-api.version>
-        <play.framework.version>2.0.0</play.framework.version>
+        <play.framework.version>2.0.1-SNAPSHOT</play.framework.version>
         <validator-api.version>1.1.0.Final</validator-api.version>
         <querydsl.version>4.1.1</querydsl.version>
         <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
@@ -37,6 +37,7 @@
         <module>min-application</module>
         <module>play-blog</module>
         <module>play-ui</module>
+        <module>play-vendor</module>
         <!--<module>play-im</module>-->
         <!--<module>play-oauth2-business</module>-->
         <!--<module>play-oauth2-webapp-bootstrap</module>-->
