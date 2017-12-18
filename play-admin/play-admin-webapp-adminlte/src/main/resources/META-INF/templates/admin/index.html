@@ -146,17 +146,24 @@
 				confirm : [ "jquery" ],
 				fileinput : [ "bootstrap" ],
 				fileinputzh : [ "fileinput" ],
-				select2 : [ "bootstrap" ],
+				select2 : {deps :[ "bootstrap","css!assets/vendor/plugins/select2/select2.min.css" ]},
+                icheck :["css!assets/vendor/plugins/iCheck/all.css"],
 				select2zh : [ "select2" ],
 				datepicker : [ "bootstrap" ],
 				datepickerzh : [ "datepicker" ],
 				jqueryui:["jquery"],
 				fancytree:["jqueryui"],
 				jquery_sidebar:["jquery"],
+                datetimepicker:["css!assets/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css"],
 				datetimepickerzh:["datetimepicker"],
 				adminlte : [ "jquery", "bootstrap", "slimscroll", "fastclick", "bootgridfa", "confirm", "validatorzh" ],
-				app:["adminlte"]
-			}
+				app:["adminlte","css!assets/css/admin.css"]
+			},
+            map: {
+                '*': {
+                    css: 'assets/require-css/css.min'
+                }
+            }
 		});
 
 		requirejs([ "jquery", "router", "text", "app" ], function($) {

@@ -1,5 +1,6 @@
 package com.airlenet.play.main.controller;
 
+import com.airlenet.play.main.entity.PlaySettingMap;
 import com.airlenet.play.main.entity.SettingEntity;
 import com.airlenet.play.main.service.SettingEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class SettingController {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String getList(Model model) {
-        SettingEntity setting = settingEntityService.get();
+        PlaySettingMap setting = settingEntityService.get();
         model.addAttribute("setting", setting);
         return "classpath:/admin/setting/info";
     }

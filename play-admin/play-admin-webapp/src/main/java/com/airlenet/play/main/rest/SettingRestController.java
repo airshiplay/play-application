@@ -1,5 +1,6 @@
 package com.airlenet.play.main.rest;
 
+import com.airlenet.play.main.entity.PlaySettingMap;
 import com.airlenet.play.main.entity.SettingEntity;
 import com.airlenet.play.main.service.SettingEntityService;
 import com.airlenet.repo.domain.Result;
@@ -8,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * @author airlenet
@@ -23,19 +25,18 @@ public class SettingRestController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
-    public SettingEntity doGet() {
-        return settingEntityService.get();
+    public Result doGet() {
+        return Result.success().setContent(settingEntityService.get());
     }
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result doSave(@ModelAttribute @Valid SettingEntity setting,
-                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return Result.validateError();
-        }
-        settingEntityService.save(setting);
+    public Result doSave(@RequestParam Map<String,String> setting) {
+        PlaySettingMap settingMap = new PlaySettingMap();
+        settingMap.putAll(setting);
+
+        settingEntityService.save("config",settingMap);
         return Result.success();
     }
 }

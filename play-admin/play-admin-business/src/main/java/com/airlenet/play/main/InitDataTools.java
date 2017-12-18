@@ -31,17 +31,6 @@ public class InitDataTools {
     @Autowired
     private AuthorityEntityService authorityEntityService;
 
-    public void setting(String siteName, String logo, String adminLoginBanner, String phone1, String phone2, String email, String address) {
-        SettingEntity settingEntity = settingEntityService.get();
-        settingEntity.setSiteName(siteName);
-        settingEntity.setLogo(logo);
-        settingEntity.setAdminLoginBanner(adminLoginBanner);
-        settingEntity.setPhone1(phone1);
-        settingEntity.setPhone2(phone2);
-        settingEntity.setEmail(email);
-        settingEntity.setAddress(address);
-        settingEntityService.save(settingEntity);
-    }
 
     public boolean existMenu() {
         return menuEntityService.count() > 0;

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" th:content="${website.seoKeywords}">
-<meta name="description" th:content="${website.seoDescription}">
+<meta name="keywords" th:content="${config_meta_keyword}">
+<meta name="description" th:content="${config_meta_description}">
 <base href="../../" th:href="@{${#httpServletRequest.getContextPath()}}" />
 <link rel="icon" href="../../favicon.ico">
 
-<title th:text="${website.seoTitle}">艾尔里信息科技</title>
+<title th:text="${config_meta_title}">艾尔里信息科技</title>
 
 <!-- Bootstrap core CSS -->
 <link th:href="@{/assets/plugins/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet">
