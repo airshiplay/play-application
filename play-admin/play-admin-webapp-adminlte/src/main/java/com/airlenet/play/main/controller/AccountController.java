@@ -2,10 +2,17 @@ package com.airlenet.play.main.controller;
 
 //import org.apache.commons.lang3.StringUtils;
 
+import com.airlenet.core.SpringContext;
 import com.airlenet.play.main.entity.AdminUserEntity;
 import com.airlenet.play.main.service.UserEntityService;
+import com.airlenet.plugin.core.Plugin;
+import com.airlenet.plugin.core.PluginService;
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.BeanUtilsBean2;
+import org.apache.commons.lang3.reflect.MethodUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +26,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.airlenet.security.CustomUserDetails;
 import com.airlenet.security.PlayPasswordService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 /**
  * @author airlenet
  * @version 2017-09-12
@@ -28,43 +40,67 @@ import com.airlenet.security.PlayPasswordService;
 public class AccountController {
 
     @Autowired
-    UserEntityService userEntityService;
+    private UserEntityService userEntityService;
 
     //	@Autowired
 //	OauthUserService oauthUserService;
 //	@Autowired
 //	OauthPluginService oauthPluginService;
     @Autowired
-    PlayPasswordService passwordService;
+    private PluginService pluginService;
+    @Autowired
+    private PlayPasswordService passwordService;
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String get(Model model) {
         Subject subject = SecurityUtils.getSubject();
         @SuppressWarnings("unchecked")
         AdminUserEntity user = ((CustomUserDetails<Long, AdminUserEntity>) subject.getPrincipal()).getCustomUser();
-//		List<OauthUserEntity> oauthUsers = oauthUserService.findByAdminUserId(user.getId());
-//		List<OauthPlugin> oauthPlugins = oauthPluginService.getAvailableOauthPlugins();
-//		List<String> oauthUserPluginIds = new ArrayList<String>();
-//		oauthPlugins.forEach(new Consumer<OauthPlugin>() {
-//
-//			@Override
-//			public void accept(OauthPlugin t) {
-//
-//				oauthUsers.forEach(new Consumer<OauthUserEntity>() {
-//
-//					@Override
-//					public void accept(OauthUserEntity u) {
-//						if (u.getOauthPluginId().equals(t.getId())) {
-//							oauthUserPluginIds.add(t.getId());
-//						}
-//					}
-//				});
-//			}
-//		});
         model.addAttribute("user", user);
-//		model.addAttribute("oauthUsers", oauthUsers);
-//		model.addAttribute("oauthPlugins", oauthPlugins);
-//		model.addAttribute("oauthUserPluginIds", oauthUserPluginIds);
+
+        try {
+            Class<Plugin> oauthPluginCls = (Class<Plugin>) Class.forName("com.airlenet.play.plugin.oauth.model.OauthPlugin");
+            List<Plugin> oauthPlugins = pluginService.getEnabledPlugins(oauthPluginCls);
+            model.addAttribute("oauthPlugins", oauthPlugins);
+
+            Object oauthUserService = SpringContext.getBean("oauthUserService");
+            List<Object> oauthUsers = (List<Object>) MethodUtils.invokeMethod(oauthUserService, true, "findByAdminUserId", user.getId());
+            List<String> oauthUserPluginIds = new ArrayList<String>();
+            oauthPlugins.forEach(new Consumer<Plugin>() {
+                @Override
+                public void accept(Plugin t) {
+                    oauthUsers.forEach(new Consumer<Object>() {
+
+                        @Override
+                        public void accept(Object u) {
+                            try {
+                                Object oauthPluginId = MethodUtils.invokeMethod(u, true, "getOauthPluginId");
+                                if (t.getId().equals(oauthPluginId)) {
+                                    oauthUserPluginIds.add(t.getId());
+                                }
+                            } catch (NoSuchMethodException e) {
+                                // ignore
+                            } catch (IllegalAccessException e) {
+                                // ignore
+                            } catch (InvocationTargetException e) {
+                                // ignore
+                            }
+                        }
+                    });
+                }
+            });
+            model.addAttribute("oauthUsers", oauthUsers);
+            model.addAttribute("oauthUserPluginIds", oauthUserPluginIds);
+        } catch (ClassNotFoundException e) {
+            // ignore
+        } catch (NoSuchMethodException e) {
+            // ignore
+        } catch (IllegalAccessException e) {
+            // ignore
+        } catch (InvocationTargetException e) {
+            // ignore
+        }
+
         return "classpath:/admin/account/info";
     }
 

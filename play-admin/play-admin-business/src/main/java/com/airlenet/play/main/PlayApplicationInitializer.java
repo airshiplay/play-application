@@ -102,10 +102,10 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
             tools.createMenuByParent("系统日志", "center_system_log", "fa fa-building", "page/center/log/list", null, sortNo++, systemManagement);
 
 
+            MenuEntity language = tools.createMenuByParent("语言管理", "center_language_list", "fa fa-language", "page/center/language/list", null, sortNo++, systemManagement);
             MenuEntity paramSetting = tools.createMenuByParent("参数设置", "center_parameter_setting", "fa fa-cog", "page/center/setting/info", null, sortNo++, systemManagement);
             tools.createPemission(paramSetting, AuthorityEntity.PermissionType.page, "参数查询", "page:sys:param:read");
             tools.createPemission(paramSetting, AuthorityEntity.PermissionType.page, "参数更新", "page:sys:param:update");
-            MenuEntity language = tools.createMenuByParent("语言管理", "center_language_list", "fa fa-language", "page/center/language/list", null, sortNo++, systemManagement);
 
             MenuEntity businessManagement = tools.createMenuByParent("业务管理", "business_management", "fa fa-plug", null, null, sortNo++, null);
             tools.createMenuByParent("会员管理", "business_member", "fa fa-user", "page/center/member/list", null, sortNo++, businessManagement);

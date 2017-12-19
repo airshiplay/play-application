@@ -61,22 +61,10 @@ public class PluginController<T extends Plugin> {
      * 设置
      */
     @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/setting", method = RequestMethod.GET)
+    @RequestMapping(value = "/setting", method = RequestMethod.POST)
     public
     @ResponseBody
-    PluginConfigEntity setting(ModelMap model) {
-        PluginConfigEntity pluginConfig = plugin.getPluginConfig();
-        return pluginConfig;
-    }
-
-    /**
-     * 更新
-     */
-    @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    Result update(@ModelAttribute("pluginConfig") @Valid PluginConfigEntity pluginConfig, BindingResult result, Model model) {
+    Result setting(@ModelAttribute("pluginConfig") @Valid PluginConfigEntity pluginConfig, BindingResult result, Model model) {
 
         preUpdate(pluginConfig, result, model);
 

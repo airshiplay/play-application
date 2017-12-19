@@ -38,6 +38,7 @@
         <module>play-blog</module>
         <module>play-ui</module>
         <module>play-vendor</module>
+        <module>play-plugin-payment</module>
         <!--<module>play-im</module>-->
         <!--<module>play-oauth2-business</module>-->
         <!--<module>play-oauth2-webapp-bootstrap</module>-->

@@ -32,6 +32,16 @@ public class WeChatOpenOauthPlugin extends OauthPlugin {
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     * 获取LOGO
+     *
+     * @return LOGO
+     */
+    @Override
+    public String getLogo() {
+        return "wechat";
+    }
+
     @Override
     public String getEnterUrl() {
         return "/oauth/authorization/admin/wechatOpenOauthPlugin";

@@ -32,11 +32,6 @@ public abstract class OauthPlugin extends Plugin {
     public static final String CLIENT_SECRET_ATTRIBUTE_NAME = "client_secret";
 
     /**
-     * ICON属性名称
-     */
-    public static final String ICON_ATTRIBUTE_NAME = "icon";
-
-    /**
      * 描述属性名称
      */
     public static final String DESCRIPTION_ATTRIBUTE_NAME = "description";
@@ -66,10 +61,7 @@ public abstract class OauthPlugin extends Plugin {
      *
      * @return LOGO
      */
-    public String getLogo() {
-        PluginConfigEntity pluginConfig = getPluginConfig();
-        return pluginConfig != null ? pluginConfig.getAttribute(ICON_ATTRIBUTE_NAME) : null;
-    }
+    public abstract String getLogo();
 
     public abstract String getEnterUrl();
 

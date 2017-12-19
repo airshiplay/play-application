@@ -97,13 +97,12 @@
 					<div class="form-group">
 						<label for="emailInput">邮箱</label>
 						<div>
-							
 							<a href="javascript:;">绑定</a>
 						</div>
 					</div>
 					
 					<div class="form-group oauth" th:each="oauthPlugin,iterStat:${oauthPlugins}">
-						<label th:for="${oauthPlugin.name+'Input'}" th:text="${oauthPlugin.name}">Github111</label>
+						<label th:for="${oauthPlugin.name+'Input'}" th:text="${oauthPlugin.name}">Github</label>
 						<div>
 							<a th:if="${#lists.contains(oauthUserPluginIds, oauthPlugin.id)}" href="javascript:void(0)" th:id="${oauthPlugin.id}" data-unbind="" th:data-unbind="${oauthPlugin.id}" >解绑</a>
 							<a th:if="${!#lists.contains(oauthUserPluginIds, oauthPlugin.id)}" th:href="@{${'/oauth/authorization/admin/'+oauthPlugin.id}}">绑定</a>

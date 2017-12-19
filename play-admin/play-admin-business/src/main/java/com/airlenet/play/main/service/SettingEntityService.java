@@ -35,7 +35,7 @@ public class SettingEntityService extends EntityService<SettingEntity, Long> {
                 Iterator<SettingEntity> resultItr = entityList.iterator();
                 while (resultItr.hasNext()){
                     SettingEntity entity = resultItr.next();
-                    if(org.springframework.util.ObjectUtils.isEmpty(entity.getKey()))
+                    if(!org.springframework.util.ObjectUtils.isEmpty(entity.getKey()))
                         settingMap.put(entity.getKey(),entity.getValue());
                 }
             }

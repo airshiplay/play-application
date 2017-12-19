@@ -34,6 +34,16 @@ public class WeiboOauthPlugin extends OauthPlugin {
     @Value("${info.siteUrl?:http://www.airlenet.com}")
     private String siteUrl;
 
+    /**
+     * 获取LOGO
+     *
+     * @return LOGO
+     */
+    @Override
+    public String getLogo() {
+        return "weibo";
+    }
+
     @Override
     public String getEnterUrl() {
         return "/oauth/authorization/admin/weiboOauthPlugin";

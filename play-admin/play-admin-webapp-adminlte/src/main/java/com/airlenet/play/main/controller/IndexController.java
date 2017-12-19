@@ -12,11 +12,14 @@ import com.airlenet.play.main.service.MenuEntityService;
 import com.airlenet.play.main.service.SettingEntityService;
 import com.airlenet.plugin.core.Plugin;
 import com.airlenet.plugin.core.PluginService;
+import org.apache.commons.beanutils.BeanUtilsBean2;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -84,9 +87,8 @@ public class IndexController {
     @RequestMapping(value = {"${path.admin?:/admin}/login"}, method = RequestMethod.GET)
     public String getLogin(Model model, HttpServletRequest request) {
         try {
-            Class<Plugin> oauthPluginCls = (Class<Plugin>) Class.forName("OauthPlugin");
+            Class<Plugin> oauthPluginCls = (Class<Plugin>) Class.forName("com.airlenet.play.plugin.oauth.model.OauthPlugin");
             List<Plugin> oauthPlugins = pluginService.getEnabledPlugins(oauthPluginCls);
-            List<String> oauthPluginIds = new ArrayList<String>();
             model.addAttribute("oauthPlugins", oauthPlugins);
         } catch (ClassNotFoundException e) {
             logger.warn("not support oauth login");

@@ -16,7 +16,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">配置OAuth插件</h3>
                 </div>
-                <form role="form" class="app-form" th:action="${plugin.updateUrl}">
+                <form role="form" class="app-form" th:action="${plugin.settingUrl}">
                     <input type="hidden" name="pluginId" th:value="${plugin_config?.pluginId}"/> <input type="hidden"
                                                                                                         name="id"
                                                                                                         th:value="${plugin_config?.id}"/>
@@ -31,20 +31,11 @@
                                                                             th:value="${plugin.name}">
                         </div>
                         <div class="form-group">
-                            <label for="avatarInput">插件图标</label>
-                            <div class="kv-avatar">
-                                <input id="oauth_icon" name="attributes['icon']" type="hidden"
-                                       th:value="${plugin_config?.attributes==null?'':plugin_config?.attributes['icon']}">
-                                <input id="avatarInput" name="file" type="file"
-                                       class="file-loading">
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label>启用</label>
                             <div class="input-group radio">
-                                <label> <input type="radio" value="false" name="isEnabled">禁用
-                                </label> &nbsp; &nbsp; <label> <input type="radio" value="true" name="isEnabled"
-                                                                      th:checked="${plugin_config?.isEnabled}">启用
+                                <label> <input type="radio" value="true" name="disabled" th:checked="${plugin_config?.disabled}">禁用
+                                </label> &nbsp; &nbsp; <label> <input type="radio" value="false" name="disabled"
+                                                                      th:checked="${!plugin_config?.disabled}">启用
                             </label>
                             </div>
                         </div>
@@ -89,9 +80,14 @@
                         <button type="button" class="btn btn-default"
                                 onclick="location.href='#/page/plugin/oauth/list'">返回列表
                         </button>
-                        <button type="submit" class="btn btn-primary pull-right" th:disabled="${plugin_config==null}">
-                            保存
-                        </button>
+
+                        <div class="btn-group pull-right">
+                            <button type="button" th:data-plugin-id="${plugin.id}" th:data-install-url="${plugin.installUrl}" th:data-uninstall-url="${plugin.uninstallUrl}" th:text="@{(${plugin_config?.pluginId==null} ? '安装' : '卸载')}" th:id="@{(${plugin_config?.pluginId==null} ? 'install' : 'uninstall')}" class="btn btn-warning">
+                            </button>
+                            <button type="submit" class="btn btn-primary" th:disabled="${plugin_config?.pluginId==null}">
+                                保存
+                            </button>
+                        </div>
                     </div>
                 </form>
 
@@ -106,46 +102,72 @@
         function (domReady) {
             domReady(function () {
                 activeMenu("plugin_oauth");
+                $("#install").on(
+                    "click",
+                    function () {
+                        var app_id = $(this).data("plugin-id");
+                        var url = $(this).data("install-url");
+                        $.post(base+url, {
+                            ids: [app_id]
+                        }, function (resp) {
+                            if (resp.success) {
+                                $.alert({
+                                    title: false,
+                                    content: "操作成功",
+                                    confirmButton: "关闭",
+                                    confirm: function(){
+                                        window.location.reload();
+                                    },
+                                });
+                            } else {
+                                $.alert({
+                                    title: false,
+                                    content: resp.msg,
+                                    confirmButton: "关闭"
+                                });
+                            }
+                        }, "json");
+                    });
+                $("#uninstall").on(
+                    "click",
+                    function () {
+                        var app_id = $(this).data("plugin-id");
+                        var url = $(this).data("uninstall-url");
+                        $.confirm({
+                            title: "提示",
+                            content: "确定删除配置?",
+                            confirmButton: "确定",
+                            cancelButton: "关闭",
+                            icon: 'fa fa-warning',
+                            confirmButtonClass: 'btn-warning',
+                            animation: 'zoom',
+                            confirm: function () {
+                                $.post(base + url, {
+                                    ids: [app_id]
+                                }, function (resp) {
+                                    if (resp.success) {
+                                        $.alert({
+                                            title: false,
+                                            content: "操作成功",
+                                            confirmButton: "关闭",
+                                            confirm: function(){
+                                                window.location.reload();
+                                            },
+                                        });
 
-                var $form = $(".app-form");
-                var userAvatar = "[[${plugin_config?.attributes==null?'':plugin_config?.attributes['icon']}]]";
-
-                var $avatarInput = $("#avatarInput");
-                $avatarInput
-                    .fileinput(
-                        {
-                            overwriteInitial: true,
-                            language: "zh",
-                            uploadUrl: base
-                            + "/center/multipart/upload",
-                            maxFileSize: 1500,
-                            showClose: false,
-                            showCaption: false,
-                            multiple: false,
-                            showUpload: false, // hide upload button
-                            showRemove: false, // hide remove button
-                            minFileCount: 1,
-                            maxFileCount: 1,
-                            elErrorContainer: '#kv-avatar-errors-1',
-                            msgErrorClass: 'alert alert-block alert-danger',
-                            defaultPreviewContent: userAvatar
-                            && userAvatar != "" ? "<img src='" + userAvatar + "' alt='头像' style='width:160px'>"
-                                : "<img src='" + base + "/requirejs/app/assets/dist/img/user2-160x160.jpg' alt='头像' style='width:160px'>",
-                            allowedFileTypes: ["image"]
-                        })
-                    .on("filebatchselected", function (event, files) {
-                        $avatarInput.fileinput("upload");
-                    })
-                    .on(
-                        'fileuploaded',
-                        function (event, data, previewId, index) {
-                            var form = data.form, files = data.files, extra = data.extra, response = data.response, reader = data.reader;
-                            if (response.success) {
-                                var $form = $(".app-form");
-                                $form.find("input#oauth_icon").val(
-                                    response.urls);
+                                    } else {
+                                        $.alert({
+                                            title: false,
+                                            content: resp.msg,
+                                            confirmButton: "关闭"
+                                        });
+                                    }
+                                }, "json");
                             }
                         });
+                    });
+
+                var $form = $(".app-form");
 
                 $(".app-form")
                     .bootstrapValidator()

@@ -71,6 +71,7 @@ public class OauthController {
             RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
     public String getAccessTokenAndProcess(@PathVariable("source") String source,
                                            @PathVariable("oauthPluginId") String oauthPluginId, String code,
+                                           String error,String error_description,
                                            HttpServletRequest request, HttpSession session) {
         Assert.notNull(oauthPluginId);
         Assert.notNull(code);

@@ -20,7 +20,7 @@ public class AdminAuditorAware implements AuditorAware<AdminUserEntity> {
         if (principal == null)
             return null;
         CustomUserDetails<?, ?> user = (CustomUserDetails<?, ?>) principal;
-        if (user.getType() == CustomUserDetails.Type.Admin) {
+        if (user.getCustomUser() instanceof AdminUserEntity) {
             return (AdminUserEntity) user.getCustomUser();
         } else {
             return null;

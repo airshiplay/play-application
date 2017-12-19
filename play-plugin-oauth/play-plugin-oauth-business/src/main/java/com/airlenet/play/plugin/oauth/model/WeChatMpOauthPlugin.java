@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.airlenet.play.main.service.SettingEntityService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,8 @@ import com.airlenet.play.plugin.oauth.service.OauthUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.SimpleType;
+
+import javax.annotation.PostConstruct;
 
 /**
  * https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842&token=&lang=zh_CN
@@ -30,7 +33,27 @@ public class WeChatMpOauthPlugin extends OauthPlugin {
     private OauthUserService oauthUserService;
 
     @Autowired
+    private SettingEntityService settingEntityService;
+
+    @Autowired
     private ObjectMapper objectMapper;
+
+    @PostConstruct
+    public void PostConstruct(){
+        String configUrl = settingEntityService.get().getConfigUrl();
+        if(configUrl!=null){
+            this.siteUrl = configUrl;
+        }
+    }
+    /**
+     * 获取LOGO
+     *
+     * @return LOGO
+     */
+    @Override
+    public String getLogo() {
+        return "wechat";
+    }
 
     @Override
     public String getEnterUrl() {

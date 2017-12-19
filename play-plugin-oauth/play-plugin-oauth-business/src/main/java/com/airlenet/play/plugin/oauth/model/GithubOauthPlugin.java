@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.airlenet.play.main.service.SettingEntityService;
 import com.airlenet.play.plugin.oauth.service.OauthUserService;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -17,6 +18,8 @@ import org.springframework.util.Assert;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.SimpleType;
+
+import javax.annotation.PostConstruct;
 
 /**
  * https://developer.github.com/v3/oauth/
@@ -33,7 +36,27 @@ public class GithubOauthPlugin extends OauthPlugin {
     private OauthUserService oauthUserService;
 
     @Autowired
+    private SettingEntityService settingEntityService;
+
+    @Autowired
     private ObjectMapper objectMapper;
+
+    @PostConstruct
+    public void PostConstruct(){
+        String configUrl = settingEntityService.get().getConfigUrl();
+        if(configUrl!=null){
+            this.siteUrl = configUrl;
+        }
+    }
+    /**
+     * 获取LOGO
+     *
+     * @return LOGO
+     */
+    @Override
+    public String getLogo() {
+        return "github";
+    }
 
     @Override
     public String getEnterUrl() {

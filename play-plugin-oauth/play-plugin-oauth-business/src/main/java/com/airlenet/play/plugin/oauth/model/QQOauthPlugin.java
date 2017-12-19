@@ -135,6 +135,16 @@ public class QQOauthPlugin extends OauthPlugin {
         return siteUrl;
     }
 
+    /**
+     * 获取LOGO
+     *
+     * @return LOGO
+     */
+    @Override
+    public String getLogo() {
+        return "qq";
+    }
+
     public String getEnterUrl() {
         return "oauth/authorization/admin/qqOauthPlugin";
     }

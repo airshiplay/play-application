@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>com.airlenet.play</groupId>
-            <artifactId>play-plugin-oauth-business</artifactId>
+            <artifactId>play-plugin-oauth-webapp-adminlte</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

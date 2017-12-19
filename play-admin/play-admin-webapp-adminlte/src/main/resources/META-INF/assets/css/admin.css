@@ -9,3 +9,41 @@ div.required .control-label:not(span):before, td.required:before {
     color: #F00;
     font-weight: bold;
 }
+.btn-qq {
+    color: #ffffff;
+    background-color: #0073c0;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn-weibo {
+    color: #ffffff;
+    background-color: #da1700;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn-wechat {
+    color: #ffffff;
+    background-color: #99D41D;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn-github {
+    color: #ffffff;
+    background-color: #444444;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+.logo-qq {
+    color: #0073c0;
+}
+
+.logo-weibo {
+    color: #da1700;
+}
+
+.logo-wechat {
+    color: #99D41D;
+}
+
+.logo-github {
+    color: #444444;
+}

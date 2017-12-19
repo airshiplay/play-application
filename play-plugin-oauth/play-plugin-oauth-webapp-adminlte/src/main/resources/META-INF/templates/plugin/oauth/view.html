@@ -30,25 +30,17 @@
                                                                         th:value="${plugin?.name}">
                     </div>
                     <div class="form-group">
-                        <label for="avatarInput">插件图标</label>
-                        <div class="kv-avatar">
-                            <img alt="插件图标"
-                                 th:src="${plugin_config?.attributes==null?'':plugin_config?.attributes['icon']}">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label>状态</label>
                         <div class="input-group radio">
                             <label> <input type="radio" value="true" readonly="readonly" disabled="disabled"
-                                           name="isEnabled"
+                                           name="disabled"
                                            th:checked="${plugin_config==null}">未安装
                             </label> &nbsp; &nbsp;
-                            <label> <input type="radio" value="false" disabled="disabled" readonly="readonly"
-                                           name="isEnabled">禁用
+                            <label> <input type="radio" value="false" disabled="disabled" readonly="readonly" th:checked="${plugin_config==null?false:plugin_config?.disabled}"
+                                           name="disabled">禁用
                             </label> &nbsp; &nbsp; <label> <input type="radio" value="true" readonly="readonly"
-                                                                  disabled="disabled" name="isEnabled"
-                                                                  th:checked="${plugin_config?.isEnabled}">启用
+                                                                  disabled="disabled" name="disabled"
+                                                                  th:checked="${plugin_config==null?false:!plugin_config?.disabled}">启用
                         </label>
                         </div>
                     </div>
