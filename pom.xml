@@ -30,20 +30,18 @@
         <module>play-cms</module>
         <module>play-maven-plugin</module>
         <module>play-shop</module>
-        <module>play-plugin-oauth</module>
-        <module>play-wechat</module>
+         <module>play-wechat</module>
         <module>play-oauth2</module>
         <module>play-website</module>
         <module>min-application</module>
         <module>play-blog</module>
         <module>play-ui</module>
         <module>play-vendor</module>
-        <module>play-plugin-payment</module>
-        <!--<module>play-im</module>-->
+         <!--<module>play-im</module>-->
         <!--<module>play-oauth2-business</module>-->
         <!--<module>play-oauth2-webapp-bootstrap</module>-->
         <!--<module>play-plugin-business</module>-->
-        <!--<module>play-plugin-webapp</module>-->
+         <module>play-plugin</module>
         <!--<module>play-plugin-oauth</module>-->
         <!--<module>play-plugin-webapp-bootstrap-oauth</module>-->
 

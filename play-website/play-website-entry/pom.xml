@@ -60,6 +60,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.airlenet.play</groupId>
+            <artifactId>play-plugin-payment-webapp-adminlte</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.airlenet.play.website</groupId>
             <artifactId>play-website-webapp-adminlte</artifactId>
             <version>${project.version}</version>

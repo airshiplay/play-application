@@ -1,0 +1,18 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>alipay</groupId>
+    <artifactId>alipay-sdk</artifactId>
+    <version>java20171201160035</version>
+    <packaging>jar</packaging>
+    <name>alipay-sdk-java20171201160035</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>alipay</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+    </dependencies>
+</project>
