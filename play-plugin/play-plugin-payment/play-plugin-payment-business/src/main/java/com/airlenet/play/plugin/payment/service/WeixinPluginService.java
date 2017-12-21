@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
  * @version 2017-12-20
  */
 @Service
-public class WeixinPluginService extends PaymentPluginService{
+public class WeixinPluginService{
 }

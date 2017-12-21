@@ -52,6 +52,11 @@
             <artifactId>validation-api</artifactId>
             <version>${validator-api.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.airlenet.play</groupId>
+            <artifactId>play-reactor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

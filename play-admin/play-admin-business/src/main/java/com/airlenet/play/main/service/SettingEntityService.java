@@ -4,11 +4,12 @@ import com.airlenet.play.main.entity.PlaySettingMap;
 import com.airlenet.play.main.entity.QSettingEntity;
 import com.airlenet.play.main.entity.SettingEntity;
 import com.airlenet.play.main.repo.SettingEntityRepository;
+import com.airlenet.play.main.util.AdminEventKey;
 import com.airlenet.repo.jpa.EntityService;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.bus.EventBus;
 
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,9 @@ public class SettingEntityService extends EntityService<SettingEntity, Long> {
 
     @Value("${config.default_language?:zh-CN}")
     private String defaultLanguage;
+
+    @Autowired
+    private EventBus eventBus;
 
     public PlaySettingMap get() {
         if (settingMap == null) {
@@ -65,6 +69,8 @@ public class SettingEntityService extends EntityService<SettingEntity, Long> {
             SettingEntity entity = resultItr.next();
             resultMap.put(entity.getKey(),entity.getValue());
         }
+        eventBus.notify(AdminEventKey.SettingConfigUrl);
+        eventBus.notify(AdminEventKey.Setting);
         return resultMap;
     }
 

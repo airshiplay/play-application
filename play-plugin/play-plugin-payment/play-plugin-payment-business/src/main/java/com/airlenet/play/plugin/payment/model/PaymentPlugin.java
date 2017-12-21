@@ -15,4 +15,11 @@ public abstract class PaymentPlugin  extends Plugin {
      * @return
      */
     public abstract String getPayGateway();
+
+    /**
+     * 获取LOGO
+     *
+     * @return LOGO
+     */
+    public abstract String getLogo();
 }

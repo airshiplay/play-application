@@ -17,8 +17,8 @@
         <div class="col-xs-12">
             <div class="mailbox-controls">
                 <div class="btn-group btn-group-sm">
-                    <a type="button" class="btn btn-primary" href="#/page/plugin/oauth/user/list">
-                        <i class="fa fa-user"></i> 订单
+                    <a type="button" class="btn btn-primary" href="#/page/plugin/payment/user/list">
+                        <i class="playicon play-order"></i> 订单
                     </a>
                 </div>
                 <a type="button" class="btn btn-warning btn-sm" id="refreshButton">
@@ -60,23 +60,20 @@
         ["domReady"],
         function (domReady) {
             domReady(function () {
-                activeMenu("plugin_oauth");
+                activeMenu("plugin_payment");
                 var grid = $("#grid-app")
                     .bootgrid(
                         {
                             url: base + "/payment/plugin/list",
                             formatters: {
-                                "logo": function (cloumn, row) {
-                                    return "<img src=\"" + (row.logo == null ? '' : row.logo) + "\" width=\"30\" height=\"30\" \/>";
-                                },
                                 "name": function (cloumn, row) {
-                                    return "<span class=''><i class=\"btn logo-"+row.logo+" btn-flat fa fa-"+row.logo+"\"></i>"+row.name+"</span>";
+                                    return "<span class=''><i class=\"btn logo-"+row.logo+" btn-flat playicon play-"+row.logo+"\"></i>"+row.name+"</span>";
                                 },
                                 "status": function (column, row) {
                                     if (!row.isInstalled) {
                                         return "未安装";
                                     }
-                                    if (row.isDisabled) {
+                                    if (row.disabled) {
                                         return "未启用";
                                     }
                                     return "已启用";
@@ -85,10 +82,10 @@
 
                                     var line = "\
 													<div class=\"btn-group btn-group-sm\" data-row-id=\"" + row.id + "\" data-uninstall-url=\"" + row.uninstallUrl + "\"  data-install-url=\"" + row.installUrl + "\">\
-														<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/plugin/oauth/view/" + row.id + "\">\
+														<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/plugin/payment/view/" + row.id + "\">\
 															<i class=\"fa fa-eye\"></i>\
 														</a>\
-														<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/plugin/oauth/setting/" + row.id + "\">\
+														<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/plugin/payment/setting/" + row.id + "\">\
 															<i class=\"glyphicon glyphicon-edit\"></i>\
 														</a>\
 														<a aria-expanded=\"false\" aria-haspopup=\"true\" data-toggle=\"dropdown\" \

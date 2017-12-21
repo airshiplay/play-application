@@ -56,6 +56,16 @@ public class AlipayPlugin extends PaymentPlugin {
     }
 
     /**
+     * 获取LOGO
+     *
+     * @return LOGO
+     */
+    @Override
+    public String getLogo() {
+        return "alipay";
+    }
+
+    /**
      * 参数返回格式，只支持json
      *
      * @return
@@ -104,16 +114,16 @@ public class AlipayPlugin extends PaymentPlugin {
 
     @Override
     public String getInstallUrl() {
-        return null;
+        return "/payment/alipay/install";
     }
 
     @Override
     public String getUninstallUrl() {
-        return null;
+        return "/payment/alipay/uninstall";
     }
 
     @Override
     public String getSettingUrl() {
-        return null;
+        return "/payment/alipay/setting";
     }
 }

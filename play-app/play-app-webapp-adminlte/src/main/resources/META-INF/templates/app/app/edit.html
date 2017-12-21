@@ -42,16 +42,16 @@
 				<!-- /.box-header -->
 				<!-- form start -->
 				<form role="form" class="app-form" action="/app/app/save">
-					<input type="hidden" name="id" value="${app.id}" />
-					<input type="hidden" name="source" value="${app.source}" />
+					<input type="hidden" name="id" th:value="${app.id}" />
+					<input type="hidden" name="source" th:value="${app.source}" />
 					<input type="hidden" name="installedFilePath" value="" />
-					<input type="hidden" name="fileSizeBytes" value="${app.fileSizeBytes?c}" />
+					<input type="hidden" name="fileSizeBytes" th:value="${app.fileSizeBytes}" />
 					<div class="box-body">
 						
 						<div class="form-group">
 							<label for="nameInput">TrackID</label>
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="请输入或点击搜索选择" name="trackId" value="${app.trackId}" data-bv-notempty="true"
+								<input type="text" class="form-control" placeholder="请输入或点击搜索选择" name="trackId" th:value="${app.trackId}" data-bv-notempty="true"
 									data-bv-notempty-message="请填写TrackID" data-bv-integer="true" data-bv-integer-message="请输入整数">
 								<span class="input-group-btn">
 									<button class="btn btn-primary" type="button" id="getStroreAppButton">获取</button>
@@ -66,12 +66,12 @@
 						<div class="form-group">
 							<label for="nameInput">应用名称</label>
 							<input type="text" name="name" class="form-control" id="nameInput" placeholder="请填写应用名称" data-bv-notempty="true"
-								data-bv-notempty-message="请填写应用名称" value="${app.name}">
+								data-bv-notempty-message="请填写应用名称" th:value="${app.name}">
 						</div>
 						<div class="form-group">
 							<label for="iconInput">应用图标</label>
 							<div class="kv-avatar">
-								<input type="hidden" name="iconPath" value="${app.iconPath}" />
+								<input type="hidden" name="iconPath" th:value="${app.iconPath}" />
 								<input type="file" id="iconInput" class="file-loading" name="file">
 							</div>
 							<p class="help-block">上传的图片最佳大小是160px*160px。</p>
@@ -83,11 +83,11 @@
 						<div class="form-group">
 							<label for="identifierInput">应用标识</label>
 							<input type="text" name="identifier" class="form-control" id="identifierInput" placeholder="根据应用文件自动获取" data-bv-notempty="true"
-								data-bv-notempty-message="请上传应用文件" value="${app.identifier}">
+								data-bv-notempty-message="请上传应用文件" th:value="${app.identifier}">
 						</div>
 						<div class="form-group">
 							<label for="versionInput">应用版本</label>
-							<input type="text" name="version" class="form-control" id="versionInput" placeholder="根据应用文件自动获取" readOnly value="${app.version}">
+							<input type="text" name="version" class="form-control" id="versionInput" placeholder="根据应用文件自动获取" readOnly th:value="${app.version}">
 						</div>
 						<div class="form-group">
 							<label for="imageInput">应用图片</label>

@@ -1,0 +1,220 @@
+<section class="content-header">
+    <h1>
+        支付插件
+        <small>开始管理支付插件</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">支付插件</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="mailbox-controls">
+        <button type="button" class="btn btn-warning btn-sm" onclick="history.back(-1)">
+            <i class="fa fa-reply"></i>
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">配置Payment插件</h3>
+                </div>
+
+                <form role="form" class="app-form" th:action="${plugin.settingUrl}">
+                    <input type="hidden" name="pluginId" th:value="${plugin_config?.pluginId}"/> <input type="hidden"
+                                                                                                        name="id"
+                                                                                                        th:value="${plugin_config?.id}"/>
+                    <div role="form" class="box-body">
+                        <div class="form-group">
+                            <label for="nameInput">Payment插件名称</label> <input type="text" name="name"
+                                                                              class="form-control"
+                                                                              id="nameInput" data-bv-notempty="true"
+                                                                              readonly="readonly"
+                                                                              data-bv-notempty-message=""
+                                                                              placeholder="client_id"
+                                                                              th:value="${plugin?.name}">
+                        </div>
+                        <div class="form-group">
+                            <label>状态</label>
+                            <div class="input-group radio">
+                                <label> <input type="radio" value="true"
+                                               th:checked="${plugin_config==null?false:plugin_config?.disabled}"
+                                               name="disabled">禁用
+                                </label> &nbsp; &nbsp; <label> <input type="radio" value="false" name="disabled"
+                                                                      th:checked="${plugin_config==null?false:!plugin_config?.disabled}">启用
+                            </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="APPIDInput"><span data-toggle="tooltip" title="客户端ID">客户端ID</span></label>
+                            <input type="text" name="attributes['APPID']"
+                                   class="form-control" id="APPIDInput"
+                                   data-bv-notempty="true"
+                                   placeholder="未填写APPID"
+                                   th:value="${plugin_config?.attributes==null?'':plugin_config?.attributes['APPID']}">
+                        </div>
+                        <div class="form-group">
+                            <label for="APP_SECRETInput"><span data-toggle="tooltip"
+                                                               title="AppSecret是APPID对应的接口密码，用于获取接口调用凭证access_token时使用">AppSecret</span></label>
+                            <input type="text"
+                                   name="attributes['APP_SECRET']"
+                                   class="form-control"
+                                   id="APP_SECRETInput"
+                                   placeholder="未填写AppSecret"
+                                   th:value="${plugin_config?.attributes==null?'':plugin_config?.attributes['APP_SECRET']}">
+                        </div>
+                        <div class="form-group">
+                            <label for="mch_idInput"><span data-toggle="tooltip"
+                                                           title="微信支付商户号:商户申请微信支付后，由微信支付分配的商户收款账号">微信支付商户号</span></label>
+                            <input type="text"
+                                   name="attributes['mch_id']"
+                                   class="form-control"
+                                   id="mch_idInput"
+                                   placeholder="未填写mch_id"
+                                   th:value="${plugin_config?.attributes==null?'':plugin_config?.attributes['mch_id']}">
+                        </div>
+                        <div class="form-group">
+                            <label for="API_KEYInput"><span data-toggle="tooltip"
+                                                            title="交易过程生成签名的密钥，仅保留在商户系统和微信支付后台，不会在网络中传播。商户妥善保管该Key，切勿在网络中传输，不能在其他客户端中存储，保证key不会被泄漏。商户可根据邮件提示登录微信商户平台进行设置。也可按以下路径设置：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置">签名密钥</span></label>
+                            <input type="text"
+                                   name="attributes['API_KEY']"
+                                   class="form-control"
+                                   id="API_KEYInput"
+                                   placeholder="未填写API_KEY"
+                                   th:value="${plugin_config?.attributes==null?'':plugin_config?.attributes['API_KEY']}">
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-default"
+                                onclick="location.href='#/page/plugin/oauth/list'">返回列表
+                        </button>
+
+                        <div class="btn-group pull-right">
+                            <button type="button" th:data-plugin-id="${plugin.id}"
+                                    th:data-install-url="${plugin.installUrl}"
+                                    th:data-uninstall-url="${plugin.uninstallUrl}"
+                                    th:text="@{(${plugin_config?.pluginId==null} ? '安装' : '卸载')}"
+                                    th:id="@{(${plugin_config?.pluginId==null} ? 'install' : 'uninstall')}"
+                                    class="btn btn-warning">
+                            </button>
+                            <button type="submit" class="btn btn-primary"
+                                    th:disabled="${plugin_config?.pluginId==null}">
+                                保存
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    require(["domReady", "fileinputzh"], function (domReady) {
+        domReady(function () {
+            activeMenu("plugin_payment");
+            $("#install").on(
+                "click",
+                function () {
+                    var app_id = $(this).data("plugin-id");
+                    var url = $(this).data("install-url");
+                    $.post(base + url, {
+                        ids: [app_id]
+                    }, function (resp) {
+                        if (resp.success) {
+                            $.alert({
+                                title: false,
+                                content: "操作成功",
+                                confirmButton: "关闭",
+                                confirm: function () {
+                                    window.location.reload();
+                                },
+                            });
+                        } else {
+                            $.alert({
+                                title: false,
+                                content: resp.msg,
+                                confirmButton: "关闭"
+                            });
+                        }
+                    }, "json");
+                });
+            $("#uninstall").on(
+                "click",
+                function () {
+                    var app_id = $(this).data("plugin-id");
+                    var url = $(this).data("uninstall-url");
+                    $.confirm({
+                        title: "提示",
+                        content: "确定删除配置?",
+                        confirmButton: "确定",
+                        cancelButton: "关闭",
+                        icon: 'fa fa-warning',
+                        confirmButtonClass: 'btn-warning',
+                        animation: 'zoom',
+                        confirm: function () {
+                            $.post(base + url, {
+                                ids: [app_id]
+                            }, function (resp) {
+                                if (resp.success) {
+                                    $.alert({
+                                        title: false,
+                                        content: "操作成功",
+                                        confirmButton: "关闭",
+                                        confirm: function () {
+                                            window.location.reload();
+                                        },
+                                    });
+
+                                } else {
+                                    $.alert({
+                                        title: false,
+                                        content: resp.msg,
+                                        confirmButton: "关闭"
+                                    });
+                                }
+                            }, "json");
+                        }
+                    });
+                });
+
+            var $form = $(".app-form");
+
+            $(".app-form")
+                .bootstrapValidator()
+                .on(
+                    'success.form.bv',
+                    function (e) {
+                        e.preventDefault();
+
+                        var $form = $(e.target);
+
+                        var bv = $form.data('bootstrapValidator');
+
+                        $.post(
+                            $form.attr('action'),
+                            $form.serialize(),
+                            function (result) {
+
+                                if (result.success) {
+                                    $.alert({
+                                        title: false,
+                                        content: "保存成功",
+                                        confirmButton: "返回列表",
+                                        confirm: function () {
+                                            location.href = "#/page/plugin/payment/list";
+                                        }
+                                    });
+
+                                } else {
+
+                                    $form.bootstrapValidator(
+                                        'disableSubmitButtons',
+                                        false);
+                                }
+                            }, 'json');
+                    });
+        });
+    });
+</script>

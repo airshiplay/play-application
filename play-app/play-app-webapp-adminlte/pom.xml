@@ -11,7 +11,7 @@
     <dependencies>
         <dependency>
             <groupId>com.airlenet.play.app</groupId>
-            <artifactId>play-app-business</artifactId>
+            <artifactId>play-app-webapp</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

@@ -4,6 +4,7 @@ import com.airlenet.play.plugin.payment.model.PaymentPlugin;
 import com.airlenet.play.plugin.payment.service.PaymentPluginService;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

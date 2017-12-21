@@ -24,15 +24,16 @@ public class AdminPaymentPluginController {
         PaymentPlugin plugin = paymentService.getPaymentPlugin(paymentPluginId);
         model.addAttribute("plugin", plugin);
         model.addAttribute("plugin_config", plugin.getPluginConfig());
-        return "classpath:/plugin/payment/view";
+
+        return "classpath:/plugin/payment/"+plugin.getName()+"View";
     }
 
-    @RequestMapping("/setting/{oauthPluginId}")
+    @RequestMapping("/setting/{paymentPluginId}")
     public String install(Model model, @PathVariable String paymentPluginId) {
         PaymentPlugin plugin = paymentService.getPaymentPlugin(paymentPluginId);
         model.addAttribute("plugin", plugin);
         model.addAttribute("plugin_config", plugin.getPluginConfig());
-        return "classpath:/plugin/payment/setting";
+        return "classpath:/plugin/payment/"+plugin.getName()+"Setting";
     }
 
 }

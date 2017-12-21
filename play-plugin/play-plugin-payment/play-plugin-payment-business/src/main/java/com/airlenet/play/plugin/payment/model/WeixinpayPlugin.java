@@ -39,7 +39,7 @@ public class WeixinpayPlugin extends PaymentPlugin{
     }
 
     /**
-     * 交易过程生成签名的密钥，仅保留在商户系统和微信支付后台，不会在网络中传播。商户妥善保管该Key，切勿在网络中传输，不能在其他客户端中存储，保证key不会被泄漏。商户可根据邮件提示登录微信商户平台进行设置。也可按一下路径设置：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置
+     * 交易过程生成签名的密钥，仅保留在商户系统和微信支付后台，不会在网络中传播。商户妥善保管该Key，切勿在网络中传输，不能在其他客户端中存储，保证key不会被泄漏。商户可根据邮件提示登录微信商户平台进行设置。也可按以下路径设置：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置
      * @return
      */
     public String getApiKey() {
@@ -65,6 +65,16 @@ public class WeixinpayPlugin extends PaymentPlugin{
         return "https://api.mch.weixin.qq.com";
     }
 
+    /**
+     * 获取LOGO
+     *
+     * @return LOGO
+     */
+    @Override
+    public String getLogo() {
+        return "weixinzhifu";
+    }
+
     @Override
     public String getName() {
         return "weixinpay";
@@ -72,12 +82,12 @@ public class WeixinpayPlugin extends PaymentPlugin{
 
     @Override
     public String getVersion() {
-        return null;
+        return "1.0.0";
     }
 
     @Override
     public String getAuthor() {
-        return null;
+        return "airlenet";
     }
 
     @Override
@@ -87,16 +97,16 @@ public class WeixinpayPlugin extends PaymentPlugin{
 
     @Override
     public String getInstallUrl() {
-        return null;
+        return "/payment/weixinpay/install";
     }
 
     @Override
     public String getUninstallUrl() {
-        return null;
+        return "/payment/weixinpay/uninstall";
     }
 
     @Override
     public String getSettingUrl() {
-        return null;
+        return "/payment/weixinpay/setting";
     }
 }

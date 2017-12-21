@@ -6,6 +6,7 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,12 +14,13 @@ import org.springframework.stereotype.Service;
  * @version 2017-12-20
  */
 @Service
-public class AlipayPluginService extends PaymentPluginService {
+public class AlipayPluginService {
     private AlipayClient alipayClient;
 
+    @Autowired
+    private AlipayPlugin alipayPlugin;
     public AlipayClient getAlipayClient() {
         if(alipayClient==null){
-            AlipayPlugin alipayPlugin =(AlipayPlugin) getPaymentPlugin("alipayPlugin");
             alipayClient= new DefaultAlipayClient(alipayPlugin.getPayGateway(),alipayPlugin.getAppId(),alipayPlugin.getAppPrivateKey(),alipayPlugin.getFormat(),
                     alipayPlugin.getCharset(),alipayPlugin.getAlipayPublicKey(),alipayPlugin.getSignType());
         }
@@ -28,12 +30,10 @@ public class AlipayPluginService extends PaymentPluginService {
     public void updateAlipayClient(){
         if(alipayClient!=null){
             synchronized (alipayClient){
-                AlipayPlugin alipayPlugin =(AlipayPlugin) getPaymentPlugin("alipayPlugin");
                 alipayClient= new DefaultAlipayClient(alipayPlugin.getPayGateway(),alipayPlugin.getAppId(),alipayPlugin.getAppPrivateKey(),alipayPlugin.getFormat(),
                         alipayPlugin.getCharset(),alipayPlugin.getAlipayPublicKey(),alipayPlugin.getSignType());
             }
         }else{
-            AlipayPlugin alipayPlugin =(AlipayPlugin) getPaymentPlugin("alipayPlugin");
             alipayClient= new DefaultAlipayClient(alipayPlugin.getPayGateway(),alipayPlugin.getAppId(),alipayPlugin.getAppPrivateKey(),alipayPlugin.getFormat(),
                     alipayPlugin.getCharset(),alipayPlugin.getAlipayPublicKey(),alipayPlugin.getSignType());
         }

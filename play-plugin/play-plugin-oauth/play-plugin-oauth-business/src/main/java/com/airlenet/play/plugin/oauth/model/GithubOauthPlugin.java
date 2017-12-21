@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.airlenet.play.main.service.SettingEntityService;
+import com.airlenet.play.main.util.AdminEventKey;
 import com.airlenet.play.plugin.oauth.service.OauthUserService;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -18,6 +19,9 @@ import org.springframework.util.Assert;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.SimpleType;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
+import reactor.bus.selector.Selectors;
 
 import javax.annotation.PostConstruct;
 
@@ -40,6 +44,8 @@ public class GithubOauthPlugin extends OauthPlugin {
 
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private EventBus eventBus;
 
     @PostConstruct
     public void PostConstruct(){
@@ -47,6 +53,12 @@ public class GithubOauthPlugin extends OauthPlugin {
         if(configUrl!=null){
             this.siteUrl = configUrl;
         }
+        eventBus.on(Selectors.$(AdminEventKey.SettingConfigUrl), (Event<Void> ev) -> {
+           String  a = settingEntityService.get().getConfigUrl();
+            if(a!=null){
+                this.siteUrl = a;
+            }
+        });
     }
     /**
      * 获取LOGO

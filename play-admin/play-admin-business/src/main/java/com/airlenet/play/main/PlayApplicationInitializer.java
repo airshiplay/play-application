@@ -17,6 +17,7 @@ import com.airlenet.play.main.InitDataTools;
 import com.airlenet.security.PlayPasswordService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import reactor.bus.EventBus;
 
 import java.util.Locale;
 
@@ -91,7 +92,7 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 //			MenuEntity userManagement = tools.createMenuByParent("用户管理", "center_user_management", "fa fa-users", null, null, sortNo++, null);
             tools.createMenuByParent("用户列表", "center_member_list", "fa fa-user", "page/center/user/list", null, sortNo++, systemManagement);
             tools.createMenuByParent("组织机构", "center_org_list", "fa fa-sitemap", "page/center/org/list", null, sortNo++, systemManagement);
-            MenuEntity roleSetting = tools.createMenuByParent("角色权限", "center_role_list", "fa fa-gavel", "page/center/role/list", null, sortNo++, systemManagement);
+            MenuEntity roleSetting = tools.createMenuByParent("角色权限", "center_role_list", "playicon play-role1", "page/center/role/list", null, sortNo++, systemManagement);
             tools.createPemission(roleSetting, AuthorityEntity.PermissionType.page, "角色列表", "page:sys:role:read");
 
             MenuEntity menuSetting = tools.createMenuByParent("菜单管理", "center_menu_management", "fa fa-navicon", "page/center/menu/list", null, sortNo++, systemManagement);

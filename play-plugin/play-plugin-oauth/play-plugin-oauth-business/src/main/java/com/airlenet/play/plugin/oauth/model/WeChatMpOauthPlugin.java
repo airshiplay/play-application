@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.airlenet.play.main.service.SettingEntityService;
+import com.airlenet.play.main.util.AdminEventKey;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,9 @@ import com.airlenet.play.plugin.oauth.service.OauthUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.SimpleType;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
+import reactor.bus.selector.Selectors;
 
 import javax.annotation.PostConstruct;
 
@@ -33,17 +37,24 @@ public class WeChatMpOauthPlugin extends OauthPlugin {
     private OauthUserService oauthUserService;
 
     @Autowired
-    private SettingEntityService settingEntityService;
-
-    @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private SettingEntityService settingEntityService;
+    @Autowired
+    private EventBus eventBus;
     @PostConstruct
     public void PostConstruct(){
         String configUrl = settingEntityService.get().getConfigUrl();
         if(configUrl!=null){
             this.siteUrl = configUrl;
         }
+        eventBus.on(Selectors.$(AdminEventKey.SettingConfigUrl), (Event<Void> ev) -> {
+            String  a = settingEntityService.get().getConfigUrl();
+            if(a!=null){
+                this.siteUrl = a;
+            }
+        });
     }
     /**
      * 获取LOGO

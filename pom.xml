@@ -21,6 +21,9 @@
         <querydsl.version>4.1.1</querydsl.version>
         <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
         <oltu.version>1.0.2</oltu.version>
+        <rxjava.version>1.3.4</rxjava.version>
+        <rxjava2.version>2.1.7</rxjava2.version>
+        <reactor.version>2.0.8.RELEASE</reactor.version>
     </properties>
 
     <modules>
@@ -30,23 +33,16 @@
         <module>play-cms</module>
         <module>play-maven-plugin</module>
         <module>play-shop</module>
-         <module>play-wechat</module>
+        <module>play-wechat</module>
         <module>play-oauth2</module>
         <module>play-website</module>
         <module>min-application</module>
         <module>play-blog</module>
         <module>play-ui</module>
         <module>play-vendor</module>
-         <!--<module>play-im</module>-->
-        <!--<module>play-oauth2-business</module>-->
-        <!--<module>play-oauth2-webapp-bootstrap</module>-->
-        <!--<module>play-plugin-business</module>-->
-         <module>play-plugin</module>
-        <!--<module>play-plugin-oauth</module>-->
-        <!--<module>play-plugin-webapp-bootstrap-oauth</module>-->
-
-        <!--<module>play-plugin-business-pay</module>-->
-        <!--<module>play-plugin-webapp-bootstrap-pay</module>-->
+        <!--<module>play-im</module>-->
+        <module>play-plugin</module>
+        <module>play-reactor</module>
 
     </modules>
     <dependencyManagement>
@@ -70,6 +66,21 @@
                 <groupId>com.airlenet</groupId>
                 <artifactId>play-bom</artifactId>
                 <version>${play.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.reactivex.rxjava2</groupId>
+                <artifactId>rxjava</artifactId>
+                <version>${rxjava2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.reactivex</groupId>
+                <artifactId>rxjava</artifactId>
+                <version>${rxjava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-bus</artifactId>
+                <version>${reactor.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

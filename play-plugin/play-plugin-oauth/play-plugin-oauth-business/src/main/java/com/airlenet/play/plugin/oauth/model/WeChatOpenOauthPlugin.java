@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.airlenet.play.main.service.SettingEntityService;
+import com.airlenet.play.main.util.AdminEventKey;
 import com.airlenet.play.plugin.oauth.service.OauthUserService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,11 @@ import org.springframework.util.Assert;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.SimpleType;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
+import reactor.bus.selector.Selectors;
+
+import javax.annotation.PostConstruct;
 
 /**
  * https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=098bc4192646af00366bd95987106f6fc9bc5085&lang=zh_CN
@@ -31,7 +38,23 @@ public class WeChatOpenOauthPlugin extends OauthPlugin {
 
     @Autowired
     private ObjectMapper objectMapper;
-
+    @Autowired
+    private SettingEntityService settingEntityService;
+    @Autowired
+    private EventBus eventBus;
+    @PostConstruct
+    public void PostConstruct(){
+        String configUrl = settingEntityService.get().getConfigUrl();
+        if(configUrl!=null){
+            this.siteUrl = configUrl;
+        }
+        eventBus.on(Selectors.$(AdminEventKey.SettingConfigUrl), (Event<Void> ev) -> {
+            String  a = settingEntityService.get().getConfigUrl();
+            if(a!=null){
+                this.siteUrl = a;
+            }
+        });
+    }
     /**
      * 获取LOGO
      *

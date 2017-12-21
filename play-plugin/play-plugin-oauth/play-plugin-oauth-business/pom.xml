@@ -20,10 +20,16 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.airlenet.play</groupId>
+            <artifactId>play-reactor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.2</version>
         </dependency>
+
     </dependencies>
 
     <build>

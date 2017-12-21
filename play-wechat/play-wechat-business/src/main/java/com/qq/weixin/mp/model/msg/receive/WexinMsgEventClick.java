@@ -12,7 +12,7 @@ import org.simpleframework.xml.Root;
  * <CreateTime>123456789</CreateTime>
  * <MsgType><![CDATA[event]]></MsgType>
  * <Event><![CDATA[CLICK]]></Event>
- * <EventKey><![CDATA[EVENTKEY]]></EventKey>
+ * <AdminEventKey><![CDATA[EVENTKEY]]></AdminEventKey>
  * </xml>
  *
  * </pre>
@@ -21,7 +21,7 @@ import org.simpleframework.xml.Root;
  */
 @Root(name = "xml")
 public class WexinMsgEventClick extends WexinMsgFactory.WechatMsgParent {
-    @Element(name = "EventKey", required = false)
+    @Element(name = "AdminEventKey", required = false)
     private String eventKey;
 
     public String getEventKey() {

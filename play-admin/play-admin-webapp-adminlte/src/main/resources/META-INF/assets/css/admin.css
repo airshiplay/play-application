@@ -47,3 +47,9 @@ div.required .control-label:not(span):before, td.required:before {
 .logo-github {
     color: #444444;
 }
+.logo-alipay {
+    color:#1674B0;
+}
+.logo-weixinzhifu{
+    color: #44AA3C;
+}

@@ -20,7 +20,7 @@ import org.simpleframework.xml.Root;
  * <CreateTime>123456789</CreateTime>
  * <MsgType><![CDATA[event]]></MsgType>
  * <Event><![CDATA[subscribe]]></Event>
- * <EventKey><![CDATA[qrscene_123123]]></EventKey>
+ * <AdminEventKey><![CDATA[qrscene_123123]]></AdminEventKey>
  * <Ticket><![CDATA[TICKET]]></Ticket>
  * </xml>
  * </code>
@@ -32,7 +32,7 @@ import org.simpleframework.xml.Root;
  * <CreateTime>123456789</CreateTime>
  * <MsgType><![CDATA[event]]></MsgType>
  * <Event><![CDATA[SCAN]]></Event>
- * <EventKey><![CDATA[SCENE_VALUE]]></EventKey>
+ * <AdminEventKey><![CDATA[SCENE_VALUE]]></AdminEventKey>
  * <Ticket><![CDATA[TICKET]]></Ticket>
  * </xml>
  * </code>
@@ -41,7 +41,7 @@ import org.simpleframework.xml.Root;
  */
 @Root(name = "xml")
 public class WexinMsgEventSubscribe extends WexinMsgFactory.WechatMsgParent {
-    @Element(name = "EventKey", required = false)
+    @Element(name = "AdminEventKey", required = false)
     private String eventKey;
     @Element(name = "Ticket", required = false)
     private String ticket;

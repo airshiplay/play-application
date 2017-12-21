@@ -13,7 +13,7 @@ import java.util.*;
  * @author airlenet
  * @version 2017-12-19
  */
-@Service
+@Service()
 public class PaymentPluginService {
     @Autowired
     private Map<String, PaymentPlugin> paymentPluginMap = new HashMap<>();

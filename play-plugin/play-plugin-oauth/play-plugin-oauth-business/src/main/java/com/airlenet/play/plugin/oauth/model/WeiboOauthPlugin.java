@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.airlenet.play.main.service.SettingEntityService;
+import com.airlenet.play.main.util.AdminEventKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.SimpleType;
 import com.airlenet.play.plugin.oauth.service.OauthUserService;
+import reactor.bus.Event;
+import reactor.bus.EventBus;
+import reactor.bus.selector.Selectors;
+
+import javax.annotation.PostConstruct;
 
 /**
  * http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%
@@ -33,7 +40,23 @@ public class WeiboOauthPlugin extends OauthPlugin {
 
     @Value("${info.siteUrl?:http://www.airlenet.com}")
     private String siteUrl;
-
+    @Autowired
+    private SettingEntityService settingEntityService;
+    @Autowired
+    private EventBus eventBus;
+    @PostConstruct
+    public void PostConstruct(){
+        String configUrl = settingEntityService.get().getConfigUrl();
+        if(configUrl!=null){
+            this.siteUrl = configUrl;
+        }
+        eventBus.on(Selectors.$(AdminEventKey.SettingConfigUrl), (Event<Void> ev) -> {
+            String  a = settingEntityService.get().getConfigUrl();
+            if(a!=null){
+                this.siteUrl = a;
+            }
+        });
+    }
     /**
      * 获取LOGO
      *
