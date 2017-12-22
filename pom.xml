@@ -129,6 +129,8 @@
                 <version>0.0.5</version>
                 <configuration>
                     <mavenVersion>3.5.0</mavenVersion>
+                    <verifyDownload>true</verifyDownload>
+                    <checksumAlgorithm>MD5</checksumAlgorithm>
                 </configuration>
             </plugin>
         </plugins>

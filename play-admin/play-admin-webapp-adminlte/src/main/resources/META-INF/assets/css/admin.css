@@ -53,3 +53,21 @@ div.required .control-label:not(span):before, td.required:before {
 .logo-weixinzhifu{
     color: #44AA3C;
 }
+.treeview-menu>li>a>.playicon{
+    width: 20px;
+}
+.dropdown-menu>li>a>.playicon{
+    margin-right: 10px;
+}
+.kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+}
+
+.kv-avatar .file-input {
+    display: table-cell;
+    max-width: 220px;
+}

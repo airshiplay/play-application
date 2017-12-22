@@ -1,4 +1,3 @@
-<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/bootstrap-fileinput/4.3.3/css/fileinput.min.css">
 <style>
 .kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {
 	margin: 0;
@@ -25,7 +24,7 @@
 		<li><a href="#/page/app/app/list">
 				<i class="fa fa-cloud"></i>我的应用
 			</a></li>
-		<li class="active">${app.name}</li>
+		<li class="active" th:text="${app.name}"></li>
 	</ol>
 </section>
 
@@ -37,7 +36,7 @@
 
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">${app.name}</h3>
+					<h3 class="box-title" th:text="${app.name}"></h3>
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
@@ -97,7 +96,7 @@
 						</div>
 						<div class="form-group">
 							<label for="descriptionInput">应用描述</label>
-							<textarea name="description" class="form-control" id="descriptionInput" rows="10">${app.description}</textarea>
+							<textarea name="description" class="form-control" id="descriptionInput" rows="10" th:text="${app.description}"></textarea>
 						</div>
 					</div>
 					<!-- /.box-body -->
@@ -112,11 +111,11 @@
 	</div>
 </section>
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
 	require([ "domReady", "fileinputzh" ], function(domReady) {
 		domReady(function() {
 			activeMenu("app_list");
-
 			var $form = $(".app-form");
 			
 			var $fileInput = $("#fileInput");
@@ -156,7 +155,7 @@
 				alert(msg);
 			});
 
-			var iconImage = "${app.iconPath}";
+			var iconImage = [[${app.iconPath}]];
 			var $iconInput = $("#iconInput");
 			$iconInput.fileinput({
 				overwriteInitial : true,
@@ -178,12 +177,10 @@
 			}).on('fileuploaded', function(event, data, previewId, index) {
 				response = data.response;
 				if (response.success) {
-					
 					$form.find("input[name=iconPath]").val(response.urls);
 				}
 			});
-
-			var appPhotos = [<#list app.photos as photo><#if photo_index==0>"${photo}"<#else>,"${photo}"</#if></#list>];
+			var appPhotos = [[${app.photos}]];
 			var appPhotosConfig = [];
 			if(appPhotos) {
 				for(var i in appPhotos) {
@@ -260,11 +257,28 @@
 								$form.find("input[name=fileSizeBytes]").val(app.fileSizeBytes);
 
 								$form.find("input[name=iconPath]").val(app.artworkUrl100);
-								$(".kv-avatar img").attr("src", app.artworkUrl100);
-								
-								////////////
+                                $(".kv-avatar img").attr("src", app.artworkUrl100);
 
-								//////////////
+                                var screenshotUrls = app.screenshotUrls.join();
+                                $form.find("input[name=photos]").val(screenshotUrls);
+
+                                $form.find("textarea[name=description]").val(app.description);
+
+                                var screenshotUrlsConfig = [];
+                                if(screenshotUrls) {
+                                    screenshotUrls = screenshotUrls.split(",");
+                                    for(var i in screenshotUrls) {
+                                        screenshotUrls[i] = "<img src='"+screenshotUrls[i]+"' class='file-preview-image img-responsive'>";
+                                        screenshotUrlsConfig[i] = "" + i;
+                                    }
+                                } else {
+                                    screenshotUrls = [];
+                                }
+
+                                $imageInput.fileinput('refresh', {
+                                    initialPreview : screenshotUrls,
+                                    initialPreviewConfig: screenshotUrlsConfig
+                                });
 							} else {
 								$.alert({
 									title : false,
@@ -373,5 +387,5 @@
 				}, 'json');
 			});
 		});
-	});
+	});/*]]>*/
 </script>

@@ -110,9 +110,8 @@
 										<span class=\"ion-arrow-down-b\"></span>\
 									</a>\
 									<ul class=\"dropdown-menu pull-right\">\
-										<li><a href=\"javascript:;\" class=\"command-user\"><i class=\"glyphicon glyphicon-user\"></i>用户</a></li>\
-										<li><a href=\"javascript:;\" class=\"command-addUser\"><i class=\"fa fa-user-plus\"></i>添加用户</a></li>\
-										<li><a href=\"javascript:;\" class=\"command-auth\"><i class=\"glyphicon glyphicon-menu-hamburger\"></i>权限</a></li>\
+										<li><a href=\"javascript:;\" class=\"command-user\"><i class=\"playicon play-user-list\"></i>用户管理</a></li>\
+										<li><a href=\"javascript:;\" class=\"command-auth\"><i class=\"playicon play-setting-permissions\"></i>权限设置</a></li>\
 										<li class=\"divider\" role=\"separator\"></li>\
 										<li><a href=\"javascript:;\" class=\"command-delete\"><i class=\"glyphicon glyphicon-remove\"></i>移除</a></li>\
 									</ul>\
@@ -120,6 +119,7 @@
 											}
 										}
 									});
+//										<li><a href=\"javascript:;\" class=\"command-addUser\"><i class=\"fa fa-user-plus playicon play-permissions-user\"></i>添加用户</a></li>\
 
 					var refreshGrid = function() {
 						grid.bootgrid("reload")
@@ -182,25 +182,6 @@
 							$.confirm({
 								title : "角色（"+roleName+"）用户列表",
 								content : "url:" + base + "/center/role/"+app_id+"/roleUserList",
-								columnClass : "col-md-10 col-md-offset-1",
-								confirmButton : "确定",
-								cancelButton : "取消",
-								confirmButtonClass : 'btn-primary',
-								cancelButtonClass : 'btn-danger',
-								confirm : function() {
-									refreshGrid();
-									return true;
-								}
-							});
-						});
-						
-						$table.find(".command-addUser").on("click", function(e) {
-							console.log("");
-							var app_id = $(this).closest(".btn-group").data("row-id");
-							var roleName = $(this).closest(".btn-group").data("row-name");
-							$.confirm({
-								title : "角色（"+roleName+"）待添加用户列表",
-								content : "url:" + base + "/center/role/"+app_id+"/roleAddUserList",
 								columnClass : "col-md-10 col-md-offset-1",
 								confirmButton : "确定",
 								cancelButton : "取消",

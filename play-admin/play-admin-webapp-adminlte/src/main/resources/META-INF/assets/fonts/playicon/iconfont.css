@@ -8,6 +8,7 @@
 }
 
 .playicon {
+  display: inline-block;
   font-family:"playicon" !important;
   font-size:inherit;
   font-style:normal;

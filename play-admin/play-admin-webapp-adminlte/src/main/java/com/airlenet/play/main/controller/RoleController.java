@@ -49,6 +49,7 @@ public class RoleController {
     @RequestMapping(value = "/{roleId}/roleUserList", method = RequestMethod.GET)
     public String getRoleUserListView(Model model, @PathVariable Long roleId) {
         model.addAttribute("roleId", roleId);
+        model.addAttribute("role", roleEntityService.findOne(roleId));
         return "classpath:/admin/role/roleUserListDialog";
     }
 

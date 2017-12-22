@@ -266,7 +266,7 @@
 			                  success:function(data){
 			                	 console.log(data);
 			                	 var $box=$dataform.find(".box-body");
-			                	if(data.content.length>0){
+			                	if(data.content&&data.content.length>0){
 			                		$dataform.find(":input#menuId").val(data.content[0].menu.id);
 			                		$dataform.bootstrapValidator('disableSubmitButtons', false);
 			                		

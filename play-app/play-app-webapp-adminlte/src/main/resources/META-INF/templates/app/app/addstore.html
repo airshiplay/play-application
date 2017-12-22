@@ -261,6 +261,27 @@
 
 								$form.find("input[name=iconPath]").val(app.artworkUrl100);
 								$(".kv-avatar img").attr("src", app.artworkUrl100);
+
+                                var screenshotUrls = app.screenshotUrls.join();
+                                $form.find("input[name=photos]").val(screenshotUrls);
+
+                                $form.find("textarea[name=description]").val(app.description);
+
+                                var screenshotUrlsConfig = [];
+                                if(screenshotUrls) {
+                                    screenshotUrls = screenshotUrls.split(",");
+                                    for(var i in screenshotUrls) {
+                                        screenshotUrls[i] = "<img src='"+screenshotUrls[i]+"' class='file-preview-image img-responsive'>";
+                                        screenshotUrlsConfig[i] = "" + i;
+                                    }
+                                } else {
+                                    screenshotUrls = [];
+                                }
+
+                                $imageInput.fileinput('refresh', {
+                                    initialPreview : screenshotUrls,
+                                    initialPreviewConfig: screenshotUrlsConfig
+                                });
 							} else {
 								$.alert({
 									title : false,
