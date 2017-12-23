@@ -108,7 +108,7 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
             tools.createPemission(paramSetting, AuthorityEntity.PermissionType.page, "参数查询", "page:sys:param:read");
             tools.createPemission(paramSetting, AuthorityEntity.PermissionType.page, "参数更新", "page:sys:param:update");
 
-            MenuEntity businessManagement = tools.createMenuByParent("业务管理", "business_management", "fa fa-plug", null, null, sortNo++, null);
+            MenuEntity businessManagement = tools.createMenuByParent("业务管理", "business_management", "playicon play-yewuguanli", null, null, sortNo++, null);
             tools.createMenuByParent("会员管理", "business_member", "fa fa-user", "page/center/member/list", null, sortNo++, businessManagement);
             tools.createMenuByParent("会员等级", "business_member_rank", "fa fa-star", "page/center/memberRank/memberRankList", null, sortNo++, businessManagement);
 ////////////////////
