@@ -65,6 +65,11 @@ public class RoleController {
         return "classpath:/admin/role/authListDialog";
     }
 
+    @RequestMapping(value = "/{roleId}/permission/list", method = RequestMethod.GET)
+    public String rolePermissionList(Model model, @PathVariable Long roleId) {
+        model.addAttribute("role", roleEntityService.findOne(roleId));
+        return "classpath:/admin/role/permission/list";
+    }
     /**
      * 角色用户列表
      *

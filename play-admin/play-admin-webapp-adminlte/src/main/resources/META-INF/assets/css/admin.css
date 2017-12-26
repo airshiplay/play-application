@@ -53,7 +53,7 @@ div.required .control-label:not(span):before, td.required:before {
 .logo-weixinzhifu{
     color: #44AA3C;
 }
-.treeview-menu>li>a>.playicon{
+.sidebar-menu>li>a>.playicon, .treeview-menu>li>a>.playicon{
     width: 20px;
 }
 .dropdown-menu>li>a>.playicon{

@@ -46,7 +46,7 @@
                                    data-bv-stringlength="true"
                                    data-bv-stringlength-min="2"
                                    data-bv-stringlength-max="30"
-                                   data-bv-stringlength-message="长度必须在2和30之间" disabled="${(role!=null and role.locked)}"
+                                   data-bv-stringlength-message="长度必须在2和30之间" th:disabled="${(role!=null and role.locked)}"
                                    th:value="${role==null?'':role.code}">
                         </div>
 

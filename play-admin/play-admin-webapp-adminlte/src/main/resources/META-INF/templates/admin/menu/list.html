@@ -40,7 +40,7 @@
 			</div>
 			<div class="box box-primary">
 				<div class="box-body no-padding">
-					<table id="grid-basic" class="table table-condensed table-hover table-striped fancytree-fade-expander">
+					<table id="menu-tree" class="table table-condensed table-hover table-striped fancytree-fade-expander">
 						<colgroup>
 						    <col width="50px"></col>
 						    <col width="*"></col>
@@ -54,7 +54,6 @@
 								<th data-column-id="text">名称</th>
 								
 								<th data-column-id="code">标识</th>
-								<th data-column-id="icon">图标</th>
 								<th data-column-id="sortNo">排序</th>
 								<th data-formatter="commands" data-css-class="command-column" data-width="150px" data-sortable="false" data-align="center"
 									data-header-align="center">操作</th>
@@ -85,32 +84,40 @@
 	require([ "domReady", "fancytree" ], function(domReady) {
 		domReady(function() {
 			activeMenu("center_menu_management");
-			glyph_opts = {
-				    map: {
-				      doc: "glyphicon glyphicon-file",
-				      docOpen: "glyphicon glyphicon-file",
-				      checkbox: "glyphicon glyphicon-unchecked",
-				      checkboxSelected: "glyphicon glyphicon-check",
-				      checkboxUnknown: "glyphicon glyphicon-share",
-				      dragHelper: "glyphicon glyphicon-play",
-				      dropMarker: "glyphicon glyphicon-arrow-right",
-				      error: "glyphicon glyphicon-warning-sign",
-				      expanderClosed: "glyphicon glyphicon-menu-right",
-				      expanderLazy: "glyphicon glyphicon-menu-right",  // glyphicon-plus-sign
-				      expanderOpen: "glyphicon glyphicon-menu-down",  // glyphicon-collapse-down
-				      folder: "glyphicon glyphicon-folder-close",
-				      folderOpen: "glyphicon glyphicon-folder-open",
-				      loading: "glyphicon glyphicon-refresh glyphicon-spin"
-				    }
-			};
-			$("#grid-basic").fancytree({
-				extensions : [ "edit", "glyph", "table" ],
+            glyph_opts = {
+                map: {
+                    doc: "glyphicon glyphicon-file",
+                    docOpen: "glyphicon glyphicon-file",
+                    checkbox: "glyphicon glyphicon-unchecked",
+                    checkboxSelected: "glyphicon glyphicon-check",
+                    checkboxUnknown: "glyphicon glyphicon-share",
+                    dragHelper: "glyphicon glyphicon-play",
+                    dropMarker: "glyphicon glyphicon-arrow-right",
+                    error: "glyphicon glyphicon-warning-sign",
+                    expanderClosed: "glyphicon glyphicon-menu-right",
+                    expanderLazy: "glyphicon glyphicon-menu-right",  // glyphicon-plus-sign
+                    expanderOpen: "glyphicon glyphicon-menu-down",  // glyphicon-collapse-down
+                    folder: "glyphicon glyphicon-folder-close",
+                    folderOpen: "glyphicon glyphicon-folder-open",
+                    loading: "glyphicon glyphicon-refresh glyphicon-spin"
+                }
+            };
+			$("#menu-tree").fancytree({
+				extensions : [ "edit","glyph", "table" ],
 				checkbox : true,
 				glyph: glyph_opts,
 				source : {
 					url : "center/menu/tree",
 					debugDelay : 1000
 				},
+                icon: function(event, data) {
+                    var node = data.node;
+                    if(node.data.iconCls){
+                        return node.data.iconCls;
+					}
+					return "glyphicon glyphicon-menu-right";
+                    // Exit without returning a value: continue with default processing.
+                },
 				table : {					
 					 indentation: 20,      // indent 20px per node level
 				     nodeColumnIdx: 1,     // render the node title into the 2nd column
@@ -124,9 +131,8 @@
 					$tdList.eq(0).html("<input type='checkbox' name='like' value='" + node.key + "'>"+"<span style='padding-left: 5px;'>"+node.getIndexHier()+"</span>");
 					/* $tdList.eq(1).text(node.getIndexHier()); */
 					$tdList.eq(2).text(node.data.code);
-					$tdList.eq(3).html("<span class=\""+node.data.iconCls+"\"></span>");
-                    $tdList.eq(4).text(node.data.sortNo);
-                    $tdList.eq(5).html("\
+                    $tdList.eq(3).text(node.data.sortNo);
+                    $tdList.eq(4).html("\
 								<div class=\"btn-group btn-group-sm\" data-row-id=\""+node.data.id+"\">\
 									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/center/menu/edit/"+node.data.id+"\">\
 										<i class=\"glyphicon glyphicon-edit\"></i>\
@@ -135,7 +141,7 @@
                 }
 			});
 			/* Handle custom checkbox clicks */
-		    $("#grid-basic").delegate("input[name=like]", "click", function(e){
+		    $("#menu-tree").delegate("input[name=like]", "click", function(e){
 		      var node = $.ui.fancytree.getNode(e),
 		         $input = $(e.target);
 		      e.stopPropagation();  // prevent fancytree activate for this row
@@ -153,7 +159,7 @@
 
 			var actionWithSelectedRows = function(action) {
 				console.log("");
-				$("#grid-basic").fancytree("getSelectedNodes");
+				$("#menu-tree").fancytree("getSelectedNodes");
 				$fancytree.getSelectedNodes();
 				var selectedRows = grid.bootgrid("getSelectedRows");
 				if (selectedRows && selectedRows.length > 0) {

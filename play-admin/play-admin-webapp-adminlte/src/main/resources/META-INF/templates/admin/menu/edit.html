@@ -22,11 +22,31 @@
 				</div>
 				<!-- /.box-header -->
 				<!-- form start -->
-				<form role="form" class="user-form" action="/center/menu/save">
-					<input type="hidden" name="id" th:value="${user==null?'':user.id}" />
+				<form role="form" class="menu-form" action="/center/menu/save">
+					<input type="hidden" name="id" th:value="${menu==null?'':menu.id}" />
 					<div class="box-body">
-						<div class="form-group">
-							<label for="textInput">名称</label>
+                        <div class="form-group required">
+                            <label for="iconInput" class="control-label">图标</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i id="iconDisplay" th:class="${menu==null?'':menu.iconCls}"></i></span>
+                                <input type="text" name="iconCls" class="form-control" id="iconInput" placeholder="请填写图标"
+                                       data-bv-notempty="true"
+                                       data-bv-notempty-message="请填写图标"
+                                       data-bv-regexp="true"
+                                       data-bv-regexp-regexp="[a-zA-Z0-9_\.]+"
+                                       data-bv-stringlength="true"
+                                       data-bv-stringlength-min="1"
+                                       data-bv-stringlength-max="20"
+                                       data-bv-stringlength-message="标识长度必须在1和20之间"
+                                       th:value="${menu==null?'':menu.iconCls}">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info btn-flat" onclick="document.getElementById('iconDisplay').setAttribute('class',document.getElementById('iconInput').value)">更新</button>
+                                </span>
+                            </div>
+
+                        </div>
+						<div class="form-group required">
+							<label for="textInput" class="control-label">名称</label>
 							<input type="text" name="text" class="form-control" id="textInput" placeholder="请填写名称" data-bv-notempty="true" data-bv-notempty-message="请填写名称"
 								   data-bv-stringlength="true"
 								   data-bv-stringlength-min="2"
@@ -34,8 +54,8 @@
 								   data-bv-stringlength-message="名称长度必须在2和50之间"
 								   th:value="${menu==null?'':menu.text}">
 						</div>
-						<div class="form-group">
-							<label for="codeInput">标识</label>
+						<div class="form-group required">
+							<label for="codeInput" class="control-label">标识</label>
 							<input type="text" name="code" class="form-control" id="codeInput" placeholder="请填写标识"
 								   data-bv-notempty="true"
 								   data-bv-notempty-message="请填写标识"
@@ -45,32 +65,37 @@
 								   data-bv-stringlength-min="4"
 								   data-bv-stringlength-max="20"
 								   data-bv-stringlength-message="标识长度必须在4和20之间"
+								   th:disabled="${menu!=null}"
 								   th:value="${menu==null?'':menu.code}">
 						</div>
-						<div class="form-group">
-							<label for="emailInput">邮箱</label>
-							<input type="email" name="email" class="form-control" id="emailInput" placeholder="请填写邮箱"
+                        <div class="form-group">
+                            <label for="parentInput">父级菜单</label>
+                            <select id="parentInput" name="parent" class="form-control select2" th:disabled="${menu!=null}">
+                                <option th:if="${menu!=null}" th:value="${menu.parent==null?'':menu.parent.id}" th:text="${menu.parent==null?'':menu.parent.text}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="viewInput">页面路径</label>
+                            <input type="text" name="view" class="form-control" id="viewInput" placeholder="请填写路径"
+                                   data-bv-regexp="true"
+                                   data-bv-regexp-regexp="[a-zA-Z0-9_\.]+"
+                                   th:disabled="${menu!=null}"
+                                   th:value="${menu==null?'':menu.view}">
+                        </div>
+						<div class="form-group required">
+							<label for="sortNoInput" class="control-label">排序</label>
+							<input type="sortNo" name="sortNo" class="form-control" id="sortNoInput" placeholder="请填写排序"
 								   data-bv-regexp="true"
-								   data-bv-regexp-regexp="^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+"
-								   th:value="${user==null?'':user.email}">
-						</div>
-						<div class="form-group">
-							<label for="photoInput">头像</label>
-							<div class="kv-avatar">
-								<input name="photo" type="hidden" value="">
-								<input id="photoInput" name="file" type="file" class="file-loading">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="newPasswordInput">密码</label>
-							<input type="password" name="newPassword" class="form-control" id="newPasswordInput" placeholder="请填写密码" value="">
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="请填写排序"
+								   data-bv-regexp-regexp="^\d+$"
+								   th:value="${menu==null?'':menu.sortNo}">
 						</div>
 					</div>
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-						<button type="button" class="btn btn-default" onclick="location.href='#/page/center/user/list'">返回列表</button>
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/center/menu/list'">返回列表</button>
 						<button type="submit" class="btn btn-primary pull-right">保存</button>
 					</div>
 				</form>
@@ -78,3 +103,41 @@
 		</div>
 	</div>
 </section>
+<script type="text/javascript">
+    require([ "domReady", "select2" ], function(domReady) {
+        domReady(function() {
+            activeMenu("center_menu_management");
+            $(".select2").select2();
+
+
+            $(".menu-form").bootstrapValidator().on('success.form.bv', function(e) {
+                e.preventDefault();
+
+                var $form = $(e.target);
+
+                var bv = $form.data('bootstrapValidator');
+
+                $.post($form.attr('action'), $form.serialize(), function(result) {
+                    if (result.success) {
+                        $.alert({
+                            title : false,
+                            content : "保存成功",
+                            confirmButton : "返回列表",
+                            confirm : function() {
+                                location.href = "#/page/center/menu/list";
+                            }
+                        });
+
+                    } else {
+                        $.alert({
+                            title : false,
+                            content : ""+result.msg+result.exception,
+                            confirmButton : "关闭"
+                        });
+                        $form.bootstrapValidator('disableSubmitButtons', false);
+                    }
+                }, 'json');
+            });
+        });
+    });
+</script>

@@ -4,6 +4,7 @@ import com.airlenet.play.main.entity.RoleEntity;
 import com.airlenet.play.main.repo.RoleEntityRepository;
 import com.airlenet.repo.domain.Tree;
 import com.airlenet.repo.domain.TreeHelper;
+import com.airlenet.repo.domain.TreeImpl;
 import com.airlenet.repo.jpa.HierarchicalEntityService;
 import com.airlenet.play.main.entity.MenuEntity;
 import com.airlenet.play.main.entity.QRoleEntity;
@@ -12,6 +13,8 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 @Service
 public class MenuEntityService extends HierarchicalEntityService<MenuEntity, Long> {
@@ -36,7 +39,10 @@ public class MenuEntityService extends HierarchicalEntityService<MenuEntity, Lon
     @Transactional(readOnly = true,value = "transactionManager")
     public Tree<MenuEntity> getMenuTreeByUserId(Long userId) {
         RoleEntity roleEntity = roleEntityRepository.findOne(QRoleEntity.roleEntity.users.any().id.eq(userId));
-        if (roleEntity.getCode().equals("superadmin")) {
+        if(roleEntity==null){
+            return TreeHelper.toTree(null, new ArrayList<MenuEntity>());
+        }
+        if ("superadmin".equals(roleEntity.getCode())) {
             return findTree(null);
         }
         Tree<MenuEntity> tree = TreeHelper.toTree(null, Lists.newArrayList(roleEntity.getMenus()));

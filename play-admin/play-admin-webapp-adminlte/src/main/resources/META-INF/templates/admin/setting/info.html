@@ -1,190 +1,208 @@
 <section class="content-header">
-	<h1>
-		参数配置 <small>开始管理参数配置</small>
-	</h1>
-	<ol class="breadcrumb">
-		<li><a href="javascript:;">
-				<i class="fa fa-home"></i> 首页
-			</a></li>
-		<li class="active"><a href="#/page/profile">
-				<i class="fa fa-cogs"></i>参数配置
-			</a></li>
-	</ol>
+    <h1>
+        参数配置
+        <small>开始管理参数配置</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#page/center/home"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active"><a href="#/page/profile"><i class="fa fa-cogs"></i>参数配置</a></li>
+    </ol>
 </section>
 <!-- Main content -->
 <section class="content">
 
-	<div class="row">
-		<div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-12">
 
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">网站配置</h3>
-				</div>
-				<!-- /.box-header -->
-				<!-- form start -->
-				<form role="form" class="profile-form" action="/center/setting/save">
-					<input type="hidden" name="id" value="" />
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">网站配置</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" class="profile-form" action="/center/setting/save">
+                    <input type="hidden" name="id" value=""/>
 
-					<div class="nav-tabs-custom" style="box-shadow: none;">
-						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#tab_1">常规</a></li>
-							<li><a data-toggle="tab" href="#tab_2">邮件</a></li>
-							<li class="pull-right"><a class="text-muted" href="javascript:;">
-									<i class="fa fa-gear"></i>
-								</a></li>
-						</ul>
-						<div class="tab-content">
-							<div id="tab_1" class="tab-pane active form-horizontal">
-								<div class="box-body">
+                    <div class="nav-tabs-custom" style="box-shadow: none;">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab_1">常规</a></li>
+                            <li><a data-toggle="tab" href="#tab_2">邮件</a></li>
+                            <li class="pull-right"><a class="text-muted" href="javascript:;">
+                                <i class="fa fa-gear"></i>
+                            </a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab_1" class="tab-pane active form-horizontal">
+                                <div class="box-body">
                                     <div class="form-group">
                                         <label for="languageInput" class="col-sm-2 control-label">默认语言</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="config_default_language" class="form-control" id="languageInput" disabled>
+                                            <input type="text" name="config_default_language" class="form-control"
+                                                   id="languageInput" disabled>
                                         </div>
                                     </div>
-									<div class="form-group required">
-										<label for="siteUrlInput" class="col-sm-2 control-label">网站网址 URL</label>
+                                    <div class="form-group required">
+                                        <label for="siteUrlInput" class="col-sm-2 control-label">网站网址 URL</label>
                                         <div class="col-sm-10">
-										<input type="url" name="config_url" class="form-control" id="siteUrlInput" placeholder="请填写网站网址 URL" data-bv-notempty="true"
-											   data-bv-notempty-message="请填写网站网址 URL" value="">
+                                            <input type="url" name="config_url" class="form-control" id="siteUrlInput"
+                                                   placeholder="请填写网站网址 URL" data-bv-notempty="true"
+                                                   data-bv-notempty-message="请填写网站网址 URL" value="">
                                         </div>
-									</div>
-									<div class="form-group required">
-										<label for="metaTitleInput" class="col-sm-2 control-label">Meta标题</label>
+                                    </div>
+                                    <div class="form-group required">
+                                        <label for="metaTitleInput" class="col-sm-2 control-label">Meta标题</label>
                                         <div class="col-sm-10">
-                                        <input type="text" name="config_meta_title" class="form-control" id="metaTitleInput" placeholder="请填写Meta标题" data-bv-notempty="true"
-                                               data-bv-notempty-message="请填写Meta标题" value=""></div>
-									</div>
-									<div class="form-group">
-										<label for="identifierInput" class="col-sm-2 control-label">Meta Tag 描述</label>
+                                            <input type="text" name="config_meta_title" class="form-control"
+                                                   id="metaTitleInput" placeholder="请填写Meta标题" data-bv-notempty="true"
+                                                   data-bv-notempty-message="请填写Meta标题" value=""></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="identifierInput" class="col-sm-2 control-label">Meta Tag 描述</label>
                                         <div class="col-sm-10">
-										<input type="text" name="config_meta_description" class="form-control" id="identifierInput" placeholder="请填写Meta描述" value=""></div>
-									</div>
-									<div class="form-group">
-										<label for="keywordInput" class="col-sm-2 control-label">Meta Tag 关键字</label>
+                                            <input type="text" name="config_meta_description" class="form-control"
+                                                   id="identifierInput" placeholder="请填写Meta描述" value=""></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="keywordInput" class="col-sm-2 control-label">Meta Tag 关键字</label>
                                         <div class="col-sm-10">
-										<input type="text" name="config_meta_keyword" class="form-control" id="keywordInput" placeholder="请填写Meta关键字" value=""></div>
-									</div>
-									<div class="form-group">
-										<label for="beianInput" class="col-sm-2 control-label">网站备案号</label>
+                                            <input type="text" name="config_meta_keyword" class="form-control"
+                                                   id="keywordInput" placeholder="请填写Meta关键字" value=""></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="beianInput" class="col-sm-2 control-label">网站备案号</label>
                                         <div class="col-sm-10">
-										<input type="text" name="config_miit" class="form-control" id="beianInput" placeholder="请填写网站备案号" value=""></div>
-									</div>
-								</div>
-							</div>
-							<div id="tab_2" class="tab-pane form-horizontal">
-								<div class="box-body">
-									<legend>常规</legend>
-									<div class="form-group">
-										<label for="smtpHostInput" class="col-sm-2 control-label"><span data-toggle="tooltip"  title="如果需要安全链接，则在前面添加'tls://'或者'ssl://'前缀。例如tls://smtp.gmail.com">SMTP 主机</span></label>
-										<div class="col-sm-10">
-										    <input type="text" name="config_mail_smtp_hostname" class="form-control" id="smtpHostInput" placeholder="请填写SMTP 主机" value="">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="smtpUsernameInput" class="col-sm-2 control-label">SMTP 用户名</label>
-										<div class="col-sm-10">
-										<input type="text" name="config_mail_smtp_username" class="form-control" id="smtpUsernameInput" placeholder="请填写SMTP 用户名" value="">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="smtpPasswordInput" class="col-sm-2 control-label"><span data-toggle="tooltip"  title="如果使用gmail邮箱，那么你可能需要建立一个应用的特定密码，访问后面的链接设置：https://security.google.com/settings">SMTP 密码</span></label>
-										<div class="col-sm-10"><input type="text" name="config_mail_smtp_password" class="form-control" id="smtpPasswordInput" placeholder="请填写SMTP 密码" value=""></div>
-									</div>
-									<div class="form-group">
-										<label for="smtpPortInput" class="col-sm-2 control-label">SMTP 端口</label>
-										<div class="col-sm-10"><input type="text" name="config_mail_smtp_port" class="form-control" id="smtpPortInput" placeholder="请填写SMTP 端口" value="25"></div>
-									</div>
-									<div class="form-group">
-										<label for="smtpTimeoutInput" class="col-sm-2 control-label">SMTP 超时</label>
-										<div class="col-sm-10"><input type="text" name="config_mail_smtp_timeout" class="form-control" id="smtpTimeoutInput" placeholder="请填写SMTP 超时" value="5"></div>
-									</div>
-									<legend>邮件提醒</legend>
-									<div class="form-group">
-                                        <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="何时发送提醒电邮">提醒邮件</span></label>
+                                            <input type="text" name="config_miit" class="form-control" id="beianInput"
+                                                   placeholder="请填写网站备案号" value=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab_2" class="tab-pane form-horizontal">
+                                <div class="box-body">
+                                    <legend>常规</legend>
+                                    <div class="form-group">
+                                        <label for="smtpHostInput" class="col-sm-2 control-label"><span
+                                                data-toggle="tooltip"
+                                                title="如果需要安全链接，则在前面添加'tls://'或者'ssl://'前缀。例如tls://smtp.gmail.com">SMTP 主机</span></label>
                                         <div class="col-sm-10">
-                                            <div class="well well-sm" style="height: 150px; overflow: auto;">                       <div class="checkbox">
-                                                <label>                           <input type="checkbox" name="config_mail_alert[]" value="RegisterAccount" checked="checked">
-                                                    注册
-                                                </label>
-                                            </div>
+                                            <input type="text" name="config_mail_smtp_hostname" class="form-control"
+                                                   id="smtpHostInput" placeholder="请填写SMTP 主机" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="smtpUsernameInput" class="col-sm-2 control-label">SMTP 用户名</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="config_mail_smtp_username" class="form-control"
+                                                   id="smtpUsernameInput" placeholder="请填写SMTP 用户名" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="smtpPasswordInput" class="col-sm-2 control-label"><span
+                                                data-toggle="tooltip"
+                                                title="如果使用gmail邮箱，那么你可能需要建立一个应用的特定密码，访问后面的链接设置：https://security.google.com/settings">SMTP 密码</span></label>
+                                        <div class="col-sm-10"><input type="text" name="config_mail_smtp_password"
+                                                                      class="form-control" id="smtpPasswordInput"
+                                                                      placeholder="请填写SMTP 密码" value=""></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="smtpPortInput" class="col-sm-2 control-label">SMTP 端口</label>
+                                        <div class="col-sm-10"><input type="text" name="config_mail_smtp_port"
+                                                                      class="form-control" id="smtpPortInput"
+                                                                      placeholder="请填写SMTP 端口" value="25"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="smtpTimeoutInput" class="col-sm-2 control-label">SMTP 超时</label>
+                                        <div class="col-sm-10"><input type="text" name="config_mail_smtp_timeout"
+                                                                      class="form-control" id="smtpTimeoutInput"
+                                                                      placeholder="请填写SMTP 超时" value="5"></div>
+                                    </div>
+                                    <legend>邮件提醒</legend>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"><span data-toggle="tooltip"
+                                                                                    title="何时发送提醒电邮">提醒邮件</span></label>
+                                        <div class="col-sm-10">
+                                            <div class="well well-sm" style="height: 150px; overflow: auto;">
                                                 <div class="checkbox">
-                                                    <label>                           <input type="checkbox" name="config_mail_alert[]" value="ForgetPassword" checked="checked">
+                                                    <label> <input type="checkbox" name="config_mail_alert[]"
+                                                                   value="RegisterAccount" checked="checked">
+                                                        注册
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label> <input type="checkbox" name="config_mail_alert[]"
+                                                                   value="ForgetPassword" checked="checked">
                                                         忘记密码
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- /.tab-content -->
-					</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
 
-					<div class="box-footer">
-						<button type="submit" class="btn btn-primary pull-right">保存</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary pull-right">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>
 
 <script type="text/javascript">
-	require([ "domReady", "fileinputzh", "select2zh","icheck" ], function(domReady) {
-		domReady(function() {
-			activeMenu("center_parameter_setting");
+    require(["domReady", "fileinputzh", "select2zh", "icheck"], function (domReady) {
+        domReady(function () {
+            activeMenu("center_parameter_setting");
             $("[data-toggle='tooltip']").tooltip();
             $("#smtpEngineInput").select2({
                 placeholder: '---请选择类型---',
-                data:[{id:'mail',text:'Mail'},
-                    {id:'smtp',text:'SMTP'}]
+                data: [{id: 'mail', text: 'Mail'},
+                    {id: 'smtp', text: 'SMTP'}]
             });
             $('input[type="checkbox"]').iCheck({
                 checkboxClass: 'icheckbox_minimal-blue',
                 radioClass: 'iradio_minimal-blue'
             });
-			var $form = $(".profile-form");
+            var $form = $(".profile-form");
 
-			$.get("/center/setting/get",function (result) {
+            $.get("/center/setting/get", function (result) {
                 if (result.success) {
-                    for (var key in result.content)
-                    {
-                        $input=$form.find("[name='"+key+"']");
-                        if($input!=null){
-                            $input.val( result.content[key]);
+                    for (var key in result.content) {
+                        $input = $form.find("[name='" + key + "']");
+                        if ($input != null) {
+                            $input.val(result.content[key]);
                         }
                     }
                 }
             });
-			$form.bootstrapValidator({
-				excluded : [ ':disabled' ]
-			}).on('success.form.bv', function(e) {
-				e.preventDefault();
+            $form.bootstrapValidator({
+                excluded: [':disabled']
+            }).on('success.form.bv', function (e) {
+                e.preventDefault();
 
-				var $form = $(e.target);
+                var $form = $(e.target);
 
-				var bv = $form.data('bootstrapValidator');
+                var bv = $form.data('bootstrapValidator');
 
-				$.post($form.attr('action'), $form.serialize(), function(result) {
-					if (result.success) {
+                $.post($form.attr('action'), $form.serialize(), function (result) {
+                    if (result.success) {
                         $.alert({
-                            title : false,
-                            content : "保存成功",
-                            confirmButton : "确定"
+                            title: false,
+                            content: "保存成功",
+                            confirmButton: "确定"
                         });
-					} else {
+                    } else {
                         $.alert({
-                            title : false,
-                            content : result.msg,
-                            confirmButton : "确定"
+                            title: false,
+                            content: result.msg,
+                            confirmButton: "确定"
                         });
-						$form.bootstrapValidator('disableSubmitButtons', false);
-					}
-				}, 'json');
-			});
-		});
-	});
+                        $form.bootstrapValidator('disableSubmitButtons', false);
+                    }
+                }, 'json');
+            });
+        });
+    });
 </script>
