@@ -79,8 +79,13 @@
 								<input name="photo" type="hidden" value="">
 								<input id="photoInput" name="file" type="file" class="file-loading">
 							</div>
-						</div>						
-						
+						</div>
+						<div class="form-group">
+							<label for="userRoleInput">角色选择</label>
+							<select id="userRoleInput" name="roles" class="form-control" multiple="multiple">
+                                <option th:if="${user?.roles!=null}" th:each="role,roleStat:${user?.roles}" selected="selected" th:text="${role.name}" th:value="${role.id}"></option>
+							</select>
+						</div>
 						<div class="form-group">
 							<label for="newPasswordInput">密码</label>
 							<input type="password" name="newPassword" class="form-control" id="newPasswordInput" placeholder="请填写密码" value="">
@@ -99,7 +104,7 @@
 </section>
 
 <script type="text/javascript">
-	require([ "domReady", "fileinputzh","kindeditor" ], function(domReady) {
+	require([ "domReady", "fileinputzh","select2" ], function(domReady) {
 		domReady(function() {
 			activeMenu("center_member_list");
 
@@ -131,7 +136,7 @@
 				maxFileCount : 1,
 				elErrorContainer : '#kv-avatar-errors-1',
 				msgErrorClass : 'alert alert-block alert-danger',
-				defaultPreviewContent : userAvatar&&userAvatar!="" ?"<img src='"+userAvatar+"' alt='头像' style='width:160px'>":"<img src='"+base+"bootstrap/assets/img/avatars/1.jpg' alt='头像' style='width:160px'>",
+				defaultPreviewContent : userAvatar&&userAvatar!="" ?"<img src='"+userAvatar+"' alt='头像' style='width:160px'>":"<img src='"+base+"/assets/img/avatars/1.jpg' alt='头像' style='width:160px'>",
 				allowedFileTypes : [ "image" ]
 			}).on("filebatchselected", function(event, files) {
 				$avatarInput.fileinput("upload");
@@ -141,9 +146,49 @@
 					var $form = $(".user-form");
 					$form.find("input[name=photo]").val( KindEditor.formatUrl(response.urls, 'absolute'));
 				}
-			});;
+			});
+			debugger
+            $("#userRoleInput").select2({
+                placeholder: '---请选择角色---',
+                initSelection: function(element, callback) { // 初始化时设置默认值
+                    var data = [];
+//                    [[${user==null?'':user.roles}]]
+                    $(element.find("option")).each(function () {
+                        data.push({id: $(this).val(), text: $(this).text()});
+                    });
+                    callback(data);
+                },
+                ajax: {
+                    url: base+"/center/role/page",
+					type: 'POST',
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            searchPhrase: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
 
-			$(".user-form").bootstrapValidator().on('success.form.bv', function(e) {
+                        params.page = params.page || 1;
+                        $.each(data.rows, function(i,val){
+                            val.text=val.name;
+                        });
+                        return {
+                            results: data.rows,
+                            pagination: {
+                                more: (params.page * 20) < data.total
+                            }
+                        };
+                    },
+                    cache: true
+                }
+            });
+//            .val("[[${org==null?'':org.type}]]").trigger("change");
+//            $("#userRoleInput").val([1,2]).trigger("change");
+
+
+            $(".user-form").bootstrapValidator().on('success.form.bv', function(e) {
 				e.preventDefault();
 
 				var $form = $(e.target);

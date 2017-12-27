@@ -33,7 +33,7 @@ public class WechatConfigController {
     @Autowired
     private LogService logService;
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = "/wechatConfigList.view", method = RequestMethod.GET)
     public String getList() {
         logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询公众号列表");

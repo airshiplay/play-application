@@ -25,7 +25,7 @@ import com.airlenet.security.shiro.authc.MemberUserToken;
 public class MemberCenterController {
 
     @RequiresUser
-    @RequiresRoles("user")
+    //@RequiresRoles("user")
     @RequestMapping("/center")
     public String memberCenter() {
         return "member/center";

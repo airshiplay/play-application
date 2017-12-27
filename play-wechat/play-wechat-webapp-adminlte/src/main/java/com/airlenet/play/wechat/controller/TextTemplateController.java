@@ -36,27 +36,27 @@ public class TextTemplateController {
     @Autowired
     private TextTemplateEntityService textTemplateEntityService;
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = "/textTemplateList.view", method = RequestMethod.GET)
     public String getList() {
         logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询文本消息列表");
         return "classpath:/wechat/textTemplate/textTemplateList";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/create.view"}, method = RequestMethod.GET)
     public String create(Model model) {
         return "classpath:/wechat/textTemplate/textTemplateForm";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/edit/{id}.view"}, method = RequestMethod.GET)
     public String edit(Model model, @PathVariable Long id) {
         model.addAttribute("textTemplate", textTemplateEntityService.findOne(id));
         return "classpath:/wechat/textTemplate/textTemplateForm";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/view/{id}.view"}, method = RequestMethod.GET)
     public String view(Model model, @PathVariable Long id) {
         model.addAttribute("textTemplate", textTemplateEntityService.findOne(id));

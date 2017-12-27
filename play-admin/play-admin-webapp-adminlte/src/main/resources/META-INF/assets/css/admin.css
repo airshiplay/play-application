@@ -71,3 +71,10 @@ div.required .control-label:not(span):before, td.required:before {
     display: table-cell;
     max-width: 220px;
 }
+.slow .toggle-group { transition: left 0.7s; -webkit-transition: left 0.7s; }
+.fast .toggle-group { transition: left 0.1s; -webkit-transition: left 0.1s; }
+.quick .toggle-group { transition: none; -webkit-transition: none; }
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+.toggle.ios .toggle-handle { border-radius: 20px; }
+.toggle.android { border-radius: 0px;}
+.toggle.android .toggle-handle { border-radius: 0px; }

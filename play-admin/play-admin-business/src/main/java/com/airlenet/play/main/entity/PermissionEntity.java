@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "sys_authority")
-public class AuthorityEntity extends SortEntity<AdminUserEntity, Long> {
+@Table(name = "sys_permission")
+public class PermissionEntity extends SortEntity<AdminUserEntity, Long> {
 
     /**
      *

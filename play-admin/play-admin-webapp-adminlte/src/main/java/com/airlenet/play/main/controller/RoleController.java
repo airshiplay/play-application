@@ -6,6 +6,7 @@ import com.airlenet.play.main.entity.RoleEntity;
 import com.airlenet.play.main.service.MenuEntityService;
 import com.airlenet.play.main.service.RoleEntityService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,19 +28,22 @@ public class RoleController {
     @Autowired
     private MenuEntityService menuEntityService;
 
-    @RequiresPermissions(value = {"page:sys:role:read"})
+    //@RequiresPermissions(value = {"page:sys:role:read"})
+    @RequiresUser
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getList() {
         return "classpath:/admin/role/list";
     }
 
-    @RequiresPermissions(value = {"page:sys:role:create"})
+    //@RequiresPermissions(value = {"page:sys:role:create"})
+    @RequiresUser
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String getAdd() {
         return "classpath:/admin/role/roleForm";
     }
 
-    @RequiresPermissions({"page:sys:role:upate"})
+    //@RequiresPermissions({"page:sys:role:upate"})
+    @RequiresUser
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String getEdit(Model model, @PathVariable Long id) {
         model.addAttribute("role", roleEntityService.findOne(id));
@@ -47,6 +51,7 @@ public class RoleController {
     }
 
     @RequestMapping(value = "/{roleId}/roleUserList", method = RequestMethod.GET)
+    @RequiresUser
     public String getRoleUserListView(Model model, @PathVariable Long roleId) {
         model.addAttribute("roleId", roleId);
         model.addAttribute("role", roleEntityService.findOne(roleId));
@@ -54,6 +59,7 @@ public class RoleController {
     }
 
     @RequestMapping(value = "/{roleId}/roleAddUserList", method = RequestMethod.GET)
+    @RequiresUser
     public String getRoleUnUserListView(Model model, @PathVariable Long roleId) {
         model.addAttribute("roleId", roleId);
         return "classpath:/admin/role/roleAddUserListDialog";
@@ -66,6 +72,7 @@ public class RoleController {
     }
 
     @RequestMapping(value = "/{roleId}/permission/list", method = RequestMethod.GET)
+    @RequiresUser
     public String rolePermissionList(Model model, @PathVariable Long roleId) {
         model.addAttribute("role", roleEntityService.findOne(roleId));
         return "classpath:/admin/role/permission/list";
@@ -77,15 +84,17 @@ public class RoleController {
      * @param roleId
      * @return
      */
-    @RequiresPermissions("page:sys:role:read")
+    //@RequiresPermissions("page:sys:role:read")
     @RequestMapping(value = "/{roleId}/user/list.view", method = RequestMethod.GET)
+    @RequiresUser
     public String getRoleUserList(Model model, @PathVariable Long roleId) {
         model.addAttribute("role", roleEntityService.findOne(roleId));
         return "classpath:/admin/role/user/list";
     }
 
-    @RequiresPermissions("page:sys:role:read")
+    //@RequiresPermissions("page:sys:role:read")
     @RequestMapping(value = "/{roleId}/user/add", method = RequestMethod.GET)
+    @RequiresUser
     public String doAddRoleUserList(Model model, @PathVariable Long roleId) {
         model.addAttribute("role", roleEntityService.findOne(roleId));
 
@@ -101,6 +110,7 @@ public class RoleController {
      */
 
     @RequestMapping(value = "/{id}/menu/edit", method = RequestMethod.GET)
+    @RequiresUser
     public String getEditMenu(Model model, @PathVariable Long id) {
         RoleEntity role = roleEntityService.findOne(id);
         Set<MenuEntity> roleMenu = role.getMenus();

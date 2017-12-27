@@ -1,6 +1,7 @@
 package com.airlenet.play.main;
 
-import com.airlenet.play.main.service.AuthorityEntityService;
+import com.airlenet.play.main.entity.*;
+import com.airlenet.play.main.service.PermissionEntityService;
 import com.airlenet.play.main.service.OrganizationEntityService;
 import com.airlenet.play.main.service.RoleEntityService;
 import com.airlenet.play.main.service.UserEntityService;
@@ -8,18 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.airlenet.integration.core.ApplicationInitializer;
-import com.airlenet.play.main.entity.AdminUserEntity;
-import com.airlenet.play.main.entity.AuthorityEntity;
-import com.airlenet.play.main.entity.MenuEntity;
-import com.airlenet.play.main.entity.OrganizationEntity;
-import com.airlenet.play.main.entity.RoleEntity;
-import com.airlenet.play.main.InitDataTools;
+import com.airlenet.play.main.entity.PermissionEntity;
 import com.airlenet.security.PlayPasswordService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import reactor.bus.EventBus;
-
-import java.util.Locale;
 
 @Component
 public class PlayApplicationInitializer extends ApplicationInitializer {
@@ -37,7 +30,7 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
     private RoleEntityService roleEntityService;
 
     @Autowired
-    private AuthorityEntityService authorityEntityService;
+    private PermissionEntityService permissionEntityService;
 
     @Autowired
     private InitDataTools tools;
@@ -45,22 +38,29 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
     @Override
     public void onRootContextRefreshed() {
         if (roleEntityService.count() == 0) {
-            AuthorityEntity authorityEntity = new AuthorityEntity();
-            authorityEntity.setMenu(null);
-            authorityEntity.setPermission("*");
-            authorityEntity.setName("超级权限");
-            authorityEntityService.save(authorityEntity);
+            PermissionEntity permissionEntity = new PermissionEntity();
+            permissionEntity.setMenu(null);
+            permissionEntity.setPermission("*");
+            permissionEntity.setName("超级权限");
+            permissionEntityService.save(permissionEntity);
 
             RoleEntity role = new RoleEntity();
             role.setName("超级管理员");
             role.setCode("superadmin");
             role.setLocked(true);
-            role.setAuthorities(Lists.newArrayList(authorityEntity));
+            role.setAuthorities(Lists.newArrayList(permissionEntity));
+            roleEntityService.save(role);
+
+            RoleEntity adminRole = new RoleEntity();
+            adminRole.setName("普通管理员");
+            adminRole.setCode("admin");
+            adminRole.setLocked(false);
+//            adminRole.setAuthorities(Lists.newArrayList(permissionEntity));
             roleEntityService.save(role);
 
             OrganizationEntity org = new OrganizationEntity();
             org.setName("艾尔里信息科技有限公司");
-            org.setCode("airletnet_company");
+            org.setCode("airletnet-company");
             org.setType(OrganizationEntity.OrgType.company);
             organizationEntityService.save(org);
 
@@ -93,10 +93,10 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
             tools.createMenuByParent("用户列表", "center_member_list", "fa fa-user", "page/center/user/list", null, sortNo++, systemManagement);
             tools.createMenuByParent("组织机构", "center_org_list", "fa fa-sitemap", "page/center/org/list", null, sortNo++, systemManagement);
             MenuEntity roleSetting = tools.createMenuByParent("角色权限", "center_role_list", "playicon play-role1", "page/center/role/list", null, sortNo++, systemManagement);
-            tools.createPemission(roleSetting, AuthorityEntity.PermissionType.page, "角色列表", "page:sys:role:read");
+            tools.createPemission(roleSetting, PermissionEntity.PermissionType.page, "角色列表", "page:sys:role:read");
 
             MenuEntity menuSetting = tools.createMenuByParent("菜单管理", "center_menu_management", "fa fa-navicon", "page/center/menu/list", null, sortNo++, systemManagement);
-            tools.createPemission(menuSetting, AuthorityEntity.PermissionType.page, "菜单列表", "page:sys:menu:read");
+            tools.createPemission(menuSetting, PermissionEntity.PermissionType.page, "菜单列表", "page:sys:menu:read");
 
             tools.createMenuByParent("区域管理", "center_area_management", "fa fa-map", "page/center/area/list", null, sortNo++, systemManagement);
             tools.createMenuByParent("字典管理", "center_dict_management", "fa fa-book", "page/center/dict/list", null, sortNo++, systemManagement);
@@ -105,8 +105,8 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 
             MenuEntity language = tools.createMenuByParent("语言管理", "center_language_list", "fa fa-language", "page/center/language/list", null, sortNo++, systemManagement);
             MenuEntity paramSetting = tools.createMenuByParent("参数设置", "center_parameter_setting", "fa fa-cog", "page/center/setting/info", null, sortNo++, systemManagement);
-            tools.createPemission(paramSetting, AuthorityEntity.PermissionType.page, "参数查询", "page:sys:param:read");
-            tools.createPemission(paramSetting, AuthorityEntity.PermissionType.page, "参数更新", "page:sys:param:update");
+            tools.createPemission(paramSetting, PermissionEntity.PermissionType.page, "参数查询", "page:sys:param:read");
+            tools.createPemission(paramSetting, PermissionEntity.PermissionType.page, "参数更新", "page:sys:param:update");
 
             MenuEntity businessManagement = tools.createMenuByParent("业务管理", "business_management", "playicon play-yewuguanli", null, null, sortNo++, null);
             tools.createMenuByParent("会员管理", "business_member", "fa fa-user", "page/center/member/list", null, sortNo++, businessManagement);

@@ -1,9 +1,8 @@
 package com.airlenet.play.main;
 
 import com.airlenet.play.main.entity.AreaEntity;
-import com.airlenet.play.main.entity.AuthorityEntity;
+import com.airlenet.play.main.entity.PermissionEntity;
 import com.airlenet.play.main.entity.MenuEntity;
-import com.airlenet.play.main.entity.SettingEntity;
 import com.airlenet.play.main.service.*;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class InitDataTools {
     private DictEntityService dictEntityService;
 
     @Autowired
-    private AuthorityEntityService authorityEntityService;
+    private PermissionEntityService permissionEntityService;
 
 
     public boolean existMenu() {
@@ -57,13 +56,13 @@ public class InitDataTools {
         return menu;
     }
 
-    public void createPemission(MenuEntity menu, AuthorityEntity.PermissionType type, String name, String permission) {
-        AuthorityEntity entity = new AuthorityEntity();
+    public void createPemission(MenuEntity menu, PermissionEntity.PermissionType type, String name, String permission) {
+        PermissionEntity entity = new PermissionEntity();
         entity.setName(name);
         entity.setMenu(menu);
         entity.setType(type);
         entity.setPermission(permission);
-        authorityEntityService.save(entity);
+        permissionEntityService.save(entity);
     }
 
     public MenuEntity createMenuByParentCode(String label, String code, String iconCls, String view, String config, Integer sortNo, String parentCode) {

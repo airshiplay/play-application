@@ -33,7 +33,7 @@ public class MenuRestController {
     private RoleEntityService roleEntityService;
 
     @RequiresUser
-    @RequiresPermissions("data:sys:menu:read")
+    //@RequiresPermissions("data:sys:menu:read")
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
     @ResponseBody
     public Tree<MenuEntity> tree(Predicate predicate) {
@@ -44,11 +44,14 @@ public class MenuRestController {
         return tree;
     }
 
+    @RequiresUser
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<MenuEntity> page(Predicate predicate, Pageable pageable) {
         return menuEntityService.findAll(predicate, pageable);
     }
+
+    @RequiresUser
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     public Result doSave(@ModelAttribute @Valid MenuEntity menu, BindingResult bindingResult) {

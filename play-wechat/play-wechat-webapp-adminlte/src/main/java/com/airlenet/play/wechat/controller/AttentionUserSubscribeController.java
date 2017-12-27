@@ -41,27 +41,27 @@ public class AttentionUserSubscribeController {
     @Autowired
     private AttentionUserSubscribeEntityService attentionUserSubscribeEntityService;
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = "/attentionUserSubscribeList.view", method = RequestMethod.GET)
     public String getList() {
         logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询关注用户 时间列表");
         return "classpath:/wechat/attentionUserSubscribe/attentionUserSubscribeList";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/create.view"}, method = RequestMethod.GET)
     public String create(Model model) {
         return "classpath:/wechat/attentionUserSubscribe/attentionUserSubscribeForm";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/edit/{id}.view"}, method = RequestMethod.GET)
     public String edit(Model model, @PathVariable Long id) {
         model.addAttribute("attentionUserSubscribe", attentionUserSubscribeEntityService.findOne(id));
         return "classpath:/wechat/attentionUserSubscribe/attentionUserSubscribeForm";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/view/{id}.view"}, method = RequestMethod.GET)
     public String view(Model model, @PathVariable Long id) {
         model.addAttribute("attentionUserSubscribe", attentionUserSubscribeEntityService.findOne(id));

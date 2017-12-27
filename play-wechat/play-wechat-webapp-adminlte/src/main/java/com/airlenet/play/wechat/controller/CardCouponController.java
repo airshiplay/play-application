@@ -45,27 +45,27 @@ public class CardCouponController {
     @Autowired
     private WeixinCardService weixinCardService;
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = "/cardCouponList.view", method = RequestMethod.GET)
     public String getList() {
         logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询卡券管理列表");
         return "classpath:/wechat/cardCoupon/cardCouponList";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/create.view"}, method = RequestMethod.GET)
     public String create(Model model) {
         return "classpath:/wechat/cardCoupon/cardCouponForm";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/edit/{id}.view"}, method = RequestMethod.GET)
     public String edit(Model model, @PathVariable Long id) {
         model.addAttribute("cardCoupon", cardCouponEntityService.findOne(id));
         return "classpath:/wechat/cardCoupon/cardCouponForm";
     }
 
-    @RequiresRoles("admin")
+    //@RequiresRoles("admin")
     @RequestMapping(value = {"/view/{id}.view"}, method = RequestMethod.GET)
     public String view(Model model, @PathVariable Long id) {
         CardCouponEntity cardCoupon = cardCouponEntityService.findOne(id);

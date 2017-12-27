@@ -27,7 +27,7 @@ public class PluginController<T extends Plugin> {
     /**
      * 安装
      */
-    @RequiresRoles(value = "admin")
+    //@RequiresRoles(value = "admin")
     @RequestMapping(value = "/install", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -44,7 +44,7 @@ public class PluginController<T extends Plugin> {
     /**
      * 卸载
      */
-    @RequiresRoles(value = "admin")
+    //@RequiresRoles(value = "admin")
     @RequestMapping(value = "/uninstall", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -59,7 +59,7 @@ public class PluginController<T extends Plugin> {
     /**
      * 设置
      */
-    @RequiresRoles(value = "admin")
+    //@RequiresRoles(value = "admin")
     @RequestMapping(value = "/setting", method = RequestMethod.POST)
     public
     @ResponseBody

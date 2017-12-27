@@ -44,7 +44,7 @@ public class RoleEntity extends DataEntity<AdminUserEntity, Long> implements
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "sys_role_authority", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
     @OrderBy("sortNo asc")
-    private List<AuthorityEntity> authorities = new ArrayList<AuthorityEntity>();
+    private List<PermissionEntity> authorities = new ArrayList<PermissionEntity>();
 
     public String getName() {
         return name;
@@ -78,11 +78,11 @@ public class RoleEntity extends DataEntity<AdminUserEntity, Long> implements
         this.menus = menus;
     }
 
-    public List<AuthorityEntity> getAuthorities() {
+    public List<PermissionEntity> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(List<AuthorityEntity> authorities) {
+    public void setAuthorities(List<PermissionEntity> authorities) {
         this.authorities = authorities;
     }
 

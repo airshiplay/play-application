@@ -90,26 +90,18 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
             RoleEntity roleEntity = (RoleEntity) result.next();
             sets.add(roleEntity.getCode());
         }
-        return Sets.newHashSet("admin");
+        return sets;//Sets.newHashSet("admin");
     }
 
     @Transactional(readOnly = true,value = "transactionManager")
     @Override
     public Set<String> findPermissions(String username, Serializable uid) {
 
-        Iterator<AuthorityEntity> result = authorityEntityRespository.findAll(QAuthorityEntity.authorityEntity.roles.any().users.any().id.eq((Long) uid)).iterator();
-
-        // JPAQueryFactory query = new JPAQueryFactory(entityManager);
-        //
-        // List<String> results = query
-        // .select(QAuthorityEntity.authorityEntity.permission)
-        // .from(QAuthorityEntity.authorityEntity)
-        // .where(QAuthorityEntity.authorityEntity.roles.any().users.any().id
-        // .eq((Long) uid)).fetch();
+        Iterator<PermissionEntity> result = authorityEntityRespository.findAll(QPermissionEntity.permissionEntity.roles.any().users.any().id.eq((Long) uid)).iterator();
 
         Set<String> sets = new HashSet<String>();
         while (result.hasNext()) {
-            AuthorityEntity roleEntity = (AuthorityEntity) result.next();
+            PermissionEntity roleEntity = (PermissionEntity) result.next();
             sets.add(roleEntity.getPermission());
         }
         return sets;// Sets.newHashSet("*:*:*:*");//
@@ -123,10 +115,10 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
         if (roles.iterator().hasNext()) {
             return Sets.newHashSet("*");
         }
-        Iterator<AuthorityEntity> result = authorityEntityRespository.findAll(QAuthorityEntity.authorityEntity.roles.any().users.any().id.eq((Long) uid)).iterator();
+        Iterator<PermissionEntity> result = authorityEntityRespository.findAll(QPermissionEntity.permissionEntity.roles.any().users.any().id.eq((Long) uid)).iterator();
         Set<String> sets = new HashSet<String>();
         while (result.hasNext()) {
-            AuthorityEntity roleEntity = (AuthorityEntity) result.next();
+            PermissionEntity roleEntity = (PermissionEntity) result.next();
             sets.add(roleEntity.getPermission());
         }
         return sets;// Sets.newHashSet("*:*:*:*");//
@@ -141,7 +133,6 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
             RoleEntity roleEntity = (RoleEntity) result.next();
             sets.add(roleEntity.getCode());
         }
-        sets.add("admin");
         return sets;
     }
 

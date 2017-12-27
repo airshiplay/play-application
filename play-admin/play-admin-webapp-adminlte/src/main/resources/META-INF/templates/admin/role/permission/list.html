@@ -23,38 +23,43 @@
                 <div class="box-header with-border">
                     <h3 class="box-title" th:text="@{'('+(${role.name})+')角色权限管理'}">角色权限管理</h3>
                 </div>
-                <div class="nav-tabs-custom" style="box-shadow: none;">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab_1">菜单权限</a></li>
-                        <li><a data-toggle="tab" href="#tab_2">页面权限</a></li>
-                        <li><a data-toggle="tab" href="#tab_2">数据权限</a></li>
-                        <li class="pull-right"><a class="text-muted" href="javascript:;">
-                            <i class="fa fa-gear"></i>
-                        </a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab_1" class="tab-pane active form-horizontal">
-                            <form role="form" class="role-menu-form" action="/center/role/menu/save">
-                                <input type="hidden" name="id" th:value="${roleId}"/>
-                                <div class="box-body">
+                <form name="form" class="role-menu-form">
+                <div class="box-body">
 
-                                    <div id="tree"></div>
+                    <table id="menu-tree"
+                           class="table table-condensed table-hover table-striped fancytree-fade-expander">
+                        <colgroup>
+                            <col width="50px"></col>
+                            <col width="*"></col>
+                            <!--<col width="*"></col>-->
+                            <!--<col width="*"></col>-->
+                            <!--<col width="*"></col>-->
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th data-column-id="text">菜单权限</th>
+                            <!--<th data-formatter="pagecommands">页面权限</th>-->
+                            <!--<th data-formatter="datacommands">数据权限</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
 
-                                </div>
-                                <!-- /.box-body -->
+                            <td></td>
+                            <!--<td></td>-->
+                            <!--<td></td>-->
+                        </tr>
+                        </tbody>
+                    </table>
 
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary pull-right">保存</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div id="tab_2" class="tab-pane form-horizontal">
-                        </div>
-                        <div id="tab_3" class="tab-pane form-horizontal">
-                        </div>
-                    </div>
                 </div>
-
+                <div class="box-footer">
+                    <button type="button" class="btn btn-default" onclick="location.href='#/page/center/role/list'">返回列表</button>
+                    <button type="submit" class="btn btn-primary pull-right">保存</button>
+                </div>
+                </form>
             </div>
             <!-- /.box-body -->
         </div>
@@ -65,12 +70,11 @@
 
 </section>
 <script type="text/javascript">
-    require(["domReady", "fancytree"],
+    require(["domReady", "fancytree", "bootstrap_toggle"],
         function (domReady) {
             domReady(function () {
                 activeMenu("center_role_list");
                 var ids = [];
-
                 glyph_opts = {
                     map: {
                         doc: "glyphicon glyphicon-file",
@@ -89,31 +93,20 @@
                         loading: "glyphicon glyphicon-refresh glyphicon-spin"
                     }
                 };
-                debugger
-                $("#tree").fancytree({
+
+                $tree=$("#menu-tree").fancytree({
                     checkbox: true,
                     selectMode: 3,
                     glyph: glyph_opts,
-                    extensions: ["glyph"],
+                    extensions: ["glyph", "table"],
 //                    focusOnSelect:true,
                     source: {
-                        url: base + "/center/role/" + [[${role.id}]] + "/menu/tree",
+                        url: base + "/center/role/" + [[${role.id}]] + "/menu/tree?path_filter=*,*.*,*.*.*",
                         debugDelay: 1000
                     },
                     init: function (event, data) {
                         // Set key from first part of title (just for this demo output)
                         data.tree.visit(function (n) {
-//                            n.key = n.title.split(" ")[0];
-//                            if(!n.data.leaf){
-//                                n.selected=false;
-//                            }
-//                            if(n.hasChildren()){
-//                                n.getChildren().forEach(function (child) {
-//                                    if(child.selected){
-//                                        n.selected=true;
-//                                    }
-//                                })
-//                            }
                             n.setExpanded(true);
                         });
                     },
@@ -125,6 +118,11 @@
                         }
                         return "";
                         // Exit without returning a value: continue with default processing.
+                    },
+                    table: {
+                        indentation: 20,      // indent 20px per node level
+                        nodeColumnIdx: 1,     // render the node title into the 2nd column
+                        checkboxColumnIdx: 0  // render the checkboxes into the 1st column
                     },
                     select: function (event, data) {
                         // Get a list of all selected nodes, and convert to a key array:
@@ -140,21 +138,37 @@
                         });
                         var nodeList = [];
                         data.tree.visit(function (n) {
-                            if(n.selected){
+                            if (n.selected) {
                                 nodeList.push(n);
-                                if(n.getParent()&&nodeList.indexOf(n.getParent())==-1){
+                                if (n.getParent() && nodeList.indexOf(n.getParent()) == -1) {
                                     nodeList.push(n.getParent())
                                 }
                             }
                         })
-                        selKeys=$.map(nodeList, function (node) {
+                        selKeys = $.map(nodeList, function (node) {
                             return node.key;
                         });
-                        ids =selKeys;
+                        ids = selKeys;
+                    },loadChildren: function(event, data) {
+
                     },
-                    // The following options are only required, if we have more than one tree on one page:
-                    cookieId: "fancytree-menu",
-                    idPrefix: "fancytree-menu-"
+                    renderColumns: function (event, data) {
+//                        var node = data.node, $tdList = $(node.tr).find(">td");
+//
+//                        var pageHtml ="<div class='form-group'>";
+//                        var dataHtml ="<div class='form-group'>";
+//                        node.data.permissions.forEach(function (val) {
+//                            if(val.type=='page'){
+//                                dataHtml =dataHtml+"<label> <input type='checkbox' class='minimal'> "+val.name+"</label>";
+//                            }else{
+//                                pageHtml=pageHtml+"<label> <input type='checkbox' class='minimal'> "+val.name+"</label>";
+//                            }
+//                        });
+//                        pageHtml=pageHtml+" </div>";
+//                        dataHtml=dataHtml+" </div>";
+//                        $tdList.eq(2).html(pageHtml);
+//                        $tdList.eq(3).html(dataHtml);
+                    }
                 });
                 $(".role-menu-form").bootstrapValidator()
                     .on('success.form.bv',
@@ -165,7 +179,18 @@
                                 .data('bootstrapValidator');
                             console.log("");
                             var noCheckValue = '';
-
+                           var nodeList = [];
+                            $("#menu-tree").fancytree("getTree").visit(function (n) {
+                                if (n.selected) {
+                                    nodeList.push(n);
+                                    if (n.getParent() && nodeList.indexOf(n.getParent()) == -1 && n.getParent().data.id) {
+                                        nodeList.push(n.getParent())
+                                    }
+                                }
+                            })
+                            var ids = $.map(nodeList, function (node) {
+                                return node.key;
+                            });
                             $.post(base + "/center/role/menu/save", {
                                 ids: ids,
                                 roleId: [[${roleId}]]

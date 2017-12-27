@@ -1,10 +1,10 @@
 package com.airlenet.play.main.rest;
 
 import com.airlenet.play.main.entity.AdminUserEntity;
-import com.airlenet.play.main.entity.AuthorityEntity;
+import com.airlenet.play.main.entity.PermissionEntity;
 import com.airlenet.play.main.entity.MenuEntity;
 import com.airlenet.play.main.entity.RoleEntity;
-import com.airlenet.play.main.service.AuthorityEntityService;
+import com.airlenet.play.main.service.PermissionEntityService;
 import com.airlenet.play.main.service.MenuEntityService;
 import com.airlenet.play.main.service.RoleEntityService;
 import com.airlenet.play.main.service.UserEntityService;
@@ -41,7 +41,7 @@ public class RoleRestController {
     private MenuEntityService menuEntityService;
 
     @Autowired
-    private AuthorityEntityService authorityEntityService;
+    private PermissionEntityService permissionEntityService;
 
     @Autowired
     private UserEntityService userEntityService;
@@ -53,7 +53,7 @@ public class RoleRestController {
      * @param pageable
      * @return
      */
-    @RequiresPermissions(value = {"page:sys:role:read", "data:sys:role:read"}, logical = Logical.OR)
+    //@RequiresPermissions(value = {"page:sys:role:read", "data:sys:role:read"}, logical = Logical.OR)
     @RequestMapping(value = "/{roleId}/user/unexist/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<AdminUserEntity> doRoleUnExistUserPage(Predicate predicate, Pageable pageable, @PathVariable Long roleId) {
@@ -104,7 +104,7 @@ public class RoleRestController {
         return Result.success();
     }
 
-    @RequiresPermissions(value = {"page:sys:role:read", "data:sys:role:read"}, logical = Logical.OR)
+    //@RequiresPermissions(value = {"page:sys:role:read", "data:sys:role:read"}, logical = Logical.OR)
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     @ResponseBody
     public Page<RoleEntity> doPage(Predicate predicate, Pageable pageable) {
@@ -143,12 +143,13 @@ public class RoleRestController {
         Tree<MenuEntity> tree = menuEntityService.findTree(predicate);
         tree.setIconClsProperty("iconCls");
         tree.setTextProperty("text");
+        tree.setExtraProperty("permissions");
         tree.setChecked(roleEntityService.getOne(roleId).getMenus());
         tree.makeCheckable();
         return tree;
     }
 
-    @RequiresPermissions(value = {"data:sys:role:menu:upate", "data:sys:role:menu:create"}, logical = Logical.OR)
+    //@RequiresPermissions(value = {"data:sys:role:menu:upate", "data:sys:role:menu:create"}, logical = Logical.OR)
     @RequestMapping(value = "/menu/save", method = RequestMethod.POST, params = "ids")
     @ResponseBody
     public Result doRoleMenuSave(@RequestParam(value = "ids") MenuEntity[] entities, @RequestParam(value = "roleId") Long roleId) {
@@ -172,13 +173,13 @@ public class RoleRestController {
      */
     @RequestMapping(value = "/{roleId}/menu/{menuId}/auth/{type}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getRoleMenuAuthority(@PathVariable Long roleId, @PathVariable Long menuId, @PathVariable AuthorityEntity.PermissionType type) {
-        Iterator<AuthorityEntity> itr = authorityEntityService.findAuthoritiesByMenuIdAndType(menuId, type).iterator();
-        List<AuthorityEntity> checkedList = authorityEntityService.findAuthoritiesByRoleId(roleId);
+    public Result getRoleMenuAuthority(@PathVariable Long roleId, @PathVariable Long menuId, @PathVariable PermissionEntity.PermissionType type) {
+        Iterator<PermissionEntity> itr = permissionEntityService.findAuthoritiesByMenuIdAndType(menuId, type).iterator();
+        List<PermissionEntity> checkedList = permissionEntityService.findAuthoritiesByRoleId(roleId);
 //		 List<Authority> content = ConvertUtil.map(itr,
-//		 new Converter<AuthorityEntity, Authority>() {
+//		 new Converter<PermissionEntity, Authority>() {
 //		 @Override
-//		 public Authority convert(AuthorityEntity source) {
+//		 public Authority convert(PermissionEntity source) {
 //		 Authority auth = new Authority(source);
 //		 if (checkedList.indexOf(source) != -1) {
 //		 auth.setChecked(true);
@@ -200,21 +201,21 @@ public class RoleRestController {
      */
     @RequestMapping(value = "/auth/{type}/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result doRoleAuthSave(@RequestParam(value = "authIds", required = false) AuthorityEntity[] entities, @RequestParam(value = "roleId") Long roleId,
-                                 @RequestParam(value = "menuId") Long menuId, AuthorityEntity.PermissionType type) {
+    public Result doRoleAuthSave(@RequestParam(value = "authIds", required = false) PermissionEntity[] entities, @RequestParam(value = "roleId") Long roleId,
+                                 @RequestParam(value = "menuId") Long menuId, PermissionEntity.PermissionType type) {
         // roleEntityService.deleteAuthoritiesByRoleIdAndMenuId(roleId, menuId);
         RoleEntity roleEntity = roleEntityService.findOne(roleId);
 
-        List<AuthorityEntity> authorites = (entities == null ? new ArrayList<AuthorityEntity>() : Lists.newArrayList(entities));
-        if (type == AuthorityEntity.PermissionType.page) {
-            for (AuthorityEntity auth : roleEntity.getAuthorities()) {
-                if (auth.getType() == AuthorityEntity.PermissionType.data && auth.getMenu().getId() != menuId) {
+        List<PermissionEntity> authorites = (entities == null ? new ArrayList<PermissionEntity>() : Lists.newArrayList(entities));
+        if (type == PermissionEntity.PermissionType.page) {
+            for (PermissionEntity auth : roleEntity.getAuthorities()) {
+                if (auth.getType() == PermissionEntity.PermissionType.data && auth.getMenu().getId() != menuId) {
                     authorites.add(auth);
                 }
             }
         } else {
-            for (AuthorityEntity auth : roleEntity.getAuthorities()) {
-                if (auth.getType() == AuthorityEntity.PermissionType.page && auth.getMenu().getId() != menuId) {
+            for (PermissionEntity auth : roleEntity.getAuthorities()) {
+                if (auth.getType() == PermissionEntity.PermissionType.page && auth.getMenu().getId() != menuId) {
                     authorites.add(auth);
                 }
             }

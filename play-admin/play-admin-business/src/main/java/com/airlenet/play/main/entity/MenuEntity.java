@@ -33,6 +33,9 @@ public class MenuEntity extends HierarchicalEntity<AdminUserEntity, Long, MenuEn
     private String config;
 
     @OneToMany(mappedBy = "menu")
+    private Set<PermissionEntity> permissions;
+
+    @OneToMany(mappedBy = "menu")
     private Set<MenuLangEntity> menuLang;
 
     public String getText() {
@@ -81,5 +84,13 @@ public class MenuEntity extends HierarchicalEntity<AdminUserEntity, Long, MenuEn
 
     public void setMenuLang(Set<MenuLangEntity> menuLang) {
         this.menuLang = menuLang;
+    }
+
+    public Set<PermissionEntity> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<PermissionEntity> permissions) {
+        this.permissions = permissions;
     }
 }

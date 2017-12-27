@@ -17,6 +17,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -24,10 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.airlenet.play.main.api.LogService;
 import com.airlenet.play.main.api.LogService.LogLevel;
@@ -115,7 +113,6 @@ public class IndexController {
         }
         logService.addLog(OperateType.LOGIN, LogLevel.INFO, "登录成功");
         return Result.success();
-
     }
 
     @RequestMapping(value = {"/center/logout"}, method = RequestMethod.GET)
@@ -127,9 +124,14 @@ public class IndexController {
         return "redirect:classpath:/admin/login";
     }
 
+
     @RequestMapping(value = {"/center/home.view"}, method = RequestMethod.GET)
     public String getHome(Model model) {
         return "classpath:/admin/home";
+    }
+    @RequestMapping(value = {"/center/error/{error}.view"}, method = RequestMethod.GET)
+    public String error(Model model, @PathVariable("error") String error) {
+        return "classpath:/admin/error/"+error;
     }
 
 }
