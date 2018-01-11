@@ -73,7 +73,6 @@ public class WebappMojo extends AbstractPlayMojo {
         getLog().info("new file=" + filepath);
     }
 
-
     public File getSourceDirectory() {
         return new File(sourceDirectory.getAbsolutePath().replace("webapp", "business"));
     }

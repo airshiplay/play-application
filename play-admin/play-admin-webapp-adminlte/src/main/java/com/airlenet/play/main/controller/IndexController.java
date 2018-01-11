@@ -103,11 +103,11 @@ public class IndexController {
             AuthenticationToken token = new AdminUserToken(username, "", "", password, remember, request.getRemoteHost());
             SecurityUtils.getSubject().login(token);
         } catch (AuthenticationException e) {
-            logger.error("admin", e);
+            logger.error("admin", e.getMessage());
             logService.addLog(OperateType.LOGIN, LogLevel.ERROR, "登录失败,用户名:" + username, e);
             return Result.validateError();
         } catch (Exception e) {
-            logger.error("admin", e);
+            logger.error("admin", e.getMessage());
             logService.addLog(OperateType.LOGIN, LogLevel.ERROR, "登录失败,用户名:" + username, e);
             return Result.validateError();
         }
@@ -121,7 +121,7 @@ public class IndexController {
         SecurityUtils.getSubject().logout();
         // clear session
         // session.invalidate();
-        return "redirect:classpath:/admin/login";
+        return "redirect:"+(adminPath.startsWith("/")?adminPath:"/"+adminPath)+"/login";
     }
 
 

@@ -9,8 +9,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import freemarker.template.utility.StringUtil;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.BooleanLiteral;
@@ -37,6 +40,17 @@ import freemarker.template.Configuration;
 
 @SuppressWarnings({"unused", "rawtypes"})
 public abstract class AbstractPlayMojo extends AbstractMojo {
+
+    /**
+     * @parameter
+     */
+    @Parameter
+    protected String moduleName ;
+    /**
+     * @parameter
+     */
+    @Parameter
+    protected boolean override;
 
     public Configuration getConfiguration() {
         // 1.创建配置实例Cofiguration
@@ -105,7 +119,12 @@ public abstract class AbstractPlayMojo extends AbstractMojo {
                         if ("name".equals(pair.getName().getFullyQualifiedName())) {
                             if (pair.getValue() instanceof StringLiteral) {
                                 String tableName = ((StringLiteral) pair.getValue()).getLiteralValue();
-                                map.put("moduleName", tableName.substring(0, tableName.indexOf("_")));
+                                if(moduleName==null){
+                                    map.put("moduleName", tableName.substring(0, tableName.indexOf("_")));
+                                }else{
+                                    map.put("moduleName", moduleName);
+                                }
+
                             }
                         }
 
@@ -147,13 +166,14 @@ public abstract class AbstractPlayMojo extends AbstractMojo {
         FieldDeclaration fieldDec[] = typeDec.getFields();
         String moduleName = map.get("moduleName").toString();
         map.put("package", packetDec.getName().getFullyQualifiedName());
-        map.put("modulePackage", packetDec.getName().getFullyQualifiedName().substring(0, packetDec.getName().getFullyQualifiedName().indexOf(moduleName) + moduleName.length()));
+        map.put("modulePackage", packetDec.getName().getFullyQualifiedName().substring(0, packetDec.getName().getFullyQualifiedName().indexOf(".entity")));
         map.put("className", packetDec.getName() + "." + simpleName);
         map.put("simpleName", simpleName);
         if (simpleName.lastIndexOf("Entity") == -1) {
             getLog().error(new RuntimeException("类名必须以Entity结尾"));
         }
-        map.put("shortSimpleName", simpleName.substring(0, simpleName.lastIndexOf("Entity")));
+        String shortSimpleName = simpleName.substring(0, simpleName.lastIndexOf("Entity"));
+        map.put("shortSimpleName", shortSimpleName);
 
         List a = typeDec.getJavadoc().tags();
         String functionName = null;
@@ -170,6 +190,10 @@ public abstract class AbstractPlayMojo extends AbstractMojo {
                 author = ((TextElement) tag.fragments().get(0)).getText();
             } else if (tag.getTagName().equals("@version")) {
                 version = ((TextElement) tag.fragments().get(0)).getText();
+            }
+
+            if (StringUtils.isEmpty(functionName)) {
+                functionName = shortSimpleName;
             }
             // List elements = tag.fragments();
             // for (int j = 0; j < elements.size(); j++) {
@@ -219,7 +243,9 @@ public abstract class AbstractPlayMojo extends AbstractMojo {
                     } else if ("Enumerated".equals(name)) {
                     } else if ("OneToMany".equals(name)) {
                     } else if ("ManyToOne".equals(name)) {
-                    } else {
+                    } else if("Transient".equals(name)) {
+                        fieldMap.put("transient", true);
+                    }else {
                         getLog().warn("不支持此修饰符" + modifiObj + marker.getClass());
                     }
 
@@ -232,15 +258,17 @@ public abstract class AbstractPlayMojo extends AbstractMojo {
                     if ("Column".equals(name)) {
                         for (MemberValuePair pair : pairs) {
                             if ("nullable".equals(pair.getName().getFullyQualifiedName())) {
-                                if (((BooleanLiteral) pair.getValue()).booleanValue()) {
+                                if (!((BooleanLiteral) pair.getValue()).booleanValue()) {
                                     fieldMap.put("notnull", true);
                                 }
                             } else if ("length".equals(pair.getName().getFullyQualifiedName())) {
                                 fieldMap.put("size", ((NumberLiteral) pair.getValue()).getToken());
                             } else if ("name".equals(pair.getName().getFullyQualifiedName())) {
 
-                            } else {
-                                getLog().warn("不支持此修饰符" + normal + "属性" + pair.getName());
+                            } else if ("unique".equals(pair.getName().getFullyQualifiedName())) {
+                                fieldMap.put("notnull", true);
+                            }else {
+                                getLog().warn("不支持此修饰符" + pair.getClass() + normal + "属性" + pair.getName());
                             }
                         }
                     } else if ("Size".equals(name)) {
@@ -251,7 +279,7 @@ public abstract class AbstractPlayMojo extends AbstractMojo {
                             } else if ("max".equals(pair.getName().getFullyQualifiedName())) {
                                 fieldMap.put("maxSize", ((NumberLiteral) pair.getValue()).getToken());
                             } else {
-                                getLog().warn("不支持此修饰符" + normal + "属性" + pair.getName());
+                                getLog().warn("不支持此修饰符" + pair.getClass() + normal + "属性" + pair.getName());
                             }
                         }
                     } else if ("JoinColumn".equals(name)) {
@@ -271,10 +299,10 @@ public abstract class AbstractPlayMojo extends AbstractMojo {
                     } else if ("Max".equals(name)) {
                         fieldMap.put("maxValue", ((NumberLiteral) singleMember.getValue()).getToken());
                     } else {
-                        getLog().warn("不支持此修饰符" + singleMember + singleMember.getClass());
+                        getLog().warn("不支持此修饰符" + singleMember.getClass() + singleMember);
                     }
                 } else {
-                    getLog().warn("不支持此修饰符" + modifiObj + modifiObj.getClass());
+                    getLog().warn("不支持此修饰符" + modifiObj.getClass() + modifiObj);
                 }
 
             }

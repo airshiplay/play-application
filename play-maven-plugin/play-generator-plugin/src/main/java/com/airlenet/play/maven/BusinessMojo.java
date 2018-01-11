@@ -31,6 +31,7 @@ public class BusinessMojo extends AbstractPlayMojo {
     @Parameter(defaultValue = "${project.build.directory}", property = "outputDir", required = true)
     private File outputDirectory;
 
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info("business code file generator start.....");
         try {

@@ -44,6 +44,7 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
                 htmlForm(cfg, map);
                 htmlView(cfg, map);
             }
+            applicationInitializer(cfg,list);
         } catch (TemplateNotFoundException e) {
             throw new MojoFailureException(e.getMessage());
         } catch (MalformedTemplateNameException e) {
@@ -63,7 +64,7 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
         String shortSimpleName = map.get("shortSimpleName").toString();
         String filepath = pkg2path(map.get("modulePackage").toString()) + "/controller/" + shortSimpleName + "Controller.java";
         File file = new File(sourceDirectory, filepath);
-        if (file.exists()) {
+        if (file.exists()&&!override) {
             getLog().info("exists file=" + filepath);
             return;
         }
@@ -72,7 +73,7 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
         Writer out = new FileWriter(file);
         template.process(map, out);
         out.flush();
-        getLog().info("new file=" + filepath);
+        getLog().info("new/override file=" + filepath);
     }
 
     private void htmlList(Configuration cfg, Map<String, Object> map) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
@@ -81,7 +82,7 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
         String lowerShortClassName = shortSimpleName.substring(0, 1).toLowerCase() + shortSimpleName.substring(1, shortSimpleName.length());
         String filepath = "/META-INF/templates/" + map.get("moduleName").toString() + "/" + lowerShortClassName + "/" + lowerShortClassName + "List.html";
         File file = new File(resourceDirectory, filepath);
-        if (file.exists()) {
+        if (file.exists()&&!override) {
             getLog().info("exists file=" + filepath);
             return;
         }
@@ -90,7 +91,7 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
         Writer out = new FileWriter(file);
         template.process(map, out);
         out.flush();
-        getLog().info("new file=" + filepath);
+        getLog().info("new/override file=" + filepath);
     }
 
     private void htmlForm(Configuration cfg, Map<String, Object> map) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
@@ -99,7 +100,7 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
 
         String filepath = "/META-INF/templates/" + map.get("moduleName").toString() + "/" + lowerShortClassName + "/" + lowerShortClassName + "Form.html";
         File file = new File(resourceDirectory, filepath);
-        if (file.exists()) {
+        if (file.exists()&&!override) {
             getLog().info("exists file=" + filepath);
             return;
         }
@@ -108,7 +109,7 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
         Writer out = new FileWriter(file);
         template.process(map, out);
         out.flush();
-        getLog().info("new file=" + filepath);
+        getLog().info("new/override file=" + filepath);
     }
 
     private void htmlView(Configuration cfg, Map<String, Object> map) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
@@ -117,7 +118,7 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
 
         String filepath = "/META-INF/templates/" + map.get("moduleName").toString() + "/" + lowerShortClassName + "/" + lowerShortClassName + "View.html";
         File file = new File(resourceDirectory, filepath);
-        if (file.exists()) {
+        if (file.exists()&&!override) {
             getLog().info("exists file=" + filepath);
             return;
         }
@@ -127,7 +128,26 @@ public class WebappAdminlteMojo extends AbstractPlayMojo {
         Writer out = new FileWriter(file);
         template.process(map, out);
         out.flush();
-        getLog().info("new file=" + filepath);
+        getLog().info("new/override file=" + filepath);
+    }
+
+    public void applicationInitializer(Configuration cfg, List<Map<String, Object>> list) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
+        Map<String, Object> map = list.get(0);
+        String moduleName= map.get("moduleName").toString();
+        String shortSimpleName = map.get("shortSimpleName").toString();
+        String filepath = pkg2path(map.get("modulePackage").toString()) + "/" + moduleName.substring(0, 1).toUpperCase() + moduleName.substring(1, moduleName.length()) + "ApplicationInitializer.java";
+        File file = new File(sourceDirectory, filepath);
+        if (file.exists()&&!override) {
+            getLog().info("exists file=" + filepath);
+            return;
+        }
+        map.put("entityList",list);
+        file.getParentFile().mkdirs();
+        freemarker.template.Template template = cfg.getTemplate("webappadminlte/applicationInitializer.ftl");
+        Writer out = new FileWriter(file);
+        template.process(map, out);
+        out.flush();
+        getLog().info("new/override file=" + filepath);
     }
 
     public File getSourceDirectory() {

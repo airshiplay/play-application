@@ -20,11 +20,6 @@
             <version>${play.framework.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.airlenet</groupId>
-            <artifactId>play-integration-core</artifactId>
-            <version>${play.framework.version}</version>
-        </dependency>
-        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
