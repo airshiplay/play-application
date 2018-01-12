@@ -23,4 +23,8 @@ public class AdminUserDetails extends CustomUserDetails<Long, AdminUserEntity> {
         return userEntityRepository.findOne(getId());
     }
 
+    @Override
+    public String toString() {
+        return "uid="+getId()+";username="+getUsername();
+    }
 }

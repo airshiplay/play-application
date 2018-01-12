@@ -19,6 +19,7 @@ requirejs.config({
         text: assetsPath + "vendor/plugins/requirejs/text",
         domReady: assetsPath + "vendor/plugins/requirejs/domReady",
         jquery: [assetsPath + "vendor/plugins/jQuery/jquery-2.2.3.min", "//cdn.bootcss.com/jquery/2.2.4/jquery.min"],
+        jqueryExtend: [assetsPath + "js/jquery-extend"],
         jqueryui: [assetsPath + "vendor/plugins/jQueryUI/jquery-ui.min"],
         bootstrap: [assetsPath + "vendor/bootstrap/js/bootstrap.min", "//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min"],
         slimscroll: [assetsPath + "vendor/plugins/slimScroll/jquery.slimscroll.min", "//cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.min"],
@@ -88,7 +89,7 @@ requirejs.config({
         datetimepicker: ["css!" + assetsPath + "vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css"],
         datetimepickerzh: ["datetimepicker"],
         adminlte: ["jquery", "bootstrap", "slimscroll", "fastclick", "bootgridfa", "confirm", "validatorzh"],
-        app: ["adminlte", "css!" + assetsPath + "css/admin.css"]
+        app: ["adminlte","jqueryExtend", "css!" + assetsPath + "css/admin.css"]
     },
     map: {
         '*': {
@@ -98,7 +99,6 @@ requirejs.config({
 });
 requirejs(["jquery","knockout", "router", "text", "app"], function ($,ko) {
     $(function () {
-        jQuery.ajaxSettings.traditional = true;
         var contentWrapper = $(".content-wrapper");
 
         var errorHtml="<section class=\"content-header\"></section>\
