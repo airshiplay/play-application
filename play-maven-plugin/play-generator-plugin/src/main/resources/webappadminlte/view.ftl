@@ -40,7 +40,7 @@
 					<img alt="picture" th:src="${r"${"}${'${shortSimpleName}'?uncap_first}==null?'':${'${shortSimpleName}'?uncap_first}.${field.fieldName}}" class="profile-user-img img-responsive img-rounded">
 					</#if>
 					</#list>
-					<h3 class="profile-username text-center">***</h3>
+					<h3 class="profile-username text-center">${functionShowName}</h3>
 					<dl>
 						<#list fields as field>
 						<#if field.fieldType="Date">

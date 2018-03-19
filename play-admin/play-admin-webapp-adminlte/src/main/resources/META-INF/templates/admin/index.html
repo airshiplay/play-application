@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <base href="../../META-INF/" th:href="@{${adminPath}}" />
-  <title>艾尔里服务平台</title>
+  <title th:text="#{site.title}">艾尔里服务平台</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="shortcut icon" href="assets/favicon.ico">
@@ -71,6 +71,7 @@
 <script type="text/javascript">
     var base = "[[${#httpServletRequest.getContextPath()}]]";
     var admin="[[${#httpServletRequest.getContextPath()}+${adminPath}]]";
+    var playtitle= document.title;
 </script>
 <script data-main="../META-INF/" th:data-main="@{/assets/js/admin.js}"  src="assets/vendor/plugins/requirejs/require.js"></script>
 

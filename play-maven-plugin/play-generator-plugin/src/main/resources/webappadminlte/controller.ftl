@@ -2,6 +2,7 @@ package ${modulePackage}.controller;
 
 import javax.validation.Valid;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.Logical;

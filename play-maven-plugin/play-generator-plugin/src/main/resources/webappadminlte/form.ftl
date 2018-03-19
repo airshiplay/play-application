@@ -44,47 +44,47 @@
                         <#if field.transient?exists&&field.transient>
 						<#elseif field.formtype="date">
 						<div class="form-group<#if field.notnull?exists&&field.notnull> required</#if>">
-			                <label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>>${field.fieldShowName}</label>
+			                <label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>><#if field.formtip?exists><span data-toggle="tooltip" title="${field.formtip}"> ${field.fieldShowName}</span><#else>${field.fieldShowName}</#if></label>
 			                <div class="input-group date" id="${field.fieldName}picker">
 			                  <div class="input-group-addon">
 			                    <i class="fa fa-calendar"></i>
 			                  </div>
-			                  <input type="text" class="form-control pull-right"  name="${field.fieldName}" <#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请填写${field.fieldName}"</#if> th:value="${r"${"}${'${shortSimpleName}'?uncap_first}==null||${'${shortSimpleName}'?uncap_first}.${field.fieldName}==null?'': #dates.format(${'${shortSimpleName}'?uncap_first}.${field.fieldName}, 'yyyy年MM月dd日 HH:mm')}"/>
+			                  <input type="text" class="form-control pull-right"  name="${field.fieldName}" <#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请填写${field.fieldShowName}"</#if> th:value="${r"${"}${'${shortSimpleName}'?uncap_first}==null||${'${shortSimpleName}'?uncap_first}.${field.fieldName}==null?'': #dates.format(${'${shortSimpleName}'?uncap_first}.${field.fieldName}, 'yyyy年MM月dd日 HH:mm')}"/>
 			                </div>
 			            </div>
 						<#elseif field.formtype="enum">
 						<div class="form-group<#if field.notnull?exists&&field.notnull> required</#if>">
-		                  <label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>>${field.fieldShowName}</label>
-		                  <select id="${field.fieldName}Input" name="type" class="form-control" <#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请选择${field.fieldName}"</#if>
+		                  <label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>><#if field.formtip?exists><span data-toggle="tooltip" title="${field.formtip}"> ${field.fieldShowName}</span><#else>${field.fieldShowName}</#if></label>
+		                  <select id="${field.fieldName}Input" name="${field.fieldName}" class="form-control" <#if field.notnull?exists&&field.notnull > data-bv-notempty="true" </#if>
 								data-bv-notempty-message="请选择${field.fieldShowName}" >
 		                  </select>
 		                </div>
 		                <#elseif field.formtype="select2">
 						<div class="form-group <#if field.notnull?exists&&field.notnull> required</#if>">
-		                  <label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>>${field.fieldShowName}</label>
-		                  <select id="${field.fieldName}Input" name="type" class="form-control" <#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请选择${field.fieldName}"</#if>
+		                  <label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>><#if field.formtip?exists><span data-toggle="tooltip" title="${field.formtip}"> ${field.fieldShowName}</span><#else>${field.fieldShowName}</#if></label>
+		                  <select id="${field.fieldName}Input" name="type" class="form-control" <#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请选择${field.fieldShowName}"</#if>
 								data-bv-notempty-message="请选择${field.fieldShowName}" >
 		                  </select>
 		                </div>
 		                <#elseif field.formtype="image">
 		                <div class="form-group<#if field.notnull?exists&&field.notnull> required</#if>">
-							<label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>>${field.fieldShowName}</label>
+							<label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>><#if field.formtip?exists><span data-toggle="tooltip" title="${field.formtip}"> ${field.fieldShowName!''}</span><#else>${field.fieldShowName}</#if></label>
 							<input name="${field.fieldName}" type="hidden" th:value="${r"${"}${'${shortSimpleName}'?uncap_first}==null?'':${'${shortSimpleName}'?uncap_first}.${field.fieldName}}">
 							<input id="${field.fieldName}Input" name="file" type="file" class="file-loading">
 						</div>
 						<#elseif field.formtype="textarea">
 						<div class="form-group<#if field.notnull?exists&&field.notnull> required</#if>">
-							<label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>>${field.fieldShowName}</label>
-							<textarea type="text" name="${field.fieldName}" class="form-control" id="${field.fieldName}Input" rows="3" placeholder="请填写${field.fieldName}"
-								<#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请填写${field.fieldName}"</#if><#if field.minSize?exists>data-bv-stringlength="true" data-bv-stringlength-min="${field.minSize}" data-bv-stringlength-max="${field.maxSize}" data-bv-stringlength-message="个数必须在${field.minSize}和${field.maxSize}之间"
+							<label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>><#if field.formtip?exists><span data-toggle="tooltip" title="${field.formtip}"> ${field.fieldShowName!''}</span><#else>${field.fieldShowName!''}</#if></label>
+							<textarea type="text" name="${field.fieldName}" class="form-control" id="${field.fieldName}Input" rows="3" placeholder="请填写${field.fieldShowName}"
+								<#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请填写${field.fieldShowName}"</#if><#if field.minSize?exists>data-bv-stringlength="true" data-bv-stringlength-min="${field.minSize}" data-bv-stringlength-max="${field.maxSize}" data-bv-stringlength-message="个数必须在${field.minSize}和${field.maxSize}之间"
 								<#elseif field.size?exists>data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="${field.size}" data-bv-stringlength-message="个数必须在0和${field.size}之间"</#if>
 		                  		th:text="${r"${"}${'${shortSimpleName}'?uncap_first}==null?'':${'${shortSimpleName}'?uncap_first}.${field.fieldName}}"/>
 						</div>
 						<#else>
 						<div class="form-group<#if field.notnull?exists&&field.notnull> required</#if>">
-							<label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>>${field.fieldShowName!''}</label>
-							<input type="${field.formtype}" name="${field.fieldName}" class="form-control" id="${field.fieldName}Input" placeholder="请填写${field.fieldName}"
-								<#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请填写${field.fieldName}"</#if><#if field.minSize?exists>data-bv-stringlength="true" data-bv-stringlength-min="${field.minSize}" data-bv-stringlength-max="${field.maxSize}" data-bv-stringlength-message="个数必须在${field.minSize}和${field.maxSize}之间"
+							<label for="${field.fieldName}Input" <#if field.notnull?exists&&field.notnull>class="control-label"</#if>><#if field.formtip?exists><span data-toggle="tooltip" title="${field.formtip}"> ${field.fieldShowName!''}</span><#else>${field.fieldShowName!''}</#if></label>
+							<input type="${field.formtype}" name="${field.fieldName}" class="form-control" id="${field.fieldName}Input" placeholder="请填写${field.fieldShowName}"
+								<#if field.notnull?exists&&field.notnull > data-bv-notempty="true" data-bv-notempty-message="请填写${field.fieldShowName}"</#if><#if field.minSize?exists>data-bv-stringlength="true" data-bv-stringlength-min="${field.minSize}" data-bv-stringlength-max="${field.maxSize}" data-bv-stringlength-message="个数必须在${field.minSize}和${field.maxSize}之间"
 								<#elseif field.size?exists>data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="${field.size}" data-bv-stringlength-message="个数必须在0和${field.size}之间"</#if>
 		                  		th:value="${r"${"}${'${shortSimpleName}'?uncap_first}==null?'':${'${shortSimpleName}'?uncap_first}.${field.fieldName}}"/>
 						</div>
@@ -108,7 +108,7 @@
 	require([ "domReady","datetimepickerzh","select2zh","fileinputzh","kindeditor"], function(domReady) {
 		domReady(function() {
 			activeMenu("${moduleName}_${'${shortSimpleName}'?lower_case}_list");
-			
+            setPageTitle("${r"${"}${'${shortSimpleName}'?uncap_first}==null?'新建${functionShowName}':'编辑${functionShowName}'}");
 			<#list fields as field>
 			<#if field.formtype="date">
 			$('#${field.fieldName}picker').datetimepicker({

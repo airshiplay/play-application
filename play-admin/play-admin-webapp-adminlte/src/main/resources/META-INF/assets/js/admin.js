@@ -11,6 +11,9 @@ var activeMenu = function (code) {
     $(".sidebar-menu").find(".menu-" + code).addClass("active");
     $(".sidebar-menu").find(".menu-" + code).parent().parent().addClass("active");
 };
+var setPageTitle = function (title) {
+    document.title=playtitle+title;
+}
 var baseUrl = '';
 var assetsPath = base + "/assets/";
 requirejs.config({

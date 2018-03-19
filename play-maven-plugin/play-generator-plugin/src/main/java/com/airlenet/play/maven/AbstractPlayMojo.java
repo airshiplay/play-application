@@ -320,7 +320,11 @@ public abstract class AbstractPlayMojo extends AbstractMojo {
                     } else if (tag.getTagName().equals("@formtype")) {
                         String formtype = ((TextElement) tag.fragments().get(0)).getText();
                         fieldMap.put("formtype", formtype.trim());
+                    }else if (tag.getTagName().equals("@formtip")) {
+                        String formtype = ((TextElement) tag.fragments().get(0)).getText();
+                        fieldMap.put("formtip", formtype.trim());
                     }
+
                 }
                 if ("select2".equals(fieldMap.get("formtype"))) {
                     String m = fieldType.substring(0, fieldType.lastIndexOf("Entity"));
