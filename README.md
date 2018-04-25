@@ -2,7 +2,8 @@
 
 #界面
 
-![](img_url)
+![登录](https://github.com/airshiplay/play-application/raw/master/docs/img/login.png)
+![区域](https://github.com/airshiplay/play-application/raw/master/docs/img/district.png)
 
 #系统设计
 ##模块命名规则
