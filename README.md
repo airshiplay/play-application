@@ -1,12 +1,15 @@
 # play-application
 
-#界面
+# 界面
 
 ![登录](https://github.com/airshiplay/play-application/raw/master/docs/img/login.png)
 ![区域](https://github.com/airshiplay/play-application/raw/master/docs/img/district.png)
+![Oauth插件](https://github.com/airshiplay/play-application/raw/master/docs/img/oauth_plugin.png)
 
-#系统设计
-##模块命名规则
+
+# 系统设计
+
+## 模块命名规则
 
 - 模块接口
   	play-{module}-api
@@ -15,42 +18,42 @@
 - 模块管理平台
 	play-{module}-webapp-requirejs
 	
-####实例
+#### 实例
 - 管理平台主业务模块
 play-main-business
 - 管理平台主管理页面
 play-admin-webapp-adminlte
 
-###模板包名
+### 模板包名
  - com.airshiplay.play.{module}
  - com.airshiplay.play.{module}.controller
  - com.airshiplay.play.{module}.{module}ApplicationInitializer
  
-###模块URL规则
+### 模块URL规则
 
-####模块页面URL规则
+#### 模块页面URL规则
 -  /{modulename}/{businessname}/list
 -  /{modulename}/{businessname}/get
 -  /{modulename}/{businessname}/add
 -  /{modulename}/{businessname}/edit/{id}
 -  /{modulename}/{businessname}/view/{id}
 
-####FreeMarker页面定义规则
+#### FreeMarker页面定义规则
 -  /views/{modulename}/{businessname}/add.ftl
 
-####模块URL规则
+#### 模块URL规则
 -  /{modulename}/{businessname}/page
 -  /{modulename}/{businessname}/tree
 
 
-##管理平台角色权限定义
+## 管理平台角色权限定义
 平台采用Shiro进行管理    
 
  资源标识符:操作:对象实例ID
 
 {modulename}:{businessname}:对象实例ID
 
-###页面权限
+### 页面权限
 
 	page:*:*:* 表示拥有所有资源所有权限
 	
@@ -68,7 +71,7 @@ play-admin-webapp-adminlte
 	system:menu:delete 表示菜单删除
 	system:menu:*	   表示菜单所有权限（增删改查）
 
-###数据权限
+### 数据权限
 	data:*:*:* 表示拥有所有资源所有权限
 
 	
