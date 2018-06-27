@@ -2,15 +2,24 @@
     "code":0,
     "data":{
         "orderList":[
-        {
+          {
             "orderNumber":"2018001010",
-            "dateAdd":"",
-            "remark":"",
+            "dateAdd":"2018-01-01",
+            "remark":"描述",
             "amountReal":"70",
             "pic":"",
-            "score":"",
+            "score":"10",
+            "status":0
+          },
+          {
+            "orderNumber":"2018001010",
+            "dateAdd":"2018-01-01",
+            "remark":"描述",
+            "amountReal":"70",
+            "pic":"",
+            "score":"10",
             "status":-1
-        },
+          },
         {
             "orderNumber":"2018001010",
             "dateAdd":"",
