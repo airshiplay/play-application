@@ -63,6 +63,19 @@
         }
         ],
         "logisticsMap":{},
-        "goodsMap": {}
+        "goodsMap": {
+          "1":[
+            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" }
+          ],
+          "2":[
+            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
+            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
+            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
+            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
+            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
+            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
+            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" }
+          ]
+        }
     }
 }
