@@ -49,6 +49,6 @@
         }
         ],
         "logisticsMap":{},
-        goodsMap: {}
+        "goodsMap": {}
     }
 }
