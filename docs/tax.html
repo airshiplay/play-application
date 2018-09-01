@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个税计算对比（2018年）</title>
+    <!-- import Vue.js -->
+    <script src="http://vuejs.org/js/vue.min.js"></script>
+    <!-- import stylesheet -->
+    <link rel="stylesheet" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <!-- import iView -->
+    <script src="http://unpkg.com/iview/dist/iview.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <Row :gutter="40" style="margin: 0px">
+        <i-Col span="12">
+            <div>
+                <i-content>
+                    <h2 style="text-align: center;margin: 20px">个税计算器2018.10.1版本</h2>
+                    <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" @submit.native.prevent>
+                        <form-item prop="original" label="">
+                            <i-Input v-model="formValidate.original" number>
+                                <span slot="prepend"  style="padding: 20px">税前工资</span>
+                            </i-Input>
+                        </form-item>
+                        <form-item prop="other">
+                            <i-Input v-model="formValidate.other" number>
+                                <span slot="prepend">各项社会保险费</span>
+                            </i-Input>
+                        </form-item>
+                        <form-item prop="l0">
+                            <i-Input v-model="formValidate.l0" number disabled>
+                                <span slot="prepend" style="padding: 12px">个税起征点</span>
+                            </i-Input>
+                        </form-item>
+                        <form-item style="text-align: center;">
+                            <i-button type="primary" @click="handleSubmit('formValidate')">计算</i-button>
+                            <i-button @click="handleReset('formValidate')" style="margin-left: 18px">重置</i-button>
+                        </form-item>
+                    </i-form>
+                </i-content>
+            </div>
+        </i-Col>
+        <i-Col span="12">
+            <i-content>
+                <h2 style="text-align: center;margin: 20px">个税计算结果</h2>
+                <i-form ref="formResult" :model="formResult"  @submit.native.prevent>
+                    <form-item   >
+                        <i-Input v-model="formResult.original" disabled>
+                            <span slot="prepend"  style="padding: 20px">应纳税所得额</span>
+                        </i-Input>
+                    </form-item>
+                    <form-item  >
+                        <i-Input v-model="formResult.taxrate" disabled>
+                            <span slot="prepend" >适用税率</span>
+                        </i-Input>
+                    </form-item>
+                    <form-item >
+                        <i-Input v-model="formResult.tax" disabled>
+                            <span slot="prepend" style="padding: 18px">应缴税款</span>
+                        </i-Input>
+                    </form-item>
+                    <form-item  >
+                        <i-Input v-model="formResult.result" disabled>
+                            <span slot="prepend" style="padding: 18px">实发工资</span>
+                        </i-Input>
+                    </form-item>
+                </i-form>
+            </i-content>
+        </i-Col>
+    </Row>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            visible: false,
+            formValidate: {
+                original: 0,
+                other: 0,
+                l0:5000
+            },
+            formResult:{
+                original: 0,
+                taxrate: '',
+                tax:0,
+                result:0,
+                l0:0
+            },
+            ruleValidate: {
+                original: [
+                    // { required: true,message: '不能为空', trigger: 'blur' },
+                    // { type:'number', message: '必须为数字'}
+                ],
+                other: [
+                    // { required: true, message: '不能为空', trigger: 'blur' },
+                    // { type:'number', message: '必须为数字' }
+                ]
+            }
+        },
+        methods: {
+            show: function () {
+                this.visible = true;
+            },
+            handleSubmit (name) {
+
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.formResult.original= this.formValidate.original-this.formValidate.other;
+                        this.formResult.l0=this.formValidate.l0;
+                        this.tax(this.formResult);
+                        var tax=tax2018(this.formResult.original);
+                        this.$Message.info('少征税额'+(tax-this.formResult.tax));
+                    } else {
+                        this.$Message.error('输入不合法');
+                    }
+                })
+            },
+            handleReset (name) {
+                this.$refs[name].resetFields();
+                this.formResult.original=0;
+                this.formResult.taxrate='';
+                this.formResult.tax=0;
+                this.formResult.result=0;
+                this.formResult.l0=0;
+            },tax(formResult ){
+                var l0 = 5000;
+                var l1 = 3000;
+                var l2 = 12000;
+                var l3 = 25000;
+                var l4 = 35000;
+                var l5 = 55000;
+                var l6 = 80000;
+
+                var original = formResult.original;
+                var tax = 0;
+                var t = original - l0;
+                if(t<=0){
+                    tax = 0;
+                    formResult.taxrate='';
+                }else if (t < l1) {
+                    tax = tax + t * 0.03;
+                    formResult.taxrate='3%';
+                } else {
+                    tax = tax + l1 * 0.03;
+                    if (t <= l2) {
+                        tax = tax + (t - l1) * 0.10;
+                        formResult.taxrate='10%';
+                    } else {
+                        tax = tax + (l2 - l1) * 0.10;
+                        if (t <= l3) {
+                            tax = tax + (t - l2) * 0.20;
+                            formResult.taxrate='20%';
+                        } else {
+                            tax = tax + (l3 - l2) * 0.20;
+
+                            if (t <= l4) {
+                                tax = tax + (t - l3) * 0.25;
+                                formResult.taxrate='25%';
+                            } else {
+                                tax = tax + (l4 - l3) * 0.25;
+
+                                if (t <= l5) {
+                                    formResult.taxrate='30%';
+                                    tax = tax + (t - l4) * 0.30;
+                                } else {
+                                    tax = tax + (l5 - l4) * 0.30;
+                                    if (t <= l6) {
+                                        formResult.taxrate='35%';
+                                        tax = tax + (t - l5) * 0.35;
+                                    } else {
+                                        tax = tax + (l6 - l5) * 0.35;
+
+                                        tax = tax + (t - l6) * 0.45;
+                                        formResult.taxrate='45%';
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+                formResult.tax=tax;
+                formResult.result=formResult.original- formResult.tax
+
+            }
+
+        }
+    })
+
+    function tt() {
+        var delta = tax2018() - tax2019()
+
+        alert("3500起征点=" + tax2018() + ";5000起征点=" + tax2019() + ";少征" + delta)
+
+        return false;
+    }
+
+    function tax2019(original) {
+        var l0 = 5000;
+        var l1 = 3000;
+        var l2 = 12000;
+        var l3 = 25000;
+        var l4 = 35000;
+        var l5 = 55000;
+        var l6 = 80000;
+
+
+        var tax = 0;
+        var t = original - l0;
+        if(t<=0){
+            tax = 0;
+        }else if (t < l1) {
+            tax = tax + t * 0.03;
+        } else {
+            tax = tax + l1 * 0.03;
+            if (t <= l2) {
+                tax = tax + (t - l1) * 0.10;
+            } else {
+                tax = tax + (l2 - l1) * 0.10;
+                if (t <= l3) {
+                    tax = tax + (t - l2) * 0.20;
+                } else {
+                    tax = tax + (l3 - l2) * 0.20;
+
+                    if (t <= l4) {
+                        tax = tax + (t - l3) * 0.25;
+                    } else {
+                        tax = tax + (l4 - l3) * 0.25;
+
+                        if (t <= l5) {
+                            tax = tax + (t - l4) * 0.30;
+                        } else {
+                            tax = tax + (l5 - l4) * 0.30;
+                            if (t <= l6) {
+                                tax = tax + (t - l5) * 0.35;
+                            } else {
+                                tax = tax + (l6 - l5) * 0.35;
+
+                                tax = tax + (t - l6) * 0.45;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        return tax;
+    }
+
+    function tax2018(original) {
+        var l0 = 3500;
+        var l1 = 1500;
+        var l2 = 4500;
+        var l3 = 9000;
+        var l4 = 35000;
+        var l5 = 55000;
+        var l6 = 80000;
+
+        var tax = 0;
+        var t = original - l0;
+        if(t<=0){
+            tax = 0;
+        }else if (t < l1) {
+            tax = tax + t * 0.03;
+        } else {
+            tax = tax + l1 * 0.03;
+            if (t <= l2) {
+                tax = tax + (t - l1) * 0.10;
+            } else {
+                tax = tax + (l2 - l1) * 0.10;
+                if (t <= l3) {
+                    tax = tax + (t - l2) * 0.20;
+                } else {
+                    tax = tax + (l3 - l2) * 0.20;
+
+                    if (t <= l4) {
+                        tax = tax + (t - l3) * 0.25;
+                    } else {
+                        tax = tax + (l4 - l3) * 0.25;
+
+                        if (t <= l5) {
+                            tax = tax + (t - l4) * 0.30;
+                        } else {
+                            tax = tax + (l5 - l4) * 0.30;
+                            if (t <= l6) {
+                                tax = tax + (t - l5) * 0.35;
+                            } else {
+                                tax = tax + (l6 - l5) * 0.35;
+
+                                tax = tax + (t - l6) * 0.45;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        return tax;
+    }
+</script>
+</body>
+</html>
