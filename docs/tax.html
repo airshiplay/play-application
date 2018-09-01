@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>个税计算对比（2018年）</title>
+    <title>最新个税计算（2018年10月前后对比）</title>
     <!-- import Vue.js -->
     <script src="http://vuejs.org/js/vue.min.js"></script>
     <!-- import stylesheet -->
@@ -16,7 +16,7 @@
 <body>
 <div id="app">
     <Row :gutter="40" style="margin: 0px">
-        <i-Col span="12">
+        <i-Col span="12" :xs="24" :sm="24" :md="12" :lg="12">
             <div>
                 <i-content>
                     <h2 style="text-align: center;margin: 20px">个税计算器2018.10.1版本</h2>
@@ -44,7 +44,7 @@
                 </i-content>
             </div>
         </i-Col>
-        <i-Col span="12">
+        <i-Col span="12" :xs="24" :sm="24" :md="12" :lg="12">
             <i-content>
                 <h2 style="text-align: center;margin: 20px">个税计算结果</h2>
                 <i-form ref="formResult" :model="formResult"  @submit.native.prevent>
