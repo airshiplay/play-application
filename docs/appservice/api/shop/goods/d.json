@@ -1,0 +1,75 @@
+{
+  "code": 0,
+  "data": {
+    "logistics": {
+      "isFree": true,
+      "feeType": 0,
+      "feeTypeStr": "按件数",
+      "details": [
+        {
+          "addAmount": 0.00,
+          "addNumber": 1,
+          "firstAmount": 8.00,
+          "firstNumber": 100,
+          "type": 0,
+          "userId": 951
+        }
+      ]
+    },
+    "category": {
+      "dateAdd": "2017-09-25 09:07:58",
+      "icon": "",
+      "id": 2246,
+      "isUse": true,
+      "key": "10",
+      "name": "袜子",
+      "paixu": 0,
+      "pid": 0,
+      "type": "",
+      "userId": 951
+    },
+    "pics": [
+      {
+        "goodsId": 6765,
+        "id": 260807,
+        "pic": "https://cdn.it120.cc/apifactory/2017/10/30/b07ee85fa64f0c68aa9a45fba20ec689.jpg",
+        "userId": 951
+      }
+    ],
+    "content": "<p><img src=\"https://cdn.it120.cc/apifactory/2017/10/30/49bf7a87159aa1112c576deff80d5462.jpg\" title=\"apifactory/2017/10/30/49bf7a87159aa1112c576deff80d5462.jpg\" alt=\"微信图片_20171030103712.jpg\"/></p><p>尼多熊袜子，适合1-3岁宝宝，秋冬款，整合起售</p>",
+    "basicInfo": {
+      "barCode": "",
+      "categoryId": 2246,
+      "characteristic": "尼多熊袜子，适合秋冬",
+      "commission": 5.00,
+      "commissionType": 2,
+      "dateAdd": "2017-10-30 10:51:08",
+      "dateStart": "2017-10-30 10:44:34",
+      "dateUpdate": "2018-06-28 11:10:03",
+      "id": 6765,
+      "logisticsId": 386,
+      "minPrice": 80.00,
+      "minScore": 0,
+      "name": "1-3岁袜子",
+      "numberFav": 0,
+      "numberGoodReputation": 1,
+      "numberOrders": 1,
+      "originalPrice": 0.00,
+      "paixu": 0,
+      "pic": "https://cdn.it120.cc/apifactory/2017/10/30/b07ee85fa64f0c68aa9a45fba20ec689.jpg",
+      "pingtuan": false,
+      "pingtuanPrice": 0.00,
+      "recommendStatus": 0,
+      "recommendStatusStr": "普通",
+      "shopId": 0,
+      "status": 0,
+      "statusStr": "上架",
+      "stores": 700000,
+      "userId": 951,
+      "videoId": "c4c6e38eeb3a428e80f1a8b32c6de587",
+      "views": 33404,
+      "weight": 0.00
+    }
+  },
+  "msg": "success"
+}

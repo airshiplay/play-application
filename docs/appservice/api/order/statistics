@@ -1,10 +1,10 @@
 {
-  "code":0,
-  "data":{
-    "count_id_no_pay":1,
-    "count_id_no_transfer":1,
-    "count_id_no_confirm":1,
-    "count_id_no_reputation":1,
-    "count_id_success":10
+  "code": 0,
+  "data": {
+    "count_id_no_pay": 1,
+    "count_id_no_transfer": 0,
+    "count_id_no_confirm": 0,
+    "count_id_no_reputation": 1,
+    "count_id_success": 10
   }
 }

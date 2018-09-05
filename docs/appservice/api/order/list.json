@@ -1,80 +1,96 @@
 {
-    "code":0,
-    "data":{
-        "orderList":[
-          {
-            "id":1,
-            "orderNumber":"2018001010",
-            "dateAdd":"2018-01-01",
-            "remark":"描述",
-            "amountReal":"70",
-            "score":"10",
-            "status":0
-          },
-          {
-            "id":2,
-            "orderNumber":"2018001010",
-            "dateAdd":"2018-01-01",
-            "remark":"描述",
-            "amountReal":"70",
-            "pic":"",
-            "score":"10",
-            "status":-1
-          },
+  "code": 0,
+  "data": {
+    "orderList": [
+      {
+        "id": 1,
+        "orderNumber": "2018001010",
+        "dateAdd": "2018-01-01",
+        "remark": "描述",
+        "amountReal": "70",
+        "score": "10",
+        "status": 0
+      },
+      {
+        "id": 2,
+        "orderNumber": "2018001010",
+        "dateAdd": "2018-01-01",
+        "remark": "描述",
+        "amountReal": "70",
+        "pic": "",
+        "score": "10",
+        "status": -1
+      },
+      {
+        "id": 3,
+        "orderNumber": "2018001010",
+        "dateAdd": "",
+        "remark": "",
+        "amountReal": "100.00",
+        "pic": "",
+        "score": "",
+        "status": 1
+      },
+      {
+        "id": 4,
+        "orderNumber": "2018001010",
+        "dateAdd": "",
+        "remark": "",
+        "amountReal": "",
+        "pic": "",
+        "score": "",
+        "status": 2
+      },
+      {
+        "id": 5,
+        "orderNumber": "2018001010",
+        "dateAdd": "",
+        "remark": "",
+        "amountReal": "",
+        "pic": "",
+        "score": "",
+        "status": 3
+      },
+      {
+        "orderNumber": "2018001010",
+        "dateAdd": "",
+        "remark": "",
+        "amountReal": "",
+        "pic": "",
+        "score": "",
+        "status": 4
+      }
+    ],
+    "logisticsMap": {},
+    "goodsMap": {
+      "1": [
         {
-            "id":3,
-            "orderNumber":"2018001010",
-            "dateAdd":"",
-            "remark":"",
-            "amountReal":"100.00",
-            "pic":"",
-            "score":"",
-            "status":1
-        },
-        {
-            "id":4,
-            "orderNumber":"2018001010",
-            "dateAdd":"",
-            "remark":"",
-            "amountReal":"",
-            "pic":"",
-            "score":"",
-            "status":2
-        },
-        {
-          "id":5,
-            "orderNumber":"2018001010",
-            "dateAdd":"",
-            "remark":"",
-            "amountReal":"",
-            "pic":"",
-            "score":"",
-            "status":3
-        },
-        {
-            "orderNumber":"2018001010",
-            "dateAdd":"",
-            "remark":"",
-            "amountReal":"",
-            "pic":"",
-            "score":"",
-            "status":4
+          "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg"
         }
-        ],
-        "logisticsMap":{},
-        "goodsMap": {
-          "1":[
-            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" }
-          ],
-          "2":[
-            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
-            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
-            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
-            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
-            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
-            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" },
-            { "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg" }
-          ]
+      ],
+      "2": [
+        {
+          "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg"
+        },
+        {
+          "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg"
+        },
+        {
+          "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg"
+        },
+        {
+          "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg"
+        },
+        {
+          "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg"
+        },
+        {
+          "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg"
+        },
+        {
+          "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg"
         }
+      ]
     }
+  }
 }

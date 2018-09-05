@@ -1,48 +1,51 @@
 {
-  "code":0,
-  "data":{
-    "orderInfo":{
-      "amount":"110.00",
-      "amountReal":"11",
-      "status":2,
-      "statusStr":"支付"
+  "code": 0,
+  "data": {
+    "orderInfo": {
+      "amount": "110.00",
+      "amountReal": "11",
+      "status": 2,
+      "statusStr": "支付"
     },
-    "yunPrice":"12",
-    "goods":[
+    "yunPrice": "12",
+    "goods": [
       {
-        "pic":"https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg",
-        "goodsName":"民粹",
-        "property":"简介",
-        "amount":10.00,
-        "number":1
-      },{
-        "goodsName":"民粹",
-        "property":"",
-        "amount":10,
-        "number":5
+        "pic": "https://img1.360buyimg.com/pop/jfs/t21937/277/830995121/17926/c6e7f4ae/5b19ee64Neb8a583e.jpg",
+        "goodsName": "民粹",
+        "property": "简介",
+        "amount": 10.00,
+        "number": 1
+      },
+      {
+        "goodsName": "民粹",
+        "property": "",
+        "amount": 10,
+        "number": 5
       }
     ],
-    "goodsList":[
+    "goodsList": [
       {
-        "price":10,
-        "number":1
+        "price": 10,
+        "number": 1
       }
     ],
-    "logistics":{
-      "trackingNumber":"1110000101",
-      "linkMan":"",
-      "address":""
+    "logistics": {
+      "trackingNumber": "1110000101",
+      "linkMan": "",
+      "address": ""
     },
-    "logisticsTraces":[
+    "logisticsTraces": [
       {
-        "AcceptStation":"发货中",
-        "AcceptTime":""
-      },{
-        "AcceptStation":"运输中",
-        "AcceptTime":""
-      },{
-        "AcceptStation":"已签收",
-        "AcceptTime":""
+        "AcceptStation": "发货中",
+        "AcceptTime": ""
+      },
+      {
+        "AcceptStation": "运输中",
+        "AcceptTime": ""
+      },
+      {
+        "AcceptStation": "已签收",
+        "AcceptTime": ""
       }
     ]
   }

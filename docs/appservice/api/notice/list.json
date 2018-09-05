@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "data": {
+    "totalRow": 1,
+    "totalPage": 1,
+    "dataList": [
+      {
+        "dateAdd": "2017-09-16 17:20:43",
+        "id": 161,
+        "isShow": true,
+        "title": "商城新开张，优惠多多，戳 戳 戳 我看详情。",
+        "userId": 951
+      }
+    ]
+  },
+  "msg": "success"
+}
