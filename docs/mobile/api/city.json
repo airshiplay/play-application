@@ -1,0 +1,332 @@
+{
+  "hotCityList": [
+    {
+      "value": "110000",
+      "label": "北京市"
+    },
+    {
+      "label": "上海市"
+    },
+    {
+      "label": "广州市"
+    },
+    {
+      "label": "深圳市"
+    },
+    {
+      "label": "天津市"
+    },
+    {
+      "label": "西安市"
+    },
+    {
+      "label": "重庆市"
+    },
+    {
+      "label": "杭州市"
+    },
+    {
+      "label": "南京市"
+    }
+  ],
+  "list": [
+    {
+      "letter": "A",
+      "data": [
+        {
+          "value": "340800",
+          "label": "安庆市"
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "data": [
+        {
+          "value": "110000",
+          "label": "北京市"
+        },
+        {
+          "label": "保定市"
+        }
+      ]
+    },
+    {
+      "letter": "C",
+      "data": [
+        {
+          "label": "重庆市"
+        },
+        {
+          "label": "成都市"
+        },
+        {
+          "label": "长沙市"
+        },
+        {
+          "label": "常州市"
+        },
+        {
+          "label": "长春市"
+        }
+      ]
+    },
+    {
+      "letter": "D",
+      "data": [
+        {
+          "label": "大连市"
+        }
+      ]
+    },
+    {
+      "letter": "E",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "F",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "G",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "H",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "I",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "J",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "K",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "L",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "M",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "N",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "O",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "P",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "Q",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "R",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "S",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "T",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "U",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "V",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "W",
+      "data": [
+        
+      ]
+    },
+    {
+      "letter": "X",
+      "data": [
+        {
+			 	value: "320100",
+			 	label: "南京市"
+			 }, {
+			 	value: "320200",
+			 	label: "无锡市"
+			 }, {
+			 	value: "320300",
+			 	label: "徐州市"
+			 }, {
+			 	value: "320400",
+			 	label: "常州市"
+			 }, {
+			 	value: "320500",
+			 	label: "苏州市"
+			 }, {
+			 	value: "320600",
+			 	label: "南通市"
+			 }, {
+			 	value: "320700",
+			 	label: "连云港市"
+			 }, {
+			 	value: "320800",
+			 	label: "淮安市"
+			 }, {
+			 	value: "320900",
+			 	label: "盐城市"
+			 }, {
+			 	value: "321000",
+			 	label: "扬州市"
+			 }, {
+			 	value: "321100",
+			 	label: "镇江市"
+			 }, {
+			 	value: "321200",
+			 	label: "泰州市"
+			 }, {
+			 	value: "321300",
+			 	label: "宿迁市"
+			 }
+      ]
+    },
+    {
+      "letter": "Y",
+      "data": [
+        {
+			 	value: "320100",
+			 	label: "南京市"
+			 }, {
+			 	value: "320200",
+			 	label: "无锡市"
+			 }, {
+			 	value: "320300",
+			 	label: "徐州市"
+			 }, {
+			 	value: "320400",
+			 	label: "常州市"
+			 }, {
+			 	value: "320500",
+			 	label: "苏州市"
+			 }, {
+			 	value: "320600",
+			 	label: "南通市"
+			 }, {
+			 	value: "320700",
+			 	label: "连云港市"
+			 }, {
+			 	value: "320800",
+			 	label: "淮安市"
+			 }, {
+			 	value: "320900",
+			 	label: "盐城市"
+			 }, {
+			 	value: "321000",
+			 	label: "扬州市"
+			 }, {
+			 	value: "321100",
+			 	label: "镇江市"
+			 }, {
+			 	value: "321200",
+			 	label: "泰州市"
+			 }, {
+			 	value: "321300",
+			 	label: "宿迁市"
+			 }
+      ]
+    },
+    {
+      "letter": "Z",
+      "data": [
+        {
+			 	value: "320100",
+			 	label: "南京市"
+			 }, {
+			 	value: "320200",
+			 	label: "无锡市"
+			 }, {
+			 	value: "320300",
+			 	label: "徐州市"
+			 }, {
+			 	value: "320400",
+			 	label: "常州市"
+			 }, {
+			 	value: "320500",
+			 	label: "苏州市"
+			 }, {
+			 	value: "320600",
+			 	label: "南通市"
+			 }, {
+			 	value: "320700",
+			 	label: "连云港市"
+			 }, {
+			 	value: "320800",
+			 	label: "淮安市"
+			 }, {
+			 	value: "320900",
+			 	label: "盐城市"
+			 }, {
+			 	value: "321000",
+			 	label: "扬州市"
+			 }, {
+			 	value: "321100",
+			 	label: "镇江市"
+			 }, {
+			 	value: "321200",
+			 	label: "泰州市"
+			 }, {
+			 	value: "321300",
+			 	label: "宿迁市"
+			 }
+      ]
+    }
+  ]
+}
