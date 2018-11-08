@@ -1,0 +1,46 @@
+{
+	"city": "南京市",
+	"endowmentInsurance": {
+		"title": "养老保险",
+		"personPercent": 8,
+		"enterprisePercent": 19,
+		"lowBase": 0,
+		"highBase": 0
+	},
+	"medicalInsurance": {
+		"title": "医疗保险",
+		"personPercent": 2,
+		"enterprisePercent": 9,
+		"lowBase": 0,
+		"highBase": 0,
+		"delta": 10
+	},
+	"unemploymentInsurance": {
+		"title": "失业保险",
+		"personPercent": 0.5,
+		"enterprisePercent": 0.5,
+		"lowBase": 0,
+		"highBase": 0
+	},
+	"employmentInjuryInsurance": {
+		"title": "工伤保险",
+		"personPercent": 0,
+		"enterprisePercent": 0.5,
+		"lowBase": 0,
+		"highBase": 0
+	},
+	"maternityInsurance": {
+		"title": "生育保险",
+		"personPercent": 0,
+		"enterprisePercent": 0.8,
+		"lowBase": 0,
+		"highBase": 0
+	},
+	"housingFundInsurance": {
+		"title": "住房公积金",
+		"personPercent": 10,
+		"enterprisePercent": 10,
+		"lowBase": 0,
+		"highBase": 0
+	}
+}
